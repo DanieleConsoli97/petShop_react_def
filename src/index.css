@@ -1,0 +1,85 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*HERO*/
+.hero-container {
+  position: relative;
+  background-image: url('./public/Hero-animals1.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-position: 50% 55%;
+  height: 80vh;
+  width: 100%;
+  margin: 0 auto;
+  
+}
+
+.hero-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+}
+
+.hero-btn {
+  margin-top: 15px;
+}
+
+/*NAVBAR*/
+
+/*seacrhbar and cart-icon*/
+.search-container {
+width: 40%;
+}
+
+.search-container input:focus {
+border-color: #28a745 !important;
+box-shadow: 0 0 5px rgba(40, 167, 69, 0.5) !important; 
+outline: none !important;
+}
+
+.cart-icon {
+color: #333;
+
+}
+
+.cart-icon:hover {
+transform: scale(1.1);
+color: green;
+}
+
+/* Menu with list */
+.nav {
+padding: 10px 0;
+}
+
+.nav-link {
+font-size: 16px;
+font-weight: 600;
+color: #333 !important;
+}
+
+.nav-link:hover {
+color: green !important;
+}
+
+.dropdown-menu {
+border-radius: 5px;
+
+}

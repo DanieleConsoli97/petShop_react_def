@@ -4,6 +4,7 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
+import { useGlobalContext } from "../context/GlobalContext"; // da utilizzare per importare i value del globalcontext
 const CarouselCustom = () => {
     return (
         <>
@@ -29,6 +30,7 @@ const CarouselCustom = () => {
                 modules={[Pagination, Navigation]}
                 className="mySwiper"
             >
+
                 <SwiperSlide>
                     <div className="card">
                         <img src="/download (1).jpg" className="card-img-top" alt="..." />

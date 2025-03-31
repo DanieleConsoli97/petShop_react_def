@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import PathNav from "../components/PathNav"
 import CarouselCustom from "../components/Carousel"
 
+
 function Home() {
   return (
     <div>

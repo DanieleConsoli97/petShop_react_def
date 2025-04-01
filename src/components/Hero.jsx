@@ -9,14 +9,7 @@ function Hero() {
           <h1 className="mb-3">PawPlanet</h1>
           <h4 className="mb-3">Il tuo shop online di fiducia</h4>
           <h5 className="mb-3">Quualità e risparmio per la cura dei tuoi Pet</h5>
-          <a
-            data-mdb-ripple-init
-            className="btn btn-outline-light btn-lg hero-btn"
-            href="#!"
-            role="button"
-          >
-            Call to action
-          </a>
+  
         </div>
       </div>
     </div>

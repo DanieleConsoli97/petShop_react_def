@@ -43,7 +43,7 @@ function Navbar() {
       </nav>
 
       {/* Menu sotto la Navbar */}
-      <div className="bg-white shadow-sm">
+      <div className="bg-success-subtle text-success-emphasis shadow-sm ">  
         <div className="container">
           <ul className="nav justify-content-center">
             <li className="nav-item dropdown">
@@ -114,3 +114,6 @@ function Navbar() {
 }
 
 export default Navbar;
+
+
+

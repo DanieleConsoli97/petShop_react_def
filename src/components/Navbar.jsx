@@ -67,14 +67,14 @@ function Navbar() {
               </a>
               <ul className="dropdown-menu" aria-labelledby="caniDropdown">
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <Link className="dropdown-item" to={'/products/cani/food'} >
                     Cibo per cani
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <Link to={'/products/cani/games'} className="dropdown-item" >
                     Giochi per cani
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -92,26 +92,26 @@ function Navbar() {
               </a>
               <ul className="dropdown-menu" aria-labelledby="gattiDropdown">
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <Link className="dropdown-item" to={'products/gatti/food'}>
                     Cibo per gatti
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Tiragraffi
-                  </a>
+                  <Link className="dropdown-item" to={'products/gatti/games'}>
+                    Giochi per gatti
+                  </Link>
                 </li>
               </ul>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link className="nav-link" to={'/products/accessories'}>
                 Accessori
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link className="nav-link" to={'/products/discounted'}>
                 Offerte
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

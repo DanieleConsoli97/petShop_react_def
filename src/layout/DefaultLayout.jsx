@@ -4,7 +4,6 @@ import PathNav from '../components/PathNav'
 
 const DefaultLayout = () => {
     const location = useLocation();
-    console.log(location.pathname)
     return (
         <>
             <Navbar />

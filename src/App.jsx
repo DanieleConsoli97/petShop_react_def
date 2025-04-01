@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route Component={DefaultLayout}>
         <Route path="/" element={<Home />} />
-        <Route path="/product/:slug" element={<ProductDetails />} />
+        <Route path="/products/:slug" element={<ProductDetails />} />
         <Route path="/products" element={<ProductList />} />
         </Route>
       </Routes>

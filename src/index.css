@@ -199,3 +199,14 @@ html {
   color: #333; 
   font-weight: bold;
 }
+
+  
+.related-carousel {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  text-align: center;
+}
+

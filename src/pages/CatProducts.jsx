@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
-function DogFoodList() {
-    const [dogFood, setdogFood] = useState([]);
+function CatProducts() {
+    const [catProducts, setCatProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
 
-        fetch('http://localhost:3000/products/cani/food')
+        fetch('http://localhost:3000/products/gatti')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Errore durante il recupero dei prodotti');
@@ -15,7 +15,7 @@ function DogFoodList() {
                 return response.json();
             })
             .then(data => {
-                setdogFood(data);
+                setCatProducts(data);
                 setLoading(false);
             })
             .catch(err => {
@@ -29,9 +29,9 @@ function DogFoodList() {
 
     return (
         <div>
-            <h1>Lista Cibo Cani</h1>
+            <h1>Lista Prodotti Gatti</h1>
             <ul>
-                {dogFood.map(product => (
+                {catProducts.map(product => (
                     <li key={product.id}>
                         <img src={product.image_url} alt={product.name} style={{ width: '50px', height: '50px' }} />
                         {product.description} - {product.price}€
@@ -42,4 +42,4 @@ function DogFoodList() {
     );
 }
 
-export default DogFoodList;
+export default CatProducts;

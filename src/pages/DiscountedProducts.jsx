@@ -29,7 +29,7 @@ function DiscountedProducts() {
 
     return (
         <div>
-            <h1>Lista Prodotti</h1>
+            <h1>Lista Offerte</h1>
             <ul>
                 {discountedProducts.map(product => (
                     <li key={product.id}>

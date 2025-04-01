@@ -31,7 +31,7 @@ function DogProducts() {
 
     return (
         <div>
-            <h1>Lista Prodotti</h1>
+            <h1>Lista Prodotti Cani</h1>
             <ul>
                 {dogProducts.map(product => (
                     <li key={product.id}>

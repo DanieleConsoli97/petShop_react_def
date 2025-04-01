@@ -1,4 +1,4 @@
-import { Outlet,useLocation } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 import Navbar from '../components/Navbar'
 import PathNav from '../components/PathNav'
 
@@ -8,9 +8,12 @@ const DefaultLayout = () => {
         <>
             <Navbar />
             {
-                location.pathname == "/" ? <></> : <PathNav /> 
+                location.pathname == "/" ? <></> : <PathNav />
             }
-            <Outlet />
+            <div className="container">
+                <Outlet />
+
+            </div>
         </>
     )
 }

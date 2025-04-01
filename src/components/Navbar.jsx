@@ -20,7 +20,7 @@ function Navbar() {
               alt="Logo"
             />
           </Link>
-          <SearchForm/>
+          <SearchForm />
 
           {/* <div className="mx-auto search-container">
             <form className="d-flex">

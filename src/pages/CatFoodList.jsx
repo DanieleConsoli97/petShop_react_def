@@ -29,7 +29,7 @@ function CatFoodList() {
 
     return (
         <div>
-            <h1>Lista Prodotti</h1>
+            <h1>Lista Cibo Gatti</h1>
             <ul>
                 {catFood.map(product => (
                     <li key={product.id}>

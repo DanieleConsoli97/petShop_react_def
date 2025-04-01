@@ -29,7 +29,7 @@ function CatGamesList() {
 
     return (
         <div>
-            <h1>Lista Prodotti</h1>
+            <h1>Lista Giochi Gatti</h1>
             <ul>
                 {catGames.map(product => (
                     <li key={product.id}>

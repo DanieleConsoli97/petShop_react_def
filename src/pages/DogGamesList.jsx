@@ -29,7 +29,7 @@ function DogGamesList() {
 
     return (
         <div>
-            <h1>Lista Prodotti</h1>
+            <h1>Lista Giochi Cani</h1>
             <ul>
                 {dogGames.map(product => (
                     <li key={product.id}>

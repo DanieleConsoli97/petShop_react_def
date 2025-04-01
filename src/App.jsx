@@ -17,6 +17,7 @@ import CatFoodList from "./pages/CatFoodList";
 import CatGamesList from "./pages/CatGamesList";
 import Accessories from "./pages/Accesories";
 import DiscountedProducts from "./pages/DiscountedProducts";
+import CatProducts from "./pages/CatProducts";
 
 
 
@@ -35,6 +36,7 @@ function App() {
             <Route path="/products/cani" element={<DogProducts />} />
             <Route path="/products/cani/food" element={<DogFoodList />} />
             <Route path="/products/cani/games" element={<DogGamesList />} />
+            <Route path="/products/gatti" element={<CatProducts />} />
             <Route path="/products/gatti/food" element={<CatFoodList />} />
             <Route path="/products/gatti/games" element={<CatGamesList />} />
             <Route path="/products/Accessories" element={<Accessories />} />
@@ -45,7 +47,7 @@ function App() {
       </Router>
     </GlobalProvider>
 
- 
+
 
   );
 }

@@ -29,7 +29,7 @@ function Accessories() {
 
     return (
         <div>
-            <h1>Lista Prodotti</h1>
+            <h1>Accessories</h1>
             <ul>
                 {accessories.map(product => (
                     <li key={product.id}>

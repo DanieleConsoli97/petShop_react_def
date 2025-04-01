@@ -83,3 +83,47 @@ color: green !important;
 border-radius: 5px;
 
 }
+
+/* Navbar fixed */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+
+/* prodouct detail */
+.product-detail {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.product-detail h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.product-detail img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.product-detail p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.product-detail p:last-child {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #28a745;
+}

@@ -1,39 +1,35 @@
-function ProductDetails() {
-  const { id } = useParams(); 
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Navbar from "../components/Navbar";
+
+function ProductDetail() {
+  const { slug } = useParams(); 
   const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-      fetch(`http://localhost:3000/products/${id}`) 
-          .then(response => {
-              if (!response.ok) {
-                  throw new Error("Errore durante il recupero del prodotto");
-              }
-              return response.json();
-          })
-          .then(data => {
-              setProduct(data);
-              setLoading(false);
-          })
-          .catch(err => {
-              setError(err.message);
-              setLoading(false);
-          });
-  }, [id]);
+    
+    fetch(`http://localhost:3000/products/${slug}`) 
+      .then((response) => response.json())
+      .then((data) => setProduct(data))
+      .catch((error) => console.error("Errore nel recupero del prodotto:", error));
+  }, [slug]);
 
-  if (loading) return <p>Caricamento...</p>;
-  if (error) return <p>Errore: {error}</p>;
+  if (!product) {
+    return <div>Caricamento...</div>;
+  }
+  console.log(product.image_url);
 
   return (
-      <div className="product-details">
-          <h1>{product.name}</h1>
-          <img src={product.image_url} alt={product.name} />
-          <p>{product.description}</p>
-          <p>Prezzo: €{product.price}</p>
+    <>
+      <Navbar/>
+      <div className="product-detail">
+        <h1>{product.name}</h1>
+        <img src={product.image_url} alt={product.name} />
+        <p>{product.description}</p>
+        <p>Prezzo: €{product.price}</p>
       </div>
+    </>
   );
 }
 
-
-export default ProductDetails;
+export default ProductDetail;

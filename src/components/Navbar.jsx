@@ -44,9 +44,14 @@ function Navbar() {
       </nav>
 
       {/* Menu sotto la Navbar */}
-      <div className="bg-success-subtle text-success-emphasis shadow-sm ">  
+      <div className="bg-success-subtle text-success-emphasis shadow-sm ">
         <div className="container">
           <ul className="nav justify-content-center">
+            <li className="nav-item">
+              <Link className="nav-link" aria-current="page" to={"/products"}>
+                Tutti i Prodotti
+              </Link>
+            </li>
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"

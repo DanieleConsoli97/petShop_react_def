@@ -8,7 +8,7 @@ const PathNav = () => {
   const pathItems = location.pathname.split('/').filter(crumb => crumb !== '');
 
   return (
-    <div className="container my-5">
+    <div className="container">
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3">
           <li className="breadcrumb-item">

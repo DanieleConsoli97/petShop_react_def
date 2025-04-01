@@ -2,6 +2,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import logo from '/PawPlanet.logo(3).png'
 import { Link } from "react-router-dom";
+import SearchForm from "./SearchForm";
 function Navbar() {
 
   return (
@@ -19,8 +20,9 @@ function Navbar() {
               alt="Logo"
             />
           </Link>
+          <SearchForm/>
 
-          <div className="mx-auto search-container">
+          {/* <div className="mx-auto search-container">
             <form className="d-flex">
               <input
                 className="form-control me-2"
@@ -32,7 +34,7 @@ function Navbar() {
                 Cerca
               </button>
             </form>
-          </div>
+          </div> */}
 
           <div className="ms-auto">
             <a href="#" className="cart-icon">

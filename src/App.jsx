@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 //layout
 import DefaultLayout from "./layout/DefaultLayout";
+import Search from "./pages/Search";
 
 //pages
 import DogFoodList from "./pages/DogFoodList";
@@ -23,6 +24,7 @@ import DiscountedProducts from "./pages/DiscountedProducts";
 function App() {
   return (
 
+
     <GlobalProvider>
       <Router>
         <Routes>
@@ -37,10 +39,13 @@ function App() {
             <Route path="/products/gatti/games" element={<CatGamesList />} />
             <Route path="/products/Accessories" element={<Accessories />} />
             <Route path="/products/discounted" element={<DiscountedProducts />} />
+            <Route path="/products/search/:term" element={<Search />} />
           </Route>
         </Routes>
       </Router>
     </GlobalProvider>
+
+ 
 
   );
 }

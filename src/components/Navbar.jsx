@@ -95,7 +95,6 @@ function Navbar() {
                 </li>
               </ul>
             </li>
-
             <li className="nav-item">
               <a className="nav-link" href="#">
                 Accessori

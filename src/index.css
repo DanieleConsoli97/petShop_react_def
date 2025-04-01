@@ -1,10 +1,16 @@
+/* Global Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/*HERO*/
+/* FONT */
+html {
+  font-family: 'Poppins', sans-serif; /* Applica il font Poppins */
+}
+
+/* HERO */
 .hero-container {
   position: relative;
   background-image: url('./assets/imgs/Hero-animals1.jpg');
@@ -15,7 +21,6 @@
   height: 80vh;
   width: 100%;
   margin: 0 auto;
-
 }
 
 .hero-mask {
@@ -40,9 +45,9 @@
   margin-top: 15px;
 }
 
-/*NAVBAR*/
+/* NAVBAR */
 
-/*seacrhbar and cart-icon*/
+/* Searchbar and cart-icon */
 .search-container {
   width: 40%;
 }
@@ -55,7 +60,6 @@
 
 .cart-icon {
   color: #333;
-
 }
 
 .cart-icon:hover {
@@ -80,7 +84,6 @@
 
 .dropdown-menu {
   border-radius: 5px;
-
 }
 
 /* Navbar fixed */
@@ -97,33 +100,67 @@
 
 .container-sm p {
   margin-top: 5%;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: 'Poppins', sans-serif;
+  ;
 }
 
-/*CAROUSEL*/
 
+/* CAROUSEL */
 .card {
   width: 100%;
-  height: 350px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  
+  
 }
 
 .card-img-top {
   width: 100%;
-  height: 200px;
+  height: 160px;
   object-fit: contain;
+  object-position: center;
 }
 
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* CAROUSEL - Card Body */
 .card-body {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 15px;
 }
 
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif;
+}
 
-/* prodouct detail */
+.card-text {
+  font-size: 1.125rem;
+  color: #006400;
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Product Detail */
 .product-detail {
   max-width: 800px;
   margin: 50px auto;
@@ -132,6 +169,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   text-align: center;
+  border: 2px solid #4CAF50; 
 }
 
 .product-detail h1 {
@@ -153,5 +191,11 @@
 .product-detail p:last-child {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #28a745;
+  color: #006400; /* Verde scuro per il prezzo */
+}
+
+/*"Prezzo" */
+.price-label {
+  color: #333; 
+  font-weight: bold;
 }

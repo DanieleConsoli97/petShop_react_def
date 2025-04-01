@@ -67,21 +67,15 @@ const CarouselCustom = () => {
                         <div className="card-body">
                             <h5 className="card-title">{product.name}</h5>
                             <p className="card-text">€{product.price}</p>
-                            <Link to={`/product/${product.slug}`} className="btn btn-primary">
+                            <Link to={`/products/${product.slug}`} className="btn btn-primary">
                                 Vedi Dettagli
                             </Link>
                         </div>
                     </div>
                     </SwiperSlide>
             ))}
-
-               
-
             </Swiper>
- </>           
-            
-        
-            
+ </>                
   );
 };
 export default CarouselCustom

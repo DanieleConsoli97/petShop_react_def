@@ -4,6 +4,7 @@ import { GlobalProvider } from "./context/GlobalContext";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductDetails from "./pages/ProductDetails";
 import ProductList from "./components/ProductsList";
+import DefaultLayout from "./layout/DefaultLayout";
 
 function App() {
   return (
@@ -11,9 +12,11 @@ function App() {
  <GlobalProvider>
     <Router>
       <Routes>
+        <Route Component={DefaultLayout}>
         <Route path="/" element={<Home />} />
         <Route path="/product/:slug" element={<ProductDetails />} />
         <Route path="/products" element={<ProductList />} />
+        </Route>
       </Routes>
     </Router>
 </GlobalProvider>

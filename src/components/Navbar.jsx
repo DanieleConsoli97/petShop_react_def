@@ -1,6 +1,7 @@
 import { FaShoppingCart } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import logo from '/PawPlanet.logo(3).png'
+import { Link } from "react-router-dom";
 function Navbar() {
 
   return (
@@ -9,7 +10,7 @@ function Navbar() {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
 
-          <a className="navbar-brand" href="#">
+          <Link to={"/"}>
             <img
               className="rounded-circle"
               src={logo}
@@ -17,7 +18,7 @@ function Navbar() {
               height="60"
               alt="Logo"
             />
-          </a>
+          </Link>
 
           <div className="mx-auto search-container">
             <form className="d-flex">

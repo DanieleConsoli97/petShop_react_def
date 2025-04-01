@@ -1,54 +1,42 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import Navbar from "../components/Navbar";
+import PathNav from "../components/PathNav"
 
 function ProductDetail() {
-  const { id } = useParams();
-  const [product, setProduct] = useState();
-  const [cart, setCart] = useState([]);
+  const { slug } = useParams(); 
+  const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/petshop/products/${id}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Errore nel recupero del prodotto");
-        }
-        return response.json();
-      })
+    
+    fetch(`http://localhost:3000/products/${slug}`) 
+      .then((response) => response.json())
       .then((data) => setProduct(data))
-      .catch((error) => console.error("Errore:", error));
-  }, [id]);
-
-  const addToCart = (product) => {
-    setCart([...cart, product]);
-    alert(`${product.name} è stato aggiunto al carrello!`);
-  };
+      .catch((error) => console.error("Errore nel recupero del prodotto:", error));
+  }, [slug]);
 
   if (!product) {
     return <div>Caricamento...</div>;
   }
+  console.log(product?.image_url);
+  console.log(product)
 
   return (
-    <div>
-      <div className="container mt-5">
-        <div className="row">
-          <div className="col-md-4">
-            <div className="card" style={{ width: "18rem" }}>
-              <img src={product.image} className="card-img-top" alt={product.name} />
-              <div className="card-body">
-                <h5 className="card-title">{product.name}</h5>
-                <p className="card-text">{product.description}</p>
-                <p className="card-text"><strong>Price:</strong> ${product.price}</p>
-                <button onClick={() => addToCart(product)} className="btn btn-primary">
-                  Aggiungi al carrello
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+    <>
+      <Navbar/>
+      <PathNav/>
+      
+      <div className="product-detail">
+        <h1>{product.name}</h1>
+        <img src={product?.image_url} className="product-image" alt={product.name} />
+        <p>{product.description}</p>
+        <p>Prezzo: €{product.price}</p>
       </div>
-    </div>
+    </>
   );
+
+
 }
+
 
 export default ProductDetail;

@@ -3,6 +3,16 @@ import regioniItaliane from "../data/Regioni";
 
 const CheckOut = () => {
     const [isBillingDifferent, setIsBillingDifferent] = useState(false);
+    const [shippingData, setShippingData] = useState({
+        nome: '',
+        cognome: '',
+        email: '',
+        indirizzo: '',
+        paese: '',
+        regione: '',
+        citta: '',
+        cap: ''
+    });
     const [billingData, setBillingData] = useState({
         nome: '',
         cognome: '',
@@ -12,12 +22,28 @@ const CheckOut = () => {
         cap: ''
     });
 
+    const handleShippingChange = (e) => {
+        const { name, value } = e.target;
+        setShippingData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
     const handleBillingChange = (e) => {
         const { name, value } = e.target;
         setBillingData(prev => ({
             ...prev,
             [name]: value
         }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Dati di spedizione:', shippingData);
+        if (isBillingDifferent) {
+            console.log('Dati di fatturazione:', billingData);
+        }
     };
 
     return (
@@ -48,11 +74,18 @@ const CheckOut = () => {
 
                     <div className="col-md-7 col-lg-8">
                         <h4 className="mb-3">Indirizzo di spedizione</h4>
-                        <form className="needs-validation" noValidate>
+                        <form className="needs-validation" noValidate onSubmit={handleSubmit}>
                             <div className="row g-3">
                                 <div className="col-sm-6">
                                     <label className="form-label">Nome</label>
-                                    <input type="text" className="form-control" id="firstName" placeholder="" required />
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        name="nome"
+                                        value={shippingData.nome}
+                                        onChange={handleShippingChange}
+                                        required
+                                    />
                                     <div className="invalid-feedback">
                                         È obbligatorio un nome valido
                                     </div>
@@ -60,7 +93,14 @@ const CheckOut = () => {
 
                                 <div className="col-sm-6">
                                     <label className="form-label">Cognome</label>
-                                    <input type="text" className="form-control" id="lastName" placeholder="" required />
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        name="cognome"
+                                        value={shippingData.cognome}
+                                        onChange={handleShippingChange}
+                                        required
+                                    />
                                     <div className="invalid-feedback">
                                         È obbligatorio inserire un cognome valido.
                                     </div>
@@ -68,7 +108,15 @@ const CheckOut = () => {
 
                                 <div className="col-12">
                                     <label className="form-label">Email</label>
-                                    <input type="email" className="form-control" id="email" placeholder="tua-e-mail@example.com" />
+                                    <input
+                                        type="email"
+                                        className="form-control"
+                                        name="email"
+                                        value={shippingData.email}
+                                        onChange={handleShippingChange}
+                                        placeholder="tua-e-mail@example.com"
+                                        required
+                                    />
                                     <div className="invalid-feedback">
                                         Inserisci un indirizzo email valido per ricevere aggiornamenti sulla spedizione.
                                     </div>
@@ -76,7 +124,15 @@ const CheckOut = () => {
 
                                 <div className="col-12">
                                     <label className="form-label">Indirizzo</label>
-                                    <input type="text" className="form-control" id="address" placeholder="via ...." required />
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        name="indirizzo"
+                                        value={shippingData.indirizzo}
+                                        onChange={handleShippingChange}
+                                        placeholder="via ...."
+                                        required
+                                    />
                                     <div className="invalid-feedback">
                                         Inserisci il tuo indirizzo di spedizione.
                                     </div>
@@ -84,9 +140,15 @@ const CheckOut = () => {
 
                                 <div className="col-md-6">
                                     <label className="form-label">Paese</label>
-                                    <select className="form-select" id="country" required>
+                                    <select
+                                        className="form-select"
+                                        name="paese"
+                                        value={shippingData.paese}
+                                        onChange={handleShippingChange}
+                                        required
+                                    >
                                         <option value="">Scegli Paese</option>
-                                        <option>Italia</option>
+                                        <option value="Italia">Italia</option>
                                     </select>
                                     <div className="invalid-feedback">
                                         Inserisci un Paese valido.
@@ -95,7 +157,13 @@ const CheckOut = () => {
 
                                 <div className="col-md-6">
                                     <label className="form-label">Regione</label>
-                                    <select className="form-select" id="region" required>
+                                    <select
+                                        className="form-select"
+                                        name="regione"
+                                        value={shippingData.regione}
+                                        onChange={handleShippingChange}
+                                        required
+                                    >
                                         <option value="">Scegli Regione</option>
                                         {regioniItaliane?.map((regione, index) => (
                                             <option key={index} value={regione.nome}>
@@ -110,7 +178,14 @@ const CheckOut = () => {
 
                                 <div className="col-md-6">
                                     <label className="form-label">Città</label>
-                                    <input type="text" className="form-control" id="city" placeholder="" required />
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        name="citta"
+                                        value={shippingData.citta}
+                                        onChange={handleShippingChange}
+                                        required
+                                    />
                                     <div className="invalid-feedback">
                                         Inserisci una città valida.
                                     </div>
@@ -118,7 +193,14 @@ const CheckOut = () => {
 
                                 <div className="col-md-6">
                                     <label className="form-label">Codice Postale</label>
-                                    <input type="text" className="form-control" id="zip" placeholder="" required />
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        name="cap"
+                                        value={shippingData.cap}
+                                        onChange={handleShippingChange}
+                                        required
+                                    />
                                     <div className="invalid-feedback">
                                         Inserisci un codice postale valido.
                                     </div>
@@ -178,15 +260,6 @@ const CheckOut = () => {
                     </div>
                 </div>
             </main>
-
-            <footer className="my-5 pt-5 text-body-secondary text-center text-small">
-                <p className="mb-1">© 2017–2024 Company Name</p>
-                <ul className="list-inline">
-                    <li className="list-inline-item"><a href="#">Privacy</a></li>
-                    <li className="list-inline-item"><a href="#">Terms</a></li>
-                    <li className="list-inline-item"><a href="#">Support</a></li>
-                </ul>
-            </footer>
         </div>
     );
 };

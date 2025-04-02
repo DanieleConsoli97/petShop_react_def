@@ -41,7 +41,7 @@ function ProductDetail() {
         <h1>{product.name}</h1>
         <img src={product?.image_url} className="product-image" alt={product.name} />
         <p>{product.description}</p>
-        <p><span className="price-label">Prezzo: </span>€{product.price}</p>
+        <p><span className="price-label">Prezzo: </span>{product.price}€</p>
       </div>
 
       <div className="related-carousel" >
@@ -77,7 +77,7 @@ function ProductDetail() {
                 <img src={product.image_url} className="card-img-top" alt={product.name} />
                 <div className="card-body">
                   <h5 className="card-title">{product.name}</h5>
-                  <p className="card-text">€{product.price}</p>
+                  <p className="card-text">{product.price}€</p>
                   <Link to={`/products/${product.slug}`} className="btn btn-primary">
                     Vedi Dettagli
                   </Link>

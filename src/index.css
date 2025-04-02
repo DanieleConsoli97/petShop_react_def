@@ -1,4 +1,3 @@
-/* Global Reset */
 * {
   margin: 0;
   padding: 0;
@@ -104,11 +103,11 @@ html {
   margin-top: 5%;
   font-weight: bold;
   text-transform: uppercase;
-  font-family: 'Poppins', sans-serif;
+
 }
 
 /* CAROUSEL */
-.card {
+.card, .card-related {
   width: 100%;
   height: 300px;
   display: flex;
@@ -120,6 +119,7 @@ html {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
 }
+
 
 .card-img-top {
   width: 100%;
@@ -147,7 +147,6 @@ html {
   font-weight: 600;
   color: #333;
   margin-bottom: 10px;
-  font-family: 'Poppins', sans-serif;
 }
 
 .card-text {
@@ -155,7 +154,6 @@ html {
   color: #006400;
   font-weight: bold;
   margin-bottom: 15px;
-  font-family: 'Poppins', sans-serif;
 }
 
 /* Product Detail */
@@ -170,14 +168,41 @@ html {
   border: 2px solid #4CAF50;
 }
 
-.product-detail h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
+.product-detail {
+  display: flex;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.product-image-container {
+  flex: 1;
 }
 
 .product-image {
-  max-width: 200px;
+  max-width: 100%;
   height: auto;
+  border-radius: 8px;
+}
+
+.product-info {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.quantity-container {
+  margin-top: 10px;
+}
+
+.quantity-container input {
+  width: 60px;
+  margin-left: 10px;
+}
+
+.product-detail h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
 }
 
 .product-detail p {
@@ -191,6 +216,7 @@ html {
   font-size: 1.5rem;
   font-weight: bold;
   color: #006400; /* Verde scuro per il prezzo */
+
 }
 
 /*"Prezzo" */
@@ -261,4 +287,5 @@ html {
   .hero-container {
     height: 80vh;
   }
+
 }

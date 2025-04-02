@@ -46,12 +46,25 @@ function ProductDetail() {
   return (
     <>
     {/* Sezione dei dettagli del prodotto */}
-      <div className="product-detail">
-        <h1>{product.name}</h1>
+    <div className="product-detail d-flex">
+      {/* Colonna sinistra: immagine del prodotto */}
+      <div className="product-image-container">
         <img src={product?.image_url} className="product-image" alt={product.name} />
+      </div>
+
+      {/* Colonna destra: informazioni del prodotto */}
+      <div className="product-info">
+        <h1>{product.name}</h1>
+        <p><strong>Brand:</strong> {product.brand}</p>
         <p>{product.description}</p>
         <p><span className="price-label">Prezzo: </span>€{product.price}</p>
+        <div className="quantity-container">
+          <label htmlFor="quantity">Quantità:</label>
+          <input type="number" id="quantity" name="quantity" min="1" defaultValue="1" />
+        </div>
+        <button className="btn btn-primary mt-3">Aggiungi al Carrello</button>
       </div>
+    </div>
 
       {/* Sezione del carosello per i prodotti correlati */}
       <div className="related-carousel" >

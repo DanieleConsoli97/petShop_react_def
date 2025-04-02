@@ -56,7 +56,7 @@ const Search = () => {
                     <div className="card-body">
                         <h5 className="card-title">{product.name}</h5>
                         <p className="card-text">{product.price} €</p>
-                        <Link to={`/products/${product.slug}`} className="btn btn-primary">
+                        <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                             Vedi Dettagli
                         </Link>
                     </div>
@@ -66,3 +66,6 @@ const Search = () => {
     );
 };
 export default Search
+
+
+

@@ -36,7 +36,7 @@ function DogProducts() {
                 {dogProducts.map(product => (
                     <li key={product.id}>
                         <img src={product.image_url} alt={product.name} style={{ width: '50px', height: '50px' }} />
-                        {product.name} - {product.price}€
+                        {product.name} - {product.price} €
                     </li>
                 ))}
             </ul>

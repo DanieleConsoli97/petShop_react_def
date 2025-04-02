@@ -58,14 +58,14 @@ function ProductDetail() {
         <p><strong>Brand:</strong> {product.brand}</p>
         <p>{product.description}</p>
 
-        <p><span className="price-label">Prezzo: </span>€{product.price}</p>
+        <p><span className="price-label">Prezzo: </span>{product.price} €</p>
         <div className="quantity-container">
           <label htmlFor="quantity">Quantità:</label>
           <input type="number" id="quantity" name="quantity" min="1" defaultValue="1" />
         </div>
         <button className="btn btn-primary mt-3">Aggiungi al Carrello</button>
 
-        <p><span className="price-label">Prezzo: </span>{product.price}€</p>
+        <p><span className="price-label">Prezzo: </span>{product.price} €</p>
 
       </div>
     </div>
@@ -104,7 +104,7 @@ function ProductDetail() {
                 <img src={product.image_url} className="card-img-top" alt={product.name} />
                 <div className="card-body">
                   <h5 className="card-title">{product.name}</h5>
-                  <p className="card-text">{product.price}€</p>
+                  <p className="card-text">{product.price} €</p>
                   <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                     Vedi Dettagli
                   </Link>

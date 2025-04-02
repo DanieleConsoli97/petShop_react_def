@@ -18,7 +18,7 @@ import CatGamesList from "./pages/CatGamesList";
 import Accessories from "./pages/Accesories";
 import DiscountedProducts from "./pages/DiscountedProducts";
 import CatProducts from "./pages/CatProducts";
-
+import CheckOut from "./pages/CheckOut";
 
 
 
@@ -42,6 +42,7 @@ function App() {
             <Route path="/prodotti/accessori" element={<Accessories />} />
             <Route path="/prodotti/promozioni" element={<DiscountedProducts />} />
             <Route path="/prodotti/search/:term" element={<Search />} />
+            <Route path="/checkout" element={<CheckOut />} />
           </Route>
         </Routes>
       </Router>

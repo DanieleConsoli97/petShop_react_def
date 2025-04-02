@@ -3,10 +3,7 @@ import axios from 'axios';
 
 function Carrello() {
   const [carrello, setCarrello] = useState([]);
-  const [nome, setNome] = useState('');
-  const [email, setEmail] = useState('');
-  const [indirizzoSpedizione, setIndirizzoSpedizione] = useState('');
-  const [indirizzoFatturazione, setIndirizzoFatturazione] = useState('');
+  
 
   useEffect(() => {
     const carrelloLocale = JSON.parse(localStorage.getItem('carrello')) || [];
@@ -41,22 +38,7 @@ function Carrello() {
     setCarrello([]);
   };
 
-  const inviaOrdine = async () => {
-    try {
-      await axios.post('/api/orders', {
-        name: nome,
-        email: email,
-        shippingAddress: indirizzoSpedizione,
-        billingAddress: indirizzoFatturazione,
-        cartItems: carrello,
-      });
-      alert('Ordine inviato con successo!');
-      svuotaCarrello();
-    } catch (errore) {
-      console.error('Errore durante l\'invio dell\'ordine:', errore);
-      alert('Errore durante l\'invio dell\'ordine.');
-    }
-  };
+  
 
   return (
     <div>

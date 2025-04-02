@@ -1,48 +1,48 @@
-# PawPlanet - Pet Shop React
+# 🐾 PawPlanet - Pet Shop React
 
-Un'applicazione web moderna per negozio di animali realizzata con React + Vite.
+🌟 Un'applicazione web moderna per negozio di animali realizzata con React + Vite.
 
-## Descrizione
+## 📝 Descrizione
 
-PawPlanet è un e-commerce completo per prodotti e accessori per animali domestici. L'applicazione offre un'interfaccia intuitiva e moderna per la gestione e l'acquisto di prodotti per cani e gatti.
+PawPlanet è un e-commerce completo per prodotti e accessori per animali domestici. L'applicazione offre un'interfaccia intuitiva e moderna per la gestione e l'acquisto di prodotti per cani 🐕 e gatti 🐱.
 
-## Tecnologie Utilizzate
+## 🛠️ Tecnologie Utilizzate
 
-- React 19
-- Vite 6
-- React Router DOM 7
-- Bootstrap 5
-- Axios per le chiamate API
-- React Icons per le icone
-- Swiper per i carousel
-- ESLint per il linting del codice
+- ⚛️ React 19
+- ⚡ Vite 6
+- 🔄 React Router DOM 7
+- 🎨 Bootstrap 5
+- 🌐 Axios per le chiamate API
+- 💫 React Icons per le icone
+- 🎠 Swiper per i carousel
+- ✨ ESLint per il linting del codice
 
-## Funzionalità Principali
+## ✨ Funzionalità Principali
 
-- **Catalogo Prodotti**
-  - Sezione dedicata per prodotti per cani
-  - Sezione dedicata per prodotti per gatti
-  - Visualizzazione prodotti scontati
-  - Ricerca prodotti
-  - Dettaglio prodotto
+- 📦 **Catalogo Prodotti**
+  - 🐕 Sezione dedicata per prodotti per cani
+  - 🐱 Sezione dedicata per prodotti per gatti
+  - 🏷️ Visualizzazione prodotti scontati
+  - 🔍 Ricerca prodotti
+  - 📋 Dettaglio prodotto
 
-- **Categorie Specifiche**
-  - Alimenti per cani e gatti
-  - Giochi per cani e gatti
-  - Accessori vari
+- 🗂️ **Categorie Specifiche**
+  - 🍖 Alimenti per cani e gatti
+  - 🎾 Giochi per cani e gatti
+  - 🛍️ Accessori vari
 
-- **Carrello e Checkout**
-  - Gestione carrello della spesa
-  - Processo di checkout con validazione
-  - Selezione regione di spedizione
+- 🛒 **Carrello e Checkout**
+  - 🛍️ Gestione carrello della spesa
+  - ✅ Processo di checkout con validazione
+  - 📍 Selezione regione di spedizione
 
-- **Interfaccia Utente**
-  - Design responsive
-  - Navigazione intuitiva
-  - Carousel per presentazione prodotti
-  - Breadcrumb per navigazione
+- 🎯 **Interfaccia Utente**
+  - 📱 Design responsive
+  - 🧭 Navigazione intuitiva
+  - 🎠 Carousel per presentazione prodotti
+  - 🗺️ Breadcrumb per navigazione
 
-## Struttura del Progetto
+## 📁 Struttura del Progetto
 
 ```plaintext
 petShop_react_def/
@@ -91,14 +91,14 @@ petShop_react_def/
 └── vite.config.js       # Configurazione Vite
 ```
 
-## Come Iniziare
+## 🚀 Come Iniziare
 
-### Prerequisiti
+### 📋 Prerequisiti
 
-- Node.js (versione 14.0.0 o superiore)
-- npm (incluso con Node.js)
+- 📦 Node.js (versione 14.0.0 o superiore)
+- 📦 npm (incluso con Node.js)
 
-### Installazione
+### 💻 Installazione
 
 1. Clona il repository
 ```bash
@@ -115,25 +115,25 @@ npm install
 npm run dev
 ```
 
-L'applicazione si aprirà nel browser all'indirizzo `http://localhost:5173`
+🌐 L'applicazione si aprirà nel browser all'indirizzo `http://localhost:5173`
 
-## Script Disponibili
+## 📜 Script Disponibili
 
-- `npm run dev` - Avvia il server di sviluppo
-- `npm run build` - Crea la build di produzione
-- `npm run preview` - Visualizza la build di produzione
-- `npm run lint` - Esegue il linting del codice
+- 🔥 `npm run dev` - Avvia il server di sviluppo
+- 🏗️ `npm run build` - Crea la build di produzione
+- 👀 `npm run preview` - Visualizza la build di produzione
+- 🔍 `npm run lint` - Esegue il linting del codice
 
-## Sviluppi Futuri
+## 🔮 Sviluppi Futuri
 
-- Implementazione sistema di autenticazione
-- Gestione profilo utente
-- Sistema di recensioni prodotti
-- Integrazione pagamenti
-- Wishlist prodotti
-- Ottimizzazione performance
-- Test automatizzati
+- 🔐 Implementazione sistema di autenticazione
+- 👤 Gestione profilo utente
+- ⭐ Sistema di recensioni prodotti
+- 💳 Integrazione pagamenti
+- 💝 Wishlist prodotti
+- ⚡ Ottimizzazione performance
+- 🧪 Test automatizzati
 
-## Licenza
+## 📄 Licenza
 
 Questo progetto è sotto licenza MIT

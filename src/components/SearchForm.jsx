@@ -15,7 +15,7 @@ const SearchForm = () => {
         e.preventDefault(); // Previeni il comportamento di submit predefinito
         if (searchTerm.trim()) {
             // Naviga alla pagina dei risultati aggiungendo il termine di ricerca nell'URL
-            navigate(`products/search/${searchTerm}`);
+            navigate(`prodotti/search/${searchTerm}`);
             setSearchTerm('');
         }
     };

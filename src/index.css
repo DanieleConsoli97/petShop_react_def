@@ -91,6 +91,8 @@ html {
   top: 0;
   width: 100%;
   z-index: 1000;
+  background: #fff; /* Aggiungi uno sfondo per evitare che si confonda con il contenuto sottostante */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .container-sm {
@@ -101,9 +103,8 @@ html {
   margin-top: 5%;
   font-weight: bold;
   text-transform: uppercase;
-  
-}
 
+}
 
 /* CAROUSEL */
 .card, .card-related {
@@ -117,18 +118,8 @@ html {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
-  
-  
 }
 
-.related-carousel {
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
-  background: white;
-  border-radius: 10px;
-  text-align: center;
-}
 
 .card-img-top {
   width: 100%;
@@ -174,7 +165,7 @@ html {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   text-align: center;
-  border: 2px solid #4CAF50; 
+  border: 2px solid #4CAF50;
 }
 
 .product-detail {
@@ -218,10 +209,83 @@ html {
   font-size: 1.2rem;
   color: #555;
   margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .product-detail p:last-child {
   font-size: 1.5rem;
   font-weight: bold;
   color: #006400; /* Verde scuro per il prezzo */
+
+}
+
+/*"Prezzo" */
+.price-label {
+  color: #333;
+  font-weight: bold;
+}
+
+.related-carousel {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* MEDIA QUERIES: Responsività */
+
+/* Per schermi più piccoli (smartphone) */
+@media (max-width: 768px) {
+  .product-detail {
+    padding: 15px;
+  }
+
+  .card {
+    height: auto; /* Permette alle card di adattarsi */
+  }
+
+  .card-img-top {
+    height: 140px;
+  }
+
+  .hero-container {
+    height: 70vh;
+  }
+}
+
+/* Per schermi medio-grandi (tablet, piccoli desktop) */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .hero-container {
+    height: 70vh;
+  }
+
+  .card {
+    height: 280px;
+  }
+
+  .product-detail {
+    max-width: 600px;
+  }
+
+  .card-body {
+    padding: 10px;
+  }
+}
+
+/* Per schermi desktop (oltre 1200px) */
+@media (min-width: 1201px) {
+  .product-detail {
+    max-width: 800px;
+  }
+
+  .card {
+    height: 300px;
+  }
+
+  .hero-container {
+    height: 80vh;
+  }
+
 }

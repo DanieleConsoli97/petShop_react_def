@@ -7,7 +7,7 @@ function Accessories() {
 
     useEffect(() => {
 
-        fetch('http://localhost:3000/products/accessories')
+        fetch('http://localhost:3000/prodotti/accessori')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Errore durante il recupero dei prodotti');
@@ -34,7 +34,7 @@ function Accessories() {
                 {accessories.map(product => (
                     <li key={product.id}>
                         <img src={product.image_url} alt={product.name} style={{ width: '50px', height: '50px' }} />
-                        {product.description} - {product.price}€
+                        {product.description} - {product.price} €
                     </li>
                 ))}
             </ul>

@@ -7,7 +7,7 @@ function ProductList() {
 
     useEffect(() => {
        
-        fetch('http://localhost:3000/products') 
+        fetch('http://localhost:3000/prodotti') 
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Errore durante il recupero dei prodotti');
@@ -34,7 +34,7 @@ function ProductList() {
                 {products.map(product => (
                     <li key={product.id}>
                         <img src={product.image_url} alt={product.name} style={{ width: '50px', height: '50px' }} />
-                        {product.name} - {product.price}€
+                        {product.name} - {product.price} €
                     </li>
                 ))}
             </ul>

@@ -9,7 +9,7 @@ function DogProducts() {
 
     useEffect(() => {
 
-        fetch('http://localhost:3000/products/cani')
+        fetch('http://localhost:3000/prodotti/cani')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Errore durante il recupero dei prodotti');

@@ -7,7 +7,7 @@ function DogGamesList() {
 
     useEffect(() => {
 
-        fetch('http://localhost:3000/products/cani/games')
+        fetch('http://localhost:3000/prodotti/cani/giochi')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Errore durante il recupero dei prodotti');

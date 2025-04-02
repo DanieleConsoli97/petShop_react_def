@@ -7,7 +7,7 @@ function CatGamesList() {
 
     useEffect(() => {
 
-        fetch('http://localhost:3000/products/gatti/games')
+        fetch('http://localhost:3000/prodotti/gatti/giochi')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Errore durante il recupero dei prodotti');

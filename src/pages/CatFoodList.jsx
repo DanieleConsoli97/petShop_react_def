@@ -7,7 +7,7 @@ function CatFoodList() {
 
     useEffect(() => {
 
-        fetch('http://localhost:3000/products/gatti/food')
+        fetch('http://localhost:3000/prodotti/gatti/cibo')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Errore durante il recupero dei prodotti');

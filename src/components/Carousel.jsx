@@ -16,7 +16,7 @@ const CarouselCustom = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:3000/products/cani')
+        fetch('http://localhost:3000/prodotti/cani')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Errore durante il recupero dei prodotti');
@@ -32,7 +32,7 @@ const CarouselCustom = () => {
                 setLoading(false);
             });
 
-        fetch('http://localhost:3000/products/gatti')
+        fetch('http://localhost:3000/prodotti/gatti')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Errore durante il recupero dei prodotti');
@@ -86,7 +86,7 @@ const CarouselCustom = () => {
                             <div className="card-body">
                                 <h5 className="card-title">{product.name}</h5>
                                 <p className="card-text">{product.price}€</p>
-                                <Link to={`/products/${product.slug}`} className="btn btn-primary">
+                                <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                                     Vedi Dettagli
                                 </Link>
                             </div>
@@ -127,7 +127,7 @@ const CarouselCustom = () => {
                             <div className="card-body">
                                 <h5 className="card-title">{product.name}</h5>
                                 <p className="card-text">{product.price}€</p>
-                                <Link to={`/products/${product.slug}`} className="btn btn-primary">
+                                <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                                     Vedi Dettagli
                                 </Link>
                             </div>

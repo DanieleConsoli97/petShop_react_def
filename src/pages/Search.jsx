@@ -11,7 +11,7 @@ const Search = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/products/search/${term}`)
+        fetch(`http://localhost:3000/prodotti/search/${term}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Errore durante il recupero dei prodotti');

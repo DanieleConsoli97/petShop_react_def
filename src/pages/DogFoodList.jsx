@@ -7,7 +7,7 @@ function DogFoodList() {
 
     useEffect(() => {
 
-        fetch('http://localhost:3000/products/cani/food')
+        fetch('http://localhost:3000/prodotti/cani/cibo')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Errore durante il recupero dei prodotti');

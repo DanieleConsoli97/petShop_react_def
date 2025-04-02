@@ -27,12 +27,12 @@ function ProductDetail() {
   
   useEffect(() => {
     // Recupera i dettagli del prodotto attuale tramite lo slug
-    fetch(`http://localhost:3000/products/${slug}`)
+    fetch(`http://localhost:3000/prodotti/${slug}`)
       .then((response) => response.json())
       .then((data) => setProduct(data))
       .catch((error) => console.error("Errore nel recupero del prodotto:", error));
     // Recupera tutti i prodotti per trovare quelli correlati
-    fetch(`http://localhost:3000/products/`)
+    fetch(`http://localhost:3000/prodotti/`)
       .then((response) => response.json())
       .then((data) => setRelatedProducts(data))
       .catch((error) => console.error("Errore nel recupero del prodotto:", error));
@@ -105,7 +105,7 @@ function ProductDetail() {
                 <div className="card-body">
                   <h5 className="card-title">{product.name}</h5>
                   <p className="card-text">{product.price}€</p>
-                  <Link to={`/products/${product.slug}`} className="btn btn-primary">
+                  <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                     Vedi Dettagli
                   </Link>
                 </div>

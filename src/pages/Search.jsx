@@ -47,8 +47,6 @@ const Search = () => {
         return <p>Prodotto non trovato</p>;
     }
 
-    console.log(products);
-
     return (
         <>
             <p>Risultati di ricerca: {products.length}</p>

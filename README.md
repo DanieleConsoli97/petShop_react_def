@@ -1,37 +1,95 @@
-I'll help you combine the previous README content with the React + Vite information.
-
-```markdown:c:\Users\Daniele\Desktop\Boolean\petShop_react\README.md
-# Pet Shop React
+# PawPlanet - Pet Shop React
 
 Un'applicazione web moderna per negozio di animali realizzata con React + Vite.
 
 ## Descrizione
 
-Questa applicazione web fornisce un'interfaccia intuitiva per un negozio di animali, permettendo ai clienti di visualizzare animali, prodotti e servizi.
+PawPlanet è un e-commerce completo per prodotti e accessori per animali domestici. L'applicazione offre un'interfaccia intuitiva e moderna per la gestione e l'acquisto di prodotti per cani e gatti.
 
 ## Tecnologie Utilizzate
 
-- React.js
-- Vite
-- JavaScript (ES6+)
-- HTML5
-- CSS3
-- Bootstrap (se utilizzato)
+- React 19
+- Vite 6
+- React Router DOM 7
+- Bootstrap 5
+- Axios per le chiamate API
+- React Icons per le icone
+- Swiper per i carousel
+- ESLint per il linting del codice
 
-### Plugin Vite
+## Funzionalità Principali
 
-Attualmente, sono disponibili due plugin ufficiali:
+- **Catalogo Prodotti**
+  - Sezione dedicata per prodotti per cani
+  - Sezione dedicata per prodotti per gatti
+  - Visualizzazione prodotti scontati
+  - Ricerca prodotti
+  - Dettaglio prodotto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) utilizza [Babel](https://babeljs.io/) per Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) utilizza [SWC](https://swc.rs/) per Fast Refresh
+- **Categorie Specifiche**
+  - Alimenti per cani e gatti
+  - Giochi per cani e gatti
+  - Accessori vari
 
-## Funzionalità
+- **Carrello e Checkout**
+  - Gestione carrello della spesa
+  - Processo di checkout con validazione
+  - Selezione regione di spedizione
 
-- Visualizzazione degli animali disponibili
-- Catalogo prodotti e accessori per animali
-- Sistema di prenotazione servizi
-- Design responsive
-- Interfaccia user-friendly
+- **Interfaccia Utente**
+  - Design responsive
+  - Navigazione intuitiva
+  - Carousel per presentazione prodotti
+  - Breadcrumb per navigazione
+
+## Struttura del Progetto
+
+```plaintext
+petShop_react_def/
+├── public/                # Risorse statiche
+│   ├── PawPlanet.logo.png
+│   ├── PetShop-image.png
+│   └── Planet_1.png
+├── src/
+│   ├── assets/           # Asset del progetto
+│   │   └── imgs/
+│   │       └── Hero-animals1.jpg
+│   ├── components/       # Componenti riutilizzabili
+│   │   ├── Carousel.jsx  # Slider prodotti
+│   │   ├── Hero.jsx      # Sezione hero
+│   │   ├── Navbar.jsx    # Barra di navigazione
+│   │   ├── PathNav.jsx   # Breadcrumb navigation
+│   │   └── SearchForm.jsx # Form di ricerca
+│   ├── context/          # Context API
+│   │   └── GlobalContext.jsx # Stato globale
+│   ├── data/             # Dati statici
+│   │   └── Regioni.js    # Lista regioni per spedizione
+│   ├── layout/           # Layout components
+│   │   └── DefaultLayout.jsx # Layout principale
+│   ├── pages/            # Componenti pagina
+│   │   ├── Home.jsx
+│   │   ├── ProductDetails.jsx
+│   │   ├── ProductsList.jsx
+│   │   ├── Search.jsx
+│   │   ├── CheckOut.jsx
+│   │   ├── DogProducts.jsx
+│   │   ├── CatProducts.jsx
+│   │   ├── DogFoodList.jsx
+│   │   ├── CatFoodList.jsx
+│   │   ├── DogGamesList.jsx
+│   │   ├── CatGamesList.jsx
+│   │   ├── Accesories.jsx
+│   │   └── DiscountedProducts.jsx
+│   ├── App.jsx           # Componente root
+│   ├── main.jsx          # Entry point
+│   └── index.css         # Stili globali
+├── .envDefault           # Template variabili ambiente
+├── .gitignore
+├── eslint.config.js     # Configurazione ESLint
+├── index.html           # HTML template
+├── package.json         # Dipendenze e script
+└── vite.config.js       # Configurazione Vite
+```
 
 ## Come Iniziare
 
@@ -44,7 +102,7 @@ Attualmente, sono disponibili due plugin ufficiali:
 
 1. Clona il repository
 ```bash
-git clone [url-del-tuo-repository]
+git clone [url-del-repository]
 ```
 
 2. Installa le dipendenze
@@ -57,57 +115,25 @@ npm install
 npm run dev
 ```
 
-L'applicazione si aprirà nel tuo browser predefinito all'indirizzo `http://localhost:5173`
+L'applicazione si aprirà nel browser all'indirizzo `http://localhost:5173`
 
-## Struttura del Progetto
+## Script Disponibili
 
-```plaintext
-petShop_react/
-├── public/
-├── src/
-│   ├── components/
-│   ├── assets/
-│   ├── styles/
-│   └── App.jsx
-└── README.md
-```
+- `npm run dev` - Avvia il server di sviluppo
+- `npm run build` - Crea la build di produzione
+- `npm run preview` - Visualizza la build di produzione
+- `npm run lint` - Esegue il linting del codice
 
-## Possibili Migliorie Future
+## Sviluppi Futuri
 
-### Funzionalità Utente
-
-- Sistema di autenticazione per gli utenti
-- Area personale per gestire gli ordini e le prenotazioni
-- Sistema di notifiche per promemoria e offerte speciali
-- Recensioni e valutazioni dei prodotti
-- Sistema di fidelizzazione con punti premio
-
-### Funzionalità di E-commerce
-
-- Carrello della spesa avanzato
-- Sistema di pagamento integrato
-- Tracciamento delle spedizioni
-- Gestione delle scorte in tempo reale
-- Lista dei desideri
-
-### Caratteristiche Tecniche
-
-- Implementazione PWA (Progressive Web App)
-- Ottimizzazione delle prestazioni
-- Integrazione con CMS headless
-- Miglioramento SEO
-- Testing automatizzato
-- Configurazione ESLint avanzata con TypeScript
+- Implementazione sistema di autenticazione
+- Gestione profilo utente
+- Sistema di recensioni prodotti
+- Integrazione pagamenti
+- Wishlist prodotti
+- Ottimizzazione performance
+- Test automatizzati
 
 ## Licenza
 
-Questo progetto è sotto licenza MIT - vedi il file LICENSE.md per i dettagli
-
-## Contatti
-
-Il Tuo Nome - [tua-email@esempio.com]
-
-Link al Progetto: [https://github.com/tuousername/petShop_react]
-```
-
-Ho integrato le informazioni di Vite nel README, aggiornato i comandi di avvio (da `npm start` a `npm run dev` come usato in Vite) e la porta predefinita (da 3000 a 5173). Ho anche aggiunto una menzione dei plugin Vite nella sezione delle tecnologie e incluso la possibilità di configurazione ESLint nelle migliorie future. Vuoi che modifichi qualcos'altro?
+Questo progetto è sotto licenza MIT

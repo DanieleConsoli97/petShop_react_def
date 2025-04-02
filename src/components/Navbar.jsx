@@ -50,7 +50,7 @@ function Navbar() {
         <div className="container">
           <ul className="nav justify-content-center">
             <li className="nav-item">
-              <Link className="nav-link" aria-current="page" to={"/products"}>
+              <Link className="nav-link" aria-current="page" to={"/prodotti"}>
                 Tutti i Prodotti
               </Link>
             </li>
@@ -67,12 +67,12 @@ function Navbar() {
               </a>
               <ul className="dropdown-menu" aria-labelledby="caniDropdown">
                 <li>
-                  <Link className="dropdown-item" to={'/products/cani/food'} >
+                  <Link className="dropdown-item" to={'/prodotti/cani/cibo'} >
                     Cibo per cani
                   </Link>
                 </li>
                 <li>
-                  <Link to={'/products/cani/games'} className="dropdown-item" >
+                  <Link to={'/prodotti/cani/giochi'} className="dropdown-item" >
                     Giochi per cani
                   </Link>
                 </li>
@@ -92,24 +92,24 @@ function Navbar() {
               </a>
               <ul className="dropdown-menu" aria-labelledby="gattiDropdown">
                 <li>
-                  <Link className="dropdown-item" to={'products/gatti/food'}>
+                  <Link className="dropdown-item" to={'prodotti/gatti/cibo'}>
                     Cibo per gatti
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to={'products/gatti/games'}>
+                  <Link className="dropdown-item" to={'prodotti/gatti/giochi'}>
                     Giochi per gatti
                   </Link>
                 </li>
               </ul>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to={'/products/accessories'}>
+              <Link className="nav-link" to={'/prodotti/accessori'}>
                 Accessori
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to={'/products/discounted'}>
+              <Link className="nav-link" to={'/prodotti/promozioni'}>
                 Offerte
               </Link>
             </li>

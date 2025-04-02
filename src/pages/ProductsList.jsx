@@ -7,7 +7,7 @@ function ProductList() {
 
     useEffect(() => {
        
-        fetch('http://localhost:3000/products') 
+        fetch('http://localhost:3000/prodotti') 
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Errore durante il recupero dei prodotti');

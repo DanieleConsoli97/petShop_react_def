@@ -31,17 +31,17 @@ function App() {
         <Routes>
           <Route Component={DefaultLayout}>
             <Route path="/" element={<Home />} />
-            <Route path="/products/:slug" element={<ProductDetails />} />
-            <Route path="/products" element={<ProductList />} />
-            <Route path="/products/cani" element={<DogProducts />} />
-            <Route path="/products/cani/food" element={<DogFoodList />} />
-            <Route path="/products/cani/games" element={<DogGamesList />} />
-            <Route path="/products/gatti" element={<CatProducts />} />
-            <Route path="/products/gatti/food" element={<CatFoodList />} />
-            <Route path="/products/gatti/games" element={<CatGamesList />} />
-            <Route path="/products/Accessories" element={<Accessories />} />
-            <Route path="/products/discounted" element={<DiscountedProducts />} />
-            <Route path="/products/search/:term" element={<Search />} />
+            <Route path="/prodotti/:slug" element={<ProductDetails />} />
+            <Route path="/prodotti" element={<ProductList />} />
+            <Route path="/prodotti/cani" element={<DogProducts />} />
+            <Route path="/prodotti/cani/cibo" element={<DogFoodList />} />
+            <Route path="/prodotti/cani/giochi" element={<DogGamesList />} />
+            <Route path="/prodotti/gatti" element={<CatProducts />} />
+            <Route path="/prodotti/gatti/cibo" element={<CatFoodList />} />
+            <Route path="/prodotti/gatti/giochi" element={<CatGamesList />} />
+            <Route path="/prodotti/accessori" element={<Accessories />} />
+            <Route path="/prodotti/promozioni" element={<DiscountedProducts />} />
+            <Route path="/prodotti/search/:term" element={<Search />} />
             <Route path="/checkout" element={<CheckOut />} />
           </Route>
         </Routes>

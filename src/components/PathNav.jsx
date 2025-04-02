@@ -62,11 +62,11 @@ const PathNav = () => {
   return (
     <div className="container">
       <nav aria-label="breadcrumb">
-      <ol className="breadcrumb breadcrumb-chevron my-4 p-3 bg-body-tertiary rounded-3">
+      <ol className="breadcrumb breadcrumb-chevron my-4 p-3 rounded-3">
           <li className="breadcrumb-item">
             <Link to="/" className="link-body-emphasis text-decoration-none">
               <FaHome className="bi" width="16" height="16" />
-              <span className="ms-1"></span>
+              <span className="ms-1 font-size-small"></span>
             </Link>
           </li>
 

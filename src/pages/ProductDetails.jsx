@@ -18,6 +18,8 @@ function ProductDetail() {
   const [product, setProduct] = useState(null);
   // Stato per i prodotti correlati
   const [relatedProducts, setRelatedProducts] = useState([]);
+ //Stato per la quantità selezionata 
+  const [quantity, setQuantity] = useState(1);
 
    // Scroll in alto quando lo slug cambia
    useEffect(() => {
@@ -38,6 +40,16 @@ function ProductDetail() {
       .catch((error) => console.error("Errore nel recupero del prodotto:", error));
   }, [slug]);
 
+  // Funzioni per gestire il cambiamento della quantità
+  const handleDecrease = () => {
+    if (quantity > 1) setQuantity(quantity - 1);
+  };
+
+  const handleIncrease = () => {
+    setQuantity(quantity + 1);
+  };
+
+
   if (!product) {
     return <div>Caricamento...</div>;
   }
@@ -46,32 +58,33 @@ function ProductDetail() {
   return (
     <>
     {/* Sezione dei dettagli del prodotto */}
-    <div className="product-detail d-flex">
-      {/* Colonna sinistra: immagine del prodotto */}
-      <div className="product-image-container">
-        <img src={product?.image_url} className="product-image" alt={product.name} />
-      </div>
+      <div className="container-product my-4">
+        <div className="product-detail d-flex">
+          {/* Colonna sinistra: immagine del prodotto */}
+          <div className="product-image-container">
+            <img src={product?.image_url} className="product-image" alt={product.name} />
+          </div>
 
-      {/* Colonna destra: informazioni del prodotto */}
-      <div className="product-info">
-        <h1>{product.name}</h1>
-        <p><strong>Brand:</strong> {product.brand}</p>
-        <p>{product.description}</p>
+          {/* Colonna destra: informazioni del prodotto */}
+          <div className="product-info">
+            <h1>{product.name}</h1>
+            <h6>Brand: {product.brand}</h6>
+            <p>{product.description}</p>
+            <p className="price">{product.price}€</p>
+            {/* Selettore quantità */}
+            <div className="quantity-container">
+                <button className="quantity-btn" onClick={handleDecrease}>-</button>
+                <input type="number" value={quantity} className="quantity-input" />
+                <button className="quantity-btn" onClick={handleIncrease}>+</button>
+            </div>
+            <button className="btn btn-primary mt-3">Aggiungi al Carrello</button>
 
-        <p><span className="price-label">Prezzo: </span>€{product.price}</p>
-        <div className="quantity-container">
-          <label htmlFor="quantity">Quantità:</label>
-          <input type="number" id="quantity" name="quantity" min="1" defaultValue="1" />
+
+          </div>
         </div>
-        <button className="btn btn-primary mt-3">Aggiungi al Carrello</button>
 
-        <p><span className="price-label">Prezzo: </span>{product.price}€</p>
-
-      </div>
-    </div>
-
-      {/* Sezione del carosello per i prodotti correlati */}
-      <div className="related-carousel" >
+        {/* Sezione del carosello per i prodotti correlati */}
+        <div className="related-carousel" >
         <h2 className="text-center my-4">Prodotti Correlati</h2>
         <Swiper
           slidesPerView={3}
@@ -116,7 +129,8 @@ function ProductDetail() {
           )}
 
         </Swiper>
-      </div>
+        </div>
+      </div> 
     </>
   );
 

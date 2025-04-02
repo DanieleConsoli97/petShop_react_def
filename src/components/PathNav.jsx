@@ -60,7 +60,7 @@ const PathNav = () => {
   let stopRendering = false;  // Variabile per fermare la visualizzazione dei breadcrumb dopo "search"
 
   return (
-    <div className="container">
+    <div className="container"> {/*se si vuole mettere a sinistra tutto usiamo w-75 ms-5 e togliamo margin nel css */}
       <nav aria-label="breadcrumb">
       <ol className="breadcrumb breadcrumb-chevron my-4 p-3 rounded-3">
           <li className="breadcrumb-item">

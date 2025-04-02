@@ -30,27 +30,28 @@ const Search = () => {
 
     if (loading) return <p>Caricamento...</p>;
     if (error) return <p>Errore: {error}</p>;
-    
-      // Variabile per tracciare se un prodotto è stato trovato
-      let prodottoTrovato = false;
 
-      // Ciclo for con let i per controllare ogni prodotto
-      for (let i = 0; i < products.length; i++) {
-          if (products[i].name.toLowerCase().includes(term.toLowerCase())) {
-              prodottoTrovato = true;
-              break; // Esci dal ciclo appena trovi un prodotto che corrisponde
-          }
-      }
-  
-      // Se non è stato trovato nessun prodotto che soddisfa la condizione, mostriamo il messaggio
-      if (!prodottoTrovato) {
-          return <p>Prodotto non trovato</p>;
-      }
+    // Variabile per tracciare se un prodotto è stato trovato
+    let prodottoTrovato = false;
+
+    // Ciclo for con let i per controllare ogni prodotto
+    for (let i = 0; i < products.length; i++) {
+        if (products[i].name.toLowerCase().includes(term.toLowerCase())) {
+            prodottoTrovato = true;
+            break; // Esci dal ciclo appena trovi un prodotto che corrisponde
+        }
+    }
+
+    // Se non è stato trovato nessun prodotto che soddisfa la condizione, mostriamo il messaggio
+    if (!prodottoTrovato) {
+        return <p>Prodotto non trovato</p>;
+    }
 
     console.log(products);
 
     return (
         <>
+            <p>Risultati di ricerca: {products.length}</p>
             {products.map(product => (
                 <div className="card" key={product.id}>
                     <img src={product.image_url} className="card-img-top" alt={product.name} />

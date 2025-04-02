@@ -1,4 +1,3 @@
-/* Global Reset */
 * {
   margin: 0;
   padding: 0;
@@ -102,13 +101,12 @@ html {
   margin-top: 5%;
   font-weight: bold;
   text-transform: uppercase;
-  font-family: 'Poppins', sans-serif;
-  ;
+  
 }
 
 
 /* CAROUSEL */
-.card {
+.card, .card-related {
   width: 100%;
   height: 300px;
   display: flex;
@@ -121,6 +119,15 @@ html {
   overflow: hidden;
   
   
+}
+
+.related-carousel {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .card-img-top {
@@ -149,7 +156,6 @@ html {
   font-weight: 600;
   color: #333;
   margin-bottom: 10px;
-  font-family: 'Poppins', sans-serif;
 }
 
 .card-text {
@@ -157,7 +163,6 @@ html {
   color: #006400;
   font-weight: bold;
   margin-bottom: 15px;
-  font-family: 'Poppins', sans-serif;
 }
 
 /* Product Detail */
@@ -193,20 +198,3 @@ html {
   font-weight: bold;
   color: #006400; /* Verde scuro per il prezzo */
 }
-
-/*"Prezzo" */
-.price-label {
-  color: #333; 
-  font-weight: bold;
-}
-
-  
-.related-carousel {
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
-  background: white;
-  border-radius: 10px;
-  text-align: center;
-}
-

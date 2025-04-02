@@ -36,7 +36,7 @@ const Search = () => {
 
     // Ciclo for con let i per controllare ogni prodotto
     for (let i = 0; i < products.length; i++) {
-        if (products[i].name.toLowerCase().includes(term.toLowerCase())) {
+        if (products[i].name.toLowerCase().includes(term.toLowerCase())||products[i].description.toLowerCase().includes(term.toLowerCase())) {
             prodottoTrovato = true;
             break; // Esci dal ciclo appena trovi un prodotto che corrisponde
         }

@@ -6,12 +6,12 @@ import { useGlobalContext } from "../context/GlobalContext";
 
 // Componente principale per la gestione del checkout
 const CheckOut = () => {
-    const {carrello} = useGlobalContext ()
-    
+    const { carrello } = useGlobalContext()
+
     // Gestione degli stati del form
     const [isBillingDifferent, setIsBillingDifferent] = useState(false); // Stato per gestire indirizzi di spedizione/fatturazione diversi
     const [errors, setErrors] = useState({}); // Stato per la gestione degli errori di validazione
-    
+
     // Stato per i dati di spedizione
     const [shippingData, setShippingData] = useState({
         nome: '',
@@ -40,7 +40,7 @@ const CheckOut = () => {
         setShippingData(prev => ({
             ...prev,
             [name]: value
-            
+
         }));
     };
 
@@ -109,7 +109,6 @@ const CheckOut = () => {
 
     //FIXME - Dati di esempio del carrello (da sostituire con dati reali)
     const cartItems = carrello
-   console.log(cartItems ) 
     // Handler per la gestione dell'invio del form
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -138,7 +137,7 @@ const CheckOut = () => {
                 discountCodeId: null,
                 shippingCost: 5.00, // Costo fisso di spedizione
             }
-           
+
             // Invio dei dati dell'ordine al server
             fetch('http://localhost:3000/prodotti/orders', {
                 method: 'POST',
@@ -147,28 +146,36 @@ const CheckOut = () => {
                 },
                 body: JSON.stringify(orderData)
             })
-            .then(response => {
-                if (!response.ok) {
-                    return response.text().then(text => {
-                        throw new Error(text || 'Errore durante la creazione dell\'ordine');
-                    });
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Ordine creato con successo:', data);
-                // TODO: Reindirizzare alla pagina di conferma
-            })
-            .catch(error => {
-                console.error('Errore dettagliato:', error);
-                setErrors(prev => ({
-                    ...prev,
-                    submit: error.message || 'Si è verificato un errore durante l\'invio dell\'ordine. Riprova più tardi.'
-                }));
-            });
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                            throw new Error(text || 'Errore durante la creazione dell\'ordine');
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Ordine creato con successo:', data);
+                    // TODO: Reindirizzare alla pagina di conferma
+                })
+                .catch(error => {
+                    console.error('Errore dettagliato:', error);
+                    setErrors(prev => ({
+                        ...prev,
+                        submit: error.message || 'Si è verificato un errore durante l\'invio dell\'ordine. Riprova più tardi.'
+                    }));
+                });
         }
     };
-
+    const calculateTotal = () => {
+        const subtotal = carrello.reduce((total, product) => {
+          return total + (product.price * product.quantity);
+        }, 0);
+        
+        const shippingCost = 5.00; // Costo di spedizione fisso
+        return subtotal + shippingCost;
+      };
+    const cartTotal = calculateTotal();
     return (
         <div className="container">
             <main>
@@ -181,13 +188,48 @@ const CheckOut = () => {
                     <div className="col-md-5 col-lg-4 order-md-last">
                         {/* Sezione carrello rimasta invariata */}
                         <h4 className="d-flex justify-content-between align-items-center mb-3"> {/*NOTE carrello*/}
-                            <span className="text-primary">Your cart</span>
-                            <span className="badge bg-primary rounded-pill">3</span>
+                            <span className="text-primary">Carrello</span>
+                            <span className="badge bg-primary rounded-pill">{carrello.length}</span>
                         </h4>
                         <ul className="list-group mb-3">
                             {/* ... contenuto del carrello ... */}
+
+                            {
+                                carrello.map((product,index) => {
+                                    const { name, price, quantity } = product
+                                    return (
+                                        <li key={index} className="list-group-item d-flex justify-content-between lh-sm">
+                                            <div>
+                                                <h6 className="my-0">{name}</h6>
+                                                <small className="text-body-secondary fw-bold"> {` Quantità : ${quantity}`}</small>
+                                            </div>
+                                            <span className="text-body-secondary">{`${price * quantity} €`}</span>
+                                        </li>
+                                    )
+                                })
+
+                            }
+                            <li  className="list-group-item d-flex justify-content-between lh-sm">
+                                            <div>
+                                                <small className="text-body-secondary fw-bold"> Costi di spedizione</small>
+                                            </div>
+                                            <span className="text-body-secondary">5 € </span>
+                                        </li>
+                            <li className="list-group-item d-flex justify-content-between bg-body-tertiary">  {/*NOTE - promo code */}
+                                <div className="text-success">
+                                    <h6 className="my-0">Promo code</h6>
+                                    <small>EXAMPLECODE</small>
+                                </div>
+                                <span className="text-success">−$5</span>
+                            </li>
+
+                            <li className="list-group-item d-flex justify-content-between">
+                                <span>Totale (EUR)</span>
+                                <strong>{cartTotal.toFixed(2)} €</strong>
+                            </li>
                         </ul>
-                        <form className="card p-2">
+
+                        <form className="card p-2">                                               {/* NOTE - pulsante agguinta promocode*/}
                             <div className="input-group">
                                 <input type="text" className="form-control" placeholder="Promo code" />
                                 <button type="submit" className="btn btn-secondary">Redeem</button>
@@ -195,6 +237,7 @@ const CheckOut = () => {
                         </form>
                     </div>
 
+                    {/*NOTE logica form*/}
                     <div className="col-md-7 col-lg-8 mb-5">
                         <h4 className="mb-3">Indirizzo di spedizione</h4>
                         <form className="needs-validation" noValidate onSubmit={handleSubmit}>
@@ -408,8 +451,8 @@ const CheckOut = () => {
                         </form>
                     </div>
                 </div>
-            </main>
-        </div>
+            </main >
+        </div >
     );
 };
 

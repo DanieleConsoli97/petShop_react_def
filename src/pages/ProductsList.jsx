@@ -29,10 +29,11 @@ function ProductList() {
     if (error) return <p>Errore: {error}</p>;
 
     return (
-        <div>
-            <h1>Lista Prodotti</h1>
+        <>
+        <h1 className='text-center my-4'>Lista Prodotti</h1>
+        <div className='products-container'>
             {products.map(product => (
-                        <div className="card" key={product.id}>
+                        <div className="products-card" key={product.id}>
                             <img src={product.image_url} className="card-img-top" alt={product.name} />
                             <div className="card-body">
                                 <h5 className="card-title">{product.name}</h5>
@@ -44,6 +45,7 @@ function ProductList() {
                         </div>
                 ))}
         </div>
+        </>
     );
 }
 

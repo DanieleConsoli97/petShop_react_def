@@ -10,7 +10,7 @@ const DefaultLayout = () => {
             {
                  location.pathname == "/"  ? <></> : <PathNav />   //|| location.pathname == "*"  ? <></> : <PathNav />
             }
-            <div className="container">
+            <div>
                 <Outlet />
 
             </div>

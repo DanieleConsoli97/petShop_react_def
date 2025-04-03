@@ -6,7 +6,7 @@ import CarouselCustom from "../components/Carousel"
 function Home() {
 
   return (
-    <div>
+    <>
     
       <Hero />
       <div className="container-sm">
@@ -14,7 +14,7 @@ function Home() {
         <CarouselCustom />
         
       </div>
-    </div>
+    </>
   );
 }
 

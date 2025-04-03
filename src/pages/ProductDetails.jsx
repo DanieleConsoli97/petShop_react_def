@@ -69,7 +69,7 @@ function ProductDetail() {
   }
 
   return (
-    <>
+    <div className="container">
       {/* Sezione dei dettagli del prodotto */}
       <div className="container-product my-4">
         <div className="product-detail d-flex">
@@ -148,7 +148,7 @@ function ProductDetail() {
           </Swiper>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

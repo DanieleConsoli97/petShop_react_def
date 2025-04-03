@@ -126,7 +126,7 @@
 
 // export default ProductDetail;
 
-
+import { useGlobalContext } from '../context/GlobalContext';
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
@@ -148,6 +148,8 @@ function ProductDetail() {
   // Stato per la quantità del prodotto
   const [quantity, setQuantity] = useState(1);
 
+  const {aggiungiAlCarrello} = useGlobalContext();
+
   // Scroll in alto quando lo slug cambia
   useEffect(() => {
     window.scrollTo(0, 0); // Scorri verso l'alto
@@ -168,6 +170,7 @@ function ProductDetail() {
 
     // Resetta la quantità ogni volta che cambia il prodotto
     setQuantity(1);
+    
   }, [slug]);
 
   // Funzioni per gestire il cambiamento della quantità
@@ -219,7 +222,7 @@ function ProductDetail() {
               />
               <button className="quantity-btn" onClick={handleIncrease}>+</button>
             </div>
-            <button className="btn btn-primary mt-3">Aggiungi al Carrello</button>
+            <button onClick={aggiungiAlCarrello} className="btn btn-primary mt-3">Aggiungi al Carrello</button>
           </div>
         </div>
 

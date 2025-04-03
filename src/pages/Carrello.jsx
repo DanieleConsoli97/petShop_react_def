@@ -1,51 +1,50 @@
 import React, { useState, useEffect } from 'react';
+import { useGlobalContext } from '../context/GlobalContext';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function Carrello() {
-  const [carrello, setCarrello] = useState([]);
-  
 
-  useEffect(() => {
-    const carrelloLocale = JSON.parse(localStorage.getItem('carrello')) || [];
-    setCarrello(carrelloLocale);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('carrello', JSON.stringify(carrello));
-  }, [carrello]);
-
-  const aggiungiAlCarrello = async (prodottoId) => {
-    try {
-      const risposta = await axios.get(`/api/products/${prodottoId}`);
-      const prodotto = risposta.data;
-      const prodottoEsistente = carrello.find((item) => item.id === prodotto.id);
-      if (prodottoEsistente) {
-        setCarrello(carrello.map((item) => (item.id === prodotto.id ? { ...item, quantity: item.quantity + 1 } : item)));
-      } else {
-        setCarrello([...carrello, { ...prodotto, quantity: 1 }]);
-      }
-    } catch (errore) {
-      console.error('Errore durante l\'aggiunta al carrello:', errore);
-    }
-  };
-
-  const rimuoviDalCarrello = (prodottoId) => {
-    setCarrello(carrello.filter((item) => item.id !== prodottoId));
-  };
-
-  const svuotaCarrello = () => {
-    localStorage.removeItem('carrello');
-    setCarrello([]);
-  };
-
-  
+  const { carrello, rimuoviDalCarrello, svuotaCarrello } = useGlobalContext();
 
   return (
     <div>
-      {/* Visualizzazione del carrello */}
-      {/* Form per l'invio dell'ordine */}
-      {/* ... */}
-      <button onClick={inviaOrdine}>Invia Ordine</button>
+      <div className='container'>
+        <h1 className='text-center'>Carrello</h1>
+        <div className='row'>
+          {carrello.map((product) => (
+            // <div key={prodotto.slug} className='col-md-4'>
+            //   <div className='card mb-4'>
+            //     <img src={prodotto.immagine} className='card-img-top' alt={prodotto.nome} />
+            //     <div className='card-body'>
+            //       <h5 className='card-title'>{prodotto.nome}</h5>
+            //       <p className='card-text'>Prezzo: {prodotto.prezzo} €</p>
+            //       <p className='card-text'>Quantità: {prodotto.quantity}</p>
+            //       <button onClick={() => rimuoviDalCarrello(prodotto.slug)} className='btn btn-danger'>Rimuovi dal carrello</button>
+            //     </div>
+            //   </div>
+            // </div>
+
+            <div className="card" key={product.id}>
+              <img src={product.image_url} className="card-img-top" alt={product.name} />
+              <div className="card-body">
+                <h5 className="card-title">{product.name}</h5>
+                <p className="card-text">{product.price} €</p>
+                <button onClick={() => rimuoviDalCarrello(prodotto.slug)} className='btn btn-danger'>Rimuovi dal carrello</button>
+                <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
+                  Vedi Dettagli
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <Link to={'/checkout'}>
+        <button >Vai alla Pagina Di Checkout</button>
+      </Link>
+      <button onClick={svuotaCarrello}>Svouta Carrello</button>
+
     </div>
   );
 }

@@ -37,9 +37,9 @@ function Navbar() {
           </div> */}
 
           <div className="ms-auto">
-            <a href="#" className="cart-icon">
+            <Link to={'/carrello'} className="cart-icon">
               <FaShoppingCart size={30} />
-            </a>
+            </Link>
           </div>
 
         </div>

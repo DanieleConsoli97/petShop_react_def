@@ -22,10 +22,17 @@ function Navbar() {
           </Link>
           <SearchForm />
 
+
           <div>
             <a href="#" className="cart-icon">
+
+          
+
+          <div className="ms-auto">
+            <Link to={'/carrello'} className="cart-icon">
+
               <FaShoppingCart size={30} />
-            </a>
+            </Link>
           </div>
 
         </div>

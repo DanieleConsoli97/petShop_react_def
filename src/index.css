@@ -6,7 +6,7 @@
 
 /* FONT */
 html {
-  font-family: 'Poppins', sans-serif; /* Applica il font Poppins */
+  font-family: 'Poppins', sans-serif;
 }
 
 /* HERO */
@@ -44,8 +44,6 @@ html {
 }
 
 /* NAVBAR */
-
-/* Searchbar and cart-icon */
 .search-container {
   width: 40%;
 }
@@ -65,7 +63,6 @@ html {
   color: green;
 }
 
-/* Menu with list */
 .nav {
   padding: 10px 0;
 }
@@ -84,13 +81,12 @@ html {
   border-radius: 5px;
 }
 
-/* Navbar fixed */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-  background: #fff; /* Aggiungi uno sfondo per evitare che si confonda con il contenuto sottostante */
+  background: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -102,7 +98,6 @@ html {
   margin-top: 5%;
   font-weight: bold;
   text-transform: uppercase;
-
 }
 
 /*PRODUCT LIST */
@@ -155,7 +150,6 @@ html {
   overflow: hidden;
 }
 
-
 .card-img-top {
   width: 100%;
   height: 160px;
@@ -168,7 +162,6 @@ html {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* CAROUSEL - Card Body */
 .card-body {
   flex-grow: 1;
   display: flex;
@@ -190,59 +183,50 @@ html {
   margin-bottom: 15px;
 }
 
-/*BREADCRUMB*/
+/* BREADCRUMB */
 .breadcrumb-chevron {
-  background-color: #F9F5EC !important; 
-  padding: 20px; 
-  border-radius: 10px; 
-  width: 80% !important; 
+  background-color: #F9F5EC !important;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80% !important;
   margin: 0 auto !important;
 }
 
-
-/* Contenitore principale del dettaglio prodotto */
+/* CONTENITORE DETTAGLIO PRODOTTO */
 .container-product{
-  background-color: #F9F5EC; 
-  padding: 20px; 
-  margin: 50px;
-  border-radius: 10px; 
+  background-color: #F9F5EC;
+  padding: 20px;
+  margin: 0 auto; /* Assicura che il contenitore sia centrato */
+  border-radius: 10px;
+  max-width: 1200px; /* Limita la larghezza massima per evitare allungamenti */
 }
 
 .product-detail {
-  max-width: 1200px !important; 
-  margin: 0 auto !important;
-  padding: 2rem !important; 
   display: flex;
+  flex-wrap: wrap; /* Aggiunto per permettere agli elementi di andare a capo su schermi piccoli */
   align-items: flex-start;
   justify-content: center;
   gap: 4rem;
   padding: 2rem;
-
 }
 
-/* Immagine prodotto */
 .product-image-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 500px; 
-  height: 500px; 
+  width: 100%; /* Impostato al 100% per migliorare la responsività */
+  max-width: 500px; /* Limita la larghezza massima dell'immagine */
   background-color: #fff;
 }
 
 .product-image {
   width: 100%;
-  height: 100%;
-  object-fit: contain; 
+  height: auto;
+  object-fit: contain;
   border-radius: 10px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.product-image:hover {
-  transform: scale(1.05); 
-}
-
-/* Sezione informazioni del prodotto */
 .product-info {
   flex: 2;
   padding-left: 2rem;
@@ -266,7 +250,6 @@ html {
   margin-bottom: 1rem;
 }
 
-/* Contenitore quantità */
 .quantity-container {
   display: flex;
   align-items: center;
@@ -274,23 +257,21 @@ html {
   margin-top: 1rem;
 }
 
-/* Rimuove le freccette dall'input quantità */
 .quantity-input::-webkit-outer-spin-button,
 .quantity-input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* Bottoni + e - */
 .quantity-btn {
-  background-color: #6C9D7C;
+  background-color: #B0B0B0; /* Bottone grigio per incremento e decremento */
   color: white;
-  width: 45px;  
+  width: 45px;
   height: 45px;
   font-size: 1.5rem;
   cursor: pointer;
-  border-radius: 50%; 
-  border: none; 
+  border-radius: 50%;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -298,24 +279,22 @@ html {
 }
 
 .quantity-btn:hover {
-  background-color: #458a5c;
+  background-color: #8f8f8f;
 }
 
-/* Input della quantità */
 .quantity-input {
   width: 50px;
   text-align: center;
   font-size: 1.2rem;
   padding: 5px;
-  border: none; 
-  outline: none; 
-  background: transparent; 
+  border: none;
+  outline: none;
+  background: transparent;
 }
 
-
-/* Bottone di acquisto */
+/* Bottoni arancioni */
 .btn-primary {
-  background: #D4A017 !important;
+  background: #D4A017 !important; /* Bottone arancione */
   font-weight: bold;
   padding: 0.75rem 1.5rem;
   border: none !important;
@@ -328,49 +307,32 @@ html {
   background: #e0a800 !important;
 }
 
-/* Sezione carosello prodotti correlati */
-
-.related-carousel {
-  max-width: 1000px;
-  margin: 50px auto;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  position: relative;
-  padding-top: 2rem; 
+/* Frecce del carosello di scorrimento */
+.carousel-control-prev-icon, 
+.carousel-control-next-icon {
+  background-color: green; /* Colore verde per le frecce */
 }
 
-/*riga che separa i prodotti correlati e il prodotto*/
-.related-carousel::before {
-  content: "";
-  display: block;
-  width: 80%; 
-  height: 2px; 
-  background-color: #D4A017; 
-  margin: 0 auto 3rem auto; 
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+  background-color: #28a745; /* Colore verde più scuro quando passa sopra */
 }
 
-.swiper-button-next,
-.swiper-button-prev {
-  color: #0e6b0e !important; /* Colore giallo oro (stesso del bottone del carrello) */
-  font-size: 20px; /* Dimensione delle frecce */
-}
-
-/* MEDIA QUERIES: Responsività */
-
-/* Per schermi più piccoli (smartphone) */
+/* Media queries */
 @media (max-width: 768px) {
   .product-detail {
-    padding: 15px;
+    padding: 10px;
+    gap: 2rem; /* Riduce il gap su schermi piccoli */
   }
 
-  .card {
-    height: auto; /* Permette alle card di adattarsi */
+  .product-info {
+    max-width: 100%; /* Permette al testo di adattarsi alla larghezza */
   }
 
-  .card-img-top {
-    height: 140px;
+  .product-image-container {
+    max-width: 100%; /* L'immagine occupa tutta la larghezza */
   }
+
 
   .hero-container {
     height: 70vh;
@@ -502,6 +464,23 @@ html {
 
   .product-info h6 {
     font-size: 1.2rem;
+
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+  .product-detail {
+    max-width: 1000px; /* Imposta una larghezza massima per i dispositivi intermedi */
+    gap: 3rem;
+  }
+
+  .product-info {
+    max-width: 65%;
+  }
+
+  .product-image-container {
+    max-width: 450px;
+
   }
   
   /* Bottone di acquisto */
@@ -518,18 +497,125 @@ html {
 }
 
 
+
 /* Per schermi desktop (oltre 1200px) */
+
 @media (min-width: 1201px) {
   .product-detail {
-    max-width: 800px;
+    gap: 4rem;
   }
 
-  .card {
-    height: 300px;
+  .product-info {
+    max-width: 60%;
   }
+}
 
-  .hero-container {
-    height: 80vh;
-  }
+/* Footer */
 
+.footer {
+  background-color: #D4A017;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap; /* Permette la disposizione a più righe se necessario */
+  justify-content: center; /* Centra tutto nel footer */
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.footer-contact {
+  display: flex; /* Usa flexbox per allineare orizzontalmente gli elementi */
+  flex-wrap: wrap; /* Permette di andare a capo quando necessario */
+  justify-content: space-between; 
+  gap: 15px; 
+  width: 100%; 
+}
+
+.footer-contact p, .footer-contact a {
+  font-size: 16px;
+  margin: 0;
+  color: white;
+  text-decoration: none;
+  display: inline-block; /* Assicura che gli elementi non vadano a capo */
+  text-align: center; /* Aggiunto per centrare il testo */
+}
+
+.footer-contact a:hover {
+  text-decoration: underline; /* Sottolinea i link quando ci si passa sopra */
+}
+
+.footer-contact strong {
+  font-size: 20px;
+}
+
+/* Social Icons */
+.footer-social {
+  margin-top: 20px;
+  text-align: center; /* Centra le icone social */
+}
+
+.footer-social a {
+  font-size: 30px;
+  color: white;
+  margin-left: 15px;
+  transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: #28a745;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+
+/* Carrello.css */
+
+/* Stile per il contenitore dei bottoni */
+.button-container {
+  display: flex;
+  gap: 15px;  /* Aggiunge spazio tra i bottoni */
+  justify-content: center;  /* Centra i bottoni orizzontalmente */
+  margin-top: 20px;
+}
+
+/* Stile per i bottoni (ridotti in dimensioni) */
+.button-container button {
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Stile per il bottone 'Vai alla Pagina di Checkout' */
+.button-container .checkout-btn {
+  background-color: #28a745; /* Bottone verde */
+  color: white;
+}
+
+.button-container .checkout-btn:hover {
+  background-color: #218838; /* Colore verde più scuro quando hover */
+}
+
+/* Stile per il bottone 'Svouta Carrello' */
+.button-container .empty-cart-btn {
+  background-color: #dc3545; /* Bottone rosso */
+  color: white;
+}
+
+.button-container .empty-cart-btn:hover {
+  background-color: #c82333; /* Colore rosso più scuro quando hover */
 }

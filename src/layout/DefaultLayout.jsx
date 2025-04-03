@@ -8,7 +8,7 @@ const DefaultLayout = () => {
         <>
             <Navbar />
             {
-                location.pathname == "/" ? <></> : <PathNav />
+                 location.pathname == "/"  ? <></> : <PathNav />   //|| location.pathname == "*"  ? <></> : <PathNav />
             }
             <div>
                 <Outlet />

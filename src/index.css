@@ -6,7 +6,7 @@
 
 /* FONT */
 html {
-  font-family: 'Poppins', sans-serif; /* Applica il font Poppins */
+  font-family: 'Poppins', sans-serif;
 }
 
 /* HERO */
@@ -45,8 +45,6 @@ html {
 }
 
 /* NAVBAR */
-
-/* Searchbar and cart-icon */
 .search-container {
   width: 40%;
 }
@@ -66,7 +64,6 @@ html {
   color: green;
 }
 
-/* Menu with list */
 .nav {
   padding: 10px 0;
 }
@@ -85,13 +82,12 @@ html {
   border-radius: 5px;
 }
 
-/* Navbar fixed */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-  background: #fff; /* Aggiungi uno sfondo per evitare che si confonda con il contenuto sottostante */
+  background: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -103,7 +99,6 @@ html {
   margin-top: 5%;
   font-weight: bold;
   text-transform: uppercase;
-
 }
 
 /* CAROUSEL */
@@ -120,7 +115,6 @@ html {
   overflow: hidden;
 }
 
-
 .card-img-top {
   width: 100%;
   height: 160px;
@@ -133,7 +127,6 @@ html {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* CAROUSEL - Card Body */
 .card-body {
   flex-grow: 1;
   display: flex;
@@ -155,7 +148,7 @@ html {
   margin-bottom: 15px;
 }
 
-/*BREADCRUMB*/
+/* BREADCRUMB */
 .breadcrumb-chevron {
   background-color: #F9F5EC !important; 
   padding: 20px; 
@@ -164,8 +157,7 @@ html {
   margin: 0 auto !important;
 }
 
-
-/* Contenitore principale del dettaglio prodotto */
+/* CONTENITORE DETTAGLIO PRODOTTO */
 .container-product{
   background-color: #F9F5EC; 
   padding: 20px; 
@@ -182,10 +174,8 @@ html {
   justify-content: center;
   gap: 4rem;
   padding: 2rem;
-
 }
 
-/* Immagine prodotto */
 .product-image-container {
   display: flex;
   justify-content: center;
@@ -207,7 +197,6 @@ html {
   transform: scale(1.05); 
 }
 
-/* Sezione informazioni del prodotto */
 .product-info {
   flex: 2;
   padding-left: 2rem;
@@ -231,7 +220,6 @@ html {
   margin-bottom: 1rem;
 }
 
-/* Contenitore quantità */
 .quantity-container {
   display: flex;
   align-items: center;
@@ -239,14 +227,12 @@ html {
   margin-top: 1rem;
 }
 
-/* Rimuove le freccette dall'input quantità */
 .quantity-input::-webkit-outer-spin-button,
 .quantity-input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* Bottoni + e - */
 .quantity-btn {
   background-color: #6C9D7C;
   color: white;
@@ -266,7 +252,6 @@ html {
   background-color: #458a5c;
 }
 
-/* Input della quantità */
 .quantity-input {
   width: 50px;
   text-align: center;
@@ -277,8 +262,6 @@ html {
   background: transparent; 
 }
 
-
-/* Bottone di acquisto */
 .btn-primary {
   background: #D4A017 !important;
   font-weight: bold;
@@ -293,8 +276,6 @@ html {
   background: #e0a800 !important;
 }
 
-/* Sezione carosello prodotti correlati */
-
 .related-carousel {
   max-width: 1000px;
   margin: 50px auto;
@@ -305,7 +286,6 @@ html {
   padding-top: 2rem; 
 }
 
-/*riga che separa i prodotti correlati e il prodotto*/
 .related-carousel::before {
   content: "";
   display: block;
@@ -317,20 +297,17 @@ html {
 
 .swiper-button-next,
 .swiper-button-prev {
-  color: #0e6b0e !important; /* Colore giallo oro (stesso del bottone del carrello) */
-  font-size: 20px; /* Dimensione delle frecce */
+  color: #0e6b0e !important;
+  font-size: 20px;
 }
 
-/* MEDIA QUERIES: Responsività */
-
-/* Per schermi più piccoli (smartphone) */
 @media (max-width: 768px) {
   .product-detail {
     padding: 15px;
   }
 
   .card {
-    height: auto; /* Permette alle card di adattarsi */
+    height: auto;
   }
 
   .card-img-top {
@@ -340,9 +317,32 @@ html {
   .hero-container {
     height: 70vh;
   }
+
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-contact,
+  .footer-social {
+    flex: none;
+    margin-bottom: 20px;
+  }
+
+  .footer-social a {
+    font-size: 25px;
+  }
+
+  .footer-contact p,
+  .footer-contact a {
+    font-size: 14px;
+  }
+
+  .footer p {
+    font-size: 14px;
+  }
 }
 
-/* Per schermi medio-grandi (tablet, piccoli desktop) */
 @media (min-width: 769px) and (max-width: 1200px) {
   .hero-container {
     height: 70vh;
@@ -359,9 +359,26 @@ html {
   .card-body {
     padding: 10px;
   }
+
+  .footer-container {
+    flex-direction: row;
+  }
+
+  .footer-social a {
+    font-size: 28px;
+  }
+
+  .footer-contact p,
+  .footer-contact a {
+    font-size: 15px;
+  }
+
+  .footer p {
+    font-size: 15px;
+    
+  }
 }
 
-/* Per schermi desktop (oltre 1200px) */
 @media (min-width: 1201px) {
   .product-detail {
     max-width: 800px;
@@ -375,4 +392,90 @@ html {
     height: 80vh;
   }
 
+  .footer-container {
+    flex-direction: row;
+  }
+
+  .footer-social a {
+    font-size: 30px;
+  }
+
+  .footer-contact p,
+  .footer-contact a {
+    font-size: 16px;
+  }
+
+  .footer p {
+    font-size: 16px;
+  }
+}
+
+/* Footer */
+
+.footer {
+  background-color: #D4A017;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.footer-contact {
+  flex: 1;
+  text-align: left;
+}
+
+.footer-contact p {
+  font-size: 16px; 
+  margin-bottom: 10px;
+}
+
+.footer-contact a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.footer-contact p a {
+  color: white;
+}
+
+.footer-contact strong {
+  font-size: 20px;
+}
+
+.footer-social {
+  flex: 1;
+  text-align: right;
+}
+
+.footer-social p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.footer-social a {
+  font-size: 30px;
+  color: white; 
+  margin-left: 15px;
+  transition: color 0.3s ease; 
+}
+
+.footer-social a:hover {
+  color: #28a745;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
 }

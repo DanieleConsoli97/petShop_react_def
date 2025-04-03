@@ -15,18 +15,14 @@ const GlobalProvider = ({ children }) => {
         localStorage.setItem('carrello', JSON.stringify(carrello));
     }, [carrello]);
 
-    const aggiungiAlCarrello = async (prodottoSlug) => {
-        try {
-            const risposta = await axios.get(`/api/prodotti/${prodottoSlug}`);
-            const prodotto = risposta.data;
-            const prodottoEsistente = carrello.find((item) => item.slug === prodotto.slug);
-            if (prodottoEsistente) {
-                setCarrello(carrello.map((item) => (item.slug === prodotto.slug ? { ...item, quantity: item.quantity + 1 } : item)));
-            } else {
-                setCarrello([...carrello, { ...prodotto, quantity: 1 }]);
-            }
-        } catch (errore) {
-            console.error('Errore durante l\'aggiunta al carrello:', errore);
+    const aggiungiAlCarrello = (prodotto, quantity) => {
+        const prodottoEsistente = carrello.find((item) => item.slug === prodotto.slug);
+        if (prodottoEsistente) {
+            setCarrello(carrello.map((item) =>
+                item.slug === prodotto.slug ? { ...item, quantity: item.quantity + quantity } : item
+            ));
+        } else {
+            setCarrello([...carrello, { ...prodotto, quantity }]);
         }
     };
 

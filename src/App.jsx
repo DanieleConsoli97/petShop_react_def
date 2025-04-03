@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 //layout
 import DefaultLayout from "./layout/DefaultLayout";
 import Search from "./pages/Search";
+import Footer from './components/Footer';
 
 //pages
 import DogFoodList from "./pages/DogFoodList";
@@ -49,6 +50,7 @@ function App() {
 
           </Route>
         </Routes>
+        <Footer />
       </Router>
     </GlobalProvider>
 

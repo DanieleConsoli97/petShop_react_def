@@ -19,6 +19,8 @@ import Accessories from "./pages/Accesories";
 import DiscountedProducts from "./pages/DiscountedProducts";
 import CatProducts from "./pages/CatProducts";
 import CheckOut from "./pages/CheckOut";
+import Carrello from "./pages/Carrello";
+
 
 
 
@@ -43,6 +45,8 @@ function App() {
             <Route path="/prodotti/promozioni" element={<DiscountedProducts />} />
             <Route path="/prodotti/search/:term" element={<Search />} />
             <Route path="/checkout" element={<CheckOut />} />
+            <Route path="/carrello" element={<Carrello />} />
+
           </Route>
         </Routes>
       </Router>

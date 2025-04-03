@@ -25,6 +25,27 @@ function CatProducts() {
             });
     }, []);
 
+    const [quantity, setQuantity] = useState(1);
+    
+        // Funzioni per gestire il cambiamento della quantità
+        const handleDecrease = () => {
+            if (quantity > 1) setQuantity(quantity - 1); // Riduci solo se la quantità è maggiore di 1
+        };
+    
+        const handleIncrease = () => {
+            if (quantity < 10) setQuantity(quantity + 1); // Aumenta solo se la quantità è inferiore a 10
+        };
+    
+        const handleQuantityChange = (event) => {
+            // Ottieni il valore e limitato tra 1 e 10
+            const value = Math.max(1, Math.min(10, parseInt(event.target.value) || 1));
+            setQuantity(value);
+        };
+    
+        const handleAddToCart = () => {
+            aggiungiAlCarrello(product, quantity); // Passa il prodotto e la quantità
+        };
+
     if (loading) return <p>Caricamento...</p>;
     if (error) return <p>Errore: {error}</p>;
 
@@ -40,6 +61,21 @@ function CatProducts() {
                                 <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                                     Vedi Dettagli
                                 </Link>
+                                {/* Selettore quantità */}
+                        <div className="quantity-container">
+                            <button className="quantity-btn" onClick={handleDecrease}>-</button>
+                            <input
+                                type="number"
+                                value={quantity}
+                                className="quantity-input"
+                                onChange={handleQuantityChange} // Gestione del cambio quantità
+                                min="1"
+                                max="10"
+                            />
+                            <button className="quantity-btn" onClick={handleIncrease}>+</button>
+                        </div>
+                        <button onClick={handleAddToCart} className="btn btn-primary mt-3">Aggiungi al Carrello</button>
+
                             </div>
                         </div>
                 ))}

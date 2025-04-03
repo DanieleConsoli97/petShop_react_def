@@ -6,6 +6,36 @@ import axios from 'axios';
 function Carrello() {
 
   const { carrello, rimuoviDalCarrello, svuotaCarrello } = useGlobalContext();
+  // Stato per le quantità di ogni prodotto
+  const [quantities, setQuantities] = useState(
+    carrello.reduce((acc, product) => {
+      acc[product.slug] = product.quantity;
+      return acc;
+    }, {})
+  );
+
+  // Funzione per aggiornare la quantità di un singolo prodotto
+  const handleQuantityChange = (slug, event) => {
+    const value = Math.max(1, Math.min(10, parseInt(event.target.value) || 1));
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [slug]: value,
+    }));
+  };
+
+  const handleDecrease = (slug) => {
+    setQuantities((prevQuantities) => {
+      const newQuantity = prevQuantities[slug] > 1 ? prevQuantities[slug] - 1 : 1;
+      return { ...prevQuantities, [slug]: newQuantity };
+    });
+  };
+
+  const handleIncrease = (slug) => {
+    setQuantities((prevQuantities) => {
+      const newQuantity = prevQuantities[slug] < 10 ? prevQuantities[slug] + 1 : 10;
+      return { ...prevQuantities, [slug]: newQuantity };
+    });
+  };
 
   return (
     <div>
@@ -18,7 +48,18 @@ function Carrello() {
               <div className="card-body">
                 <h5 className="card-title">{product.name}</h5>
                 <p className="card-text">Prezzo: {product.price} €</p>
-                <p className="card-text">Quantità: {product.quantity}</p>
+
+                <button className="quantity-btn" onClick={() => handleDecrease(product.slug)}>-</button>
+
+                <input
+                  type="number"
+                  value={quantities[product.slug] || 1} // Imposta la quantità dal nostro stato
+                  className="quantity-input"
+                  onChange={(e) => handleQuantityChange(product.slug, e)} // Gestione del cambio quantità
+                  min="1"
+                  max="10"
+                />
+                <button className="quantity-btn" onClick={() => handleIncrease(product.slug)}>+</button>
                 <button onClick={() => rimuoviDalCarrello(product.slug)} className='btn btn-danger'>Rimuovi dal carrello</button>
                 <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                   Vedi Dettagli
@@ -28,11 +69,10 @@ function Carrello() {
           ))}
         </div>
       </div>
-
       <Link to={'/checkout'}>
-        <button >Vai alla Pagina Di Checkout</button>
+        <button>Vai alla Pagina Di Checkout</button>
       </Link>
-      <button onClick={svuotaCarrello}>Svouta Carrello</button>
+      <button onClick={svuotaCarrello}>Svuota Carrello</button>
 
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 
 function DiscountedProducts() {
     const [discountedProducts, setDiscountedProducts] = useState([]);
@@ -30,14 +31,18 @@ function DiscountedProducts() {
     return (
         <div>
             <h1>Lista Offerte</h1>
-            <ul>
-                {discountedProducts.map(product => (
-                    <li key={product.id}>
-                        <img src={product.image_url} alt={product.name} style={{ width: '50px', height: '50px' }} />
-                        {product.description} - {product.price} €
-                    </li>
+            {discountedProducts.map(product => (
+                        <div className="card" key={product.id}>
+                            <img src={product.image_url} className="card-img-top" alt={product.name} />
+                            <div className="card-body">
+                                <h5 className="card-title">{product.name}</h5>
+                                <p className="card-text">{product.price} €</p>
+                                <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
+                                    Vedi Dettagli
+                                </Link>
+                            </div>
+                        </div>
                 ))}
-            </ul>
         </div>
     );
 }

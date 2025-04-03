@@ -51,7 +51,7 @@ function CatProducts() {
 
     return (
         <div>
-            <h1>Lista Prodotti Gatti</h1>
+            <h1>Lista Prodotti per Gatti</h1>
             {catProducts.map(product => (
                         <div className="card" key={product.id}>
                             <img src={product.image_url} className="card-img-top" alt={product.name} />

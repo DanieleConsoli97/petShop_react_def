@@ -53,7 +53,7 @@ function DogProducts() {
 
     return (
         <div>
-            <h1>Lista Prodotti Cani</h1>
+            <h1>Lista Prodotti per Cani</h1>
             {dogProducts.map(product => (
                 <div className="card" key={product.id}>
                     <img src={product.image_url} className="card-img-top" alt={product.name} />

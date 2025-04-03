@@ -3,14 +3,13 @@ import { useState, useEffect } from "react";
 import logo from '/PawPlanet.logo(3).png'
 import { Link } from "react-router-dom";
 import SearchForm from "./SearchForm";
+
 function Navbar() {
-  
   return (
     <>
       {/* Navbar principale con logo, barra di ricerca e carrello */}
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
-
           <Link to={"/"}>
             <img
               className="rounded-circle"
@@ -21,23 +20,13 @@ function Navbar() {
             />
           </Link>
           <SearchForm />
-
-
-          <div>
-            <a href="#" className="cart-icon">
-
-          
-
           <div className="ms-auto">
             <Link to={'/carrello'} className="cart-icon">
-
               <FaShoppingCart size={30} />
             </Link>
           </div>
-
         </div>
       </nav>
-
       {/* Menu sotto la Navbar */}
       <div className="bg-success-subtle text-success-emphasis shadow-sm ">
         <div className="container">
@@ -71,7 +60,6 @@ function Navbar() {
                 </li>
               </ul>
             </li>
-
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
@@ -85,12 +73,12 @@ function Navbar() {
               </a>
               <ul className="dropdown-menu" aria-labelledby="gattiDropdown">
                 <li>
-                  <Link className="dropdown-item" to={'prodotti/gatti/cibo'}>
+                  <Link className="dropdown-item" to={'/prodotti/gatti/cibo'}>
                     Cibo per gatti
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to={'prodotti/gatti/giochi'}>
+                  <Link className="dropdown-item" to={'/prodotti/gatti/giochi'}>
                     Giochi per gatti
                   </Link>
                 </li>
@@ -114,6 +102,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-
-

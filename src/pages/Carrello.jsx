@@ -3,8 +3,9 @@ import { useGlobalContext } from '../context/GlobalContext';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-function Carrello() {
 
+
+function Carrello() {
   const { carrello, rimuoviDalCarrello, svuotaCarrello } = useGlobalContext();
 
   return (
@@ -29,11 +30,13 @@ function Carrello() {
         </div>
       </div>
 
-      <Link to={'/checkout'}>
-        <button >Vai alla Pagina Di Checkout</button>
-      </Link>
-      <button onClick={svuotaCarrello}>Svouta Carrello</button>
-
+      {/* Contenitore dei bottoni */}
+      <div className="button-container">
+        <Link to={'/checkout'}>
+          <button className="checkout-btn">Vai alla Pagina Di Checkout</button>
+        </Link>
+        <button className="empty-cart-btn" onClick={svuotaCarrello}>Svuota Carrello</button>
+      </div>
     </div>
   );
 }

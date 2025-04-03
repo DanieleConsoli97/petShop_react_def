@@ -21,7 +21,7 @@ import DiscountedProducts from "./pages/DiscountedProducts";
 import CatProducts from "./pages/CatProducts";
 import CheckOut from "./pages/CheckOut";
 import Carrello from "./pages/Carrello";
-
+import NotFound from "./pages/NotFound";
 
 
 
@@ -47,7 +47,7 @@ function App() {
             <Route path="/prodotti/search/:term" element={<Search />} />
             <Route path="/checkout" element={<CheckOut />} />
             <Route path="/carrello" element={<Carrello />} />
-
+            <Route path="*" element={<NotFound/>} />
           </Route>
         </Routes>
         <Footer />

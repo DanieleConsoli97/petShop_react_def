@@ -2,9 +2,12 @@
 // Importazione delle dipendenze necessarie
 import { useState } from "react";
 import regioniItaliane from "../data/Regioni";
+import { useGlobalContext } from "../context/GlobalContext";
 
 // Componente principale per la gestione del checkout
 const CheckOut = () => {
+    const {carrello} = useGlobalContext ()
+    
     // Gestione degli stati del form
     const [isBillingDifferent, setIsBillingDifferent] = useState(false); // Stato per gestire indirizzi di spedizione/fatturazione diversi
     const [errors, setErrors] = useState({}); // Stato per la gestione degli errori di validazione
@@ -37,6 +40,7 @@ const CheckOut = () => {
         setShippingData(prev => ({
             ...prev,
             [name]: value
+            
         }));
     };
 
@@ -104,21 +108,8 @@ const CheckOut = () => {
     };
 
     //FIXME - Dati di esempio del carrello (da sostituire con dati reali)
-    const cartItems = [
-        {
-            id: 1,
-            name: "Crocchette Premium",
-            price: 29.99,
-            quantity: 2
-        },
-        {
-            id: 2,
-            name: "Gioco per Gatti",
-            price: 12.99,
-            quantity: 1
-        }
-    ];
-
+    const cartItems = carrello
+   console.log(cartItems ) 
     // Handler per la gestione dell'invio del form
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -147,7 +138,7 @@ const CheckOut = () => {
                 discountCodeId: null,
                 shippingCost: 5.00, // Costo fisso di spedizione
             }
-
+           
             // Invio dei dati dell'ordine al server
             fetch('http://localhost:3000/prodotti/orders', {
                 method: 'POST',

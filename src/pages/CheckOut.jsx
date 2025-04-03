@@ -1,10 +1,15 @@
 //NOTE - Mettere numero order in path ?
+// Importazione delle dipendenze necessarie
 import { useState } from "react";
 import regioniItaliane from "../data/Regioni";
 
+// Componente principale per la gestione del checkout
 const CheckOut = () => {
-    const [isBillingDifferent, setIsBillingDifferent] = useState(false);
-    const [errors, setErrors] = useState({});
+    // Gestione degli stati del form
+    const [isBillingDifferent, setIsBillingDifferent] = useState(false); // Stato per gestire indirizzi di spedizione/fatturazione diversi
+    const [errors, setErrors] = useState({}); // Stato per la gestione degli errori di validazione
+    
+    // Stato per i dati di spedizione
     const [shippingData, setShippingData] = useState({
         nome: '',
         cognome: '',
@@ -15,6 +20,8 @@ const CheckOut = () => {
         citta: '',
         cap: ''
     });
+
+    // Stato per i dati di fatturazione (se diversi dalla spedizione)
     const [billingData, setBillingData] = useState({
         nome: '',
         cognome: '',
@@ -24,6 +31,7 @@ const CheckOut = () => {
         cap: ''
     });
 
+    // Handler per l'aggiornamento dei dati di spedizione
     const handleShippingChange = (e) => {
         const { name, value } = e.target;
         setShippingData(prev => ({
@@ -32,6 +40,7 @@ const CheckOut = () => {
         }));
     };
 
+    // Handler per l'aggiornamento dei dati di fatturazione
     const handleBillingChange = (e) => {
         const { name, value } = e.target;
         setBillingData(prev => ({
@@ -40,6 +49,7 @@ const CheckOut = () => {
         }));
     };
 
+    // Funzioni di validazione per i campi del form
     const validateEmail = (email) => {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
@@ -53,10 +63,11 @@ const CheckOut = () => {
         return /^[A-Za-zÀ-ÿ\s]+$/.test(name);
     };
 
+    // Funzione principale di validazione del form
     const validateForm = () => {
         const newErrors = {};
 
-        // Validazione campi spedizione
+        // Validazione dei campi di spedizione
         if (!shippingData.nome.trim()) {
             newErrors.nome = "Il nome è obbligatorio";
         } else if (!validateName(shippingData.nome)) {
@@ -92,13 +103,78 @@ const CheckOut = () => {
         return Object.keys(newErrors).length === 0;
     };
 
+    //FIXME - Dati di esempio del carrello (da sostituire con dati reali)
+    const cartItems = [
+        {
+            id: 1,
+            name: "Crocchette Premium",
+            price: 29.99,
+            quantity: 2
+        },
+        {
+            id: 2,
+            name: "Gioco per Gatti",
+            price: 12.99,
+            quantity: 1
+        }
+    ];
+
+    // Handler per la gestione dell'invio del form
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validateForm()) {
-            console.log('Dati di spedizione:', shippingData);
-            if (isBillingDifferent) {
-                console.log('Dati di fatturazione:', billingData);
+            // Formattazione dell'indirizzo completo
+            const formatAddress = (data) => {
+                return `${data.indirizzo}, ${data.cap} ${data.citta}, ${data.regione}, ${data.paese}`;
+            };
+
+            // Preparazione dei dati per l'invio
+            const shippingAddressFormatted = formatAddress(shippingData);
+            const billingAddressFormatted = isBillingDifferent ? billingData.indirizzo : shippingAddressFormatted;
+
+            // Costruzione dell'oggetto ordine 
+            const orderData = {
+                name: shippingData.nome,
+                lastName: shippingData.cognome,
+                email: shippingData.email,
+                shippingAddress: shippingAddressFormatted,
+                billingAddress: billingAddressFormatted,
+                country: shippingData.paese,
+                state: shippingData.regione,
+                city: shippingData.citta,
+                zipCode: shippingData.cap,
+                cartItems: cartItems,
+                discountCodeId: null,
+                shippingCost: 5.00, // Costo fisso di spedizione
             }
+
+            // Invio dei dati dell'ordine al server
+            fetch('http://localhost:3000/prodotti/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(orderData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error(text || 'Errore durante la creazione dell\'ordine');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Ordine creato con successo:', data);
+                // TODO: Reindirizzare alla pagina di conferma
+            })
+            .catch(error => {
+                console.error('Errore dettagliato:', error);
+                setErrors(prev => ({
+                    ...prev,
+                    submit: error.message || 'Si è verificato un errore durante l\'invio dell\'ordine. Riprova più tardi.'
+                }));
+            });
         }
     };
 
@@ -128,7 +204,7 @@ const CheckOut = () => {
                         </form>
                     </div>
 
-                    <div className="col-md-7 col-lg-8">
+                    <div className="col-md-7 col-lg-8 mb-5">
                         <h4 className="mb-3">Indirizzo di spedizione</h4>
                         <form className="needs-validation" noValidate onSubmit={handleSubmit}>
                             <div className="row g-3">

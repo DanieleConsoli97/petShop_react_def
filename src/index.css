@@ -167,7 +167,9 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   padding: 15px;
+  margin-top: 10px;
 }
 
 .card-title {
@@ -215,13 +217,14 @@ html {
   justify-content: center;
   align-items: center;
   width: 100%; /* Impostato al 100% per migliorare la responsività */
-  max-width: 500px; /* Limita la larghezza massima dell'immagine */
+  max-width: 450px; /* Limita la larghezza massima dell'immagine */
+  height: auto; /* Permette all'immagine di adattarsi al contenitore */
   background-color: #fff;
 }
 
 .product-image {
   width: 100%;
-  height: auto;
+  max-height: 350px;
   object-fit: contain;
   border-radius: 10px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
@@ -264,7 +267,7 @@ html {
 }
 
 .quantity-btn {
-  background-color: #B0B0B0; /* Bottone grigio per incremento e decremento */
+  background-color: #6C9D7C;
   color: white;
   width: 45px;
   height: 45px;
@@ -279,7 +282,7 @@ html {
 }
 
 .quantity-btn:hover {
-  background-color: #8f8f8f;
+  background-color: #3f8858;
 }
 
 .quantity-input {
@@ -308,15 +311,11 @@ html {
 }
 
 /* Frecce del carosello di scorrimento */
-.carousel-control-prev-icon, 
-.carousel-control-next-icon {
-  background-color: green; /* Colore verde per le frecce */
+.swiper-button-next,
+.swiper-button-prev{
+  color: green !important; /* Colore verde per le frecce */
 }
 
-.carousel-control-prev-icon:hover,
-.carousel-control-next-icon:hover {
-  background-color: #28a745; /* Colore verde più scuro quando passa sopra */
-}
 
 /* Media queries */
 @media (max-width: 768px) {
@@ -377,11 +376,7 @@ html {
     gap: 1rem;
   }
   
-  /* Immagine prodotto */
-  .product-image-container {
-    width: 250px; 
-    height: 250px; 
-  }
+  
   
   /* Sezione informazioni del prodotto */
   .product-info {
@@ -445,9 +440,11 @@ html {
   /* Immagine prodotto */
   .product-image-container {
     width: 400px; 
-    height: 400px; 
   }
   
+  .product-image {
+    max-height: 250px;
+  }
   /* Sezione informazioni del prodotto */
   .product-info {
     max-width: 70%;
@@ -479,7 +476,7 @@ html {
   }
 
   .product-image-container {
-    max-width: 450px;
+    max-width: 400px;
 
   }
   

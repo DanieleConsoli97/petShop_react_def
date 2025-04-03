@@ -4,7 +4,7 @@ import logo from '/PawPlanet.logo(3).png'
 import { Link } from "react-router-dom";
 import SearchForm from "./SearchForm";
 function Navbar() {
-
+  
   return (
     <>
       {/* Navbar principale con logo, barra di ricerca e carrello */}
@@ -21,20 +21,6 @@ function Navbar() {
             />
           </Link>
           <SearchForm />
-
-          {/* <div className="mx-auto search-container">
-            <form className="d-flex">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Cerca prodotti..."
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-success" type="submit">
-                Cerca
-              </button>
-            </form>
-          </div> */}
 
           <div className="ms-auto">
             <a href="#" className="cart-icon">

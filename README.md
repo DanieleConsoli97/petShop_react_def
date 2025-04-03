@@ -123,6 +123,30 @@ npm run dev
 - 🏗️ `npm run build` - Crea la build di produzione
 - 👀 `npm run preview` - Visualizza la build di produzione
 - 🔍 `npm run lint` - Esegue il linting del codice
+## 📚 API e Endpoints
+
+- `GET /prodotti` - Recupera lista prodotti
+- `GET /prodotti/:id` - Recupera dettaglio prodotto
+- `GET /prodotti/categoria/:categoria` - Filtra prodotti per categoria
+- `POST /prodotti/orders` - Crea un nuovo ordine
+
+## 🧪 Testing
+
+```bash
+# Esegui i test
+npm run test
+
+# Esegui i test con coverage
+npm run test:coverage
+```
+
+## 🤝 Contribuire
+
+1. 🍴 Fai un fork del progetto
+2. 🔨 Crea un branch per la tua feature (`git checkout -b feature/AmazingFeature`)
+3. 📝 Committa i tuoi cambiamenti (`git commit -m 'Add some AmazingFeature'`)
+4. 📤 Pusha sul branch (`git push origin feature/AmazingFeature`)
+5. 🔄 Apri una Pull Request
 
 ## 🔮 Sviluppi Futuri
 
@@ -136,4 +160,4 @@ npm run dev
 
 ## 📄 Licenza
 
-Questo progetto è sotto licenza MIT
+Questo progetto è sotto licenza MIT - vedi il file [LICENSE.md](LICENSE.md) per i dettagli.

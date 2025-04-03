@@ -4,12 +4,10 @@ import axios from 'axios';
 const GlobalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
-    const [carrello, setCarrello] = useState([]);
-
-    useEffect(() => {
-        const carrelloLocale = JSON.parse(localStorage.getItem('carrello')) || [];
-        setCarrello(carrelloLocale);
-    }, []);
+    const [carrello, setCarrello] = useState(() => {
+        // Inizializzo il carello con i dati presenti nel LocalStorage, se non ci sono dati lo inizializzo come array vuoto
+        return JSON.parse(localStorage.getItem('carrello')) || [];
+    });
 
     useEffect(() => {
         localStorage.setItem('carrello', JSON.stringify(carrello));

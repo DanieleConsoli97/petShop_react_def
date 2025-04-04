@@ -100,6 +100,55 @@ html {
   text-transform: uppercase;
 }
 
+/* SETTAGGI VISUALIZZAZIONE LISTA O GRIGLIA*/
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.products-container.list-view {
+  flex-direction: column; /* Imposta la visualizzazione a colonna */
+  align-items: center; /* Centra le card orizzontalmente nella lista */
+}
+
+.products-container.list-view .products-card {
+  flex-direction: row; /* Allinea immagine e testo orizzontalmente */
+  align-items: center; /* Allinea verticalmente gli elementi */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: left; /* Allinea il testo a sinistra nella visualizzazione a lista */
+  width: 70%; /* Imposta la larghezza al 70% */
+  max-width: 70%; /* Assicura che non superi il 70% */
+  margin-bottom: 15px; /* Aggiunge spazio tra le card nella lista */
+}
+
+.products-container.list-view .products-card img {
+  width: 150px; /* Larghezza fissa per l'immagine nella lista */
+  height: 150px; /* Altezza fissa per l'immagine nella lista */
+  object-fit: contain;
+  margin-right: 20px; /* Spazio tra immagine e testo */
+}
+
+.products-container.list-view .products-card .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Allinea il contenuto del body a sinistra */
+  flex-grow: 1; /* Permette al body di occupare lo spazio rimanente */
+}
+
+.products-container.list-view .products-card .card-body .card-title {
+  margin-bottom: 5px;
+}
+
+.products-container.list-view .products-card .card-body .card-text {
+  margin-bottom: 10px;
+}
+
+
 /*PRODUCT LIST */
 .products-container {
   display: flex;

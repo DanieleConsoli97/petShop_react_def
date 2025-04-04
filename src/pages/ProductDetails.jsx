@@ -146,6 +146,7 @@ function ProductDetail() {
                       <Link to={`/prodotti/${relatedProduct.slug}`} className="btn btn-primary">
                         Vedi Dettagli
                       </Link>
+                      
                     </div>
                   </div>
                 </SwiperSlide>
@@ -155,6 +156,7 @@ function ProductDetail() {
         </div>
       </div>
     </div>
+   
   );
 }
 

@@ -12,15 +12,16 @@ const DefaultLayout = () => {
         <>
             <Navbar />
             {
-                location.pathname == "/" ? <></> : <PathNav />   //|| location.pathname == "*"  ? <></> : <PathNav />
+                location.pathname === "/" || location.pathname === "/404" || location.pathname.includes("*") ? <></> : <PathNav />
             }
-            <ReactStateToast title={toastMessage.title} text={toastMessage.text} type={toastMessage.type} />
+          <ReactStateToast {...toastMessage} />
             <div>
                 
                 <Outlet />
             </div>
             <Footer />
             {/* Aggiungo il componente Toast che sarà disponibile in tutta l'applicazione */}
+            
             
         </>
     )

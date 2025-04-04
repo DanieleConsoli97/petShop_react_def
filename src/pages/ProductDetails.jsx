@@ -1,6 +1,6 @@
 import { useGlobalContext } from '../context/GlobalContext';
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 //swiper modules
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -27,12 +27,28 @@ function ProductDetail() {
     window.scrollTo(0, 0); // Scorri verso l'alto
   }, [slug]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     // Recupera i dettagli del prodotto attuale tramite lo slug
     fetch(`http://localhost:3000/prodotti/${slug}`)
-      .then((response) => response.json())
-      .then((data) => setProduct(data))
-      .catch((error) => console.error("Errore nel recupero del prodotto:", error));
+      .then((response) => {
+        if (!response.ok) throw new Error(`Errore HTTP: ${response.status}`);
+        return response.json();
+      })
+      .then((data) => {
+        // Verifica se il prodotto esiste e contiene le proprietà necessarie
+        if (data && data.id && data.name && data.slug) {
+          setProduct(data);
+        } else {
+          console.error("Dati del prodotto incompleti o mancanti");
+          navigate('/404', { replace: true });
+        }
+      })
+      .catch((error) => {
+        console.error("Errore nel recupero del prodotto:", error);
+        navigate('/404', { replace: true });
+      });
 
     // Recupera tutti i prodotti per trovare quelli correlati
     fetch(`http://localhost:3000/prodotti/`)
@@ -43,7 +59,7 @@ function ProductDetail() {
     // Resetta la quantità ogni volta che cambia il prodotto
     setQuantity(1);
 
-  }, [slug]);
+  }, [slug, navigate]);
 
   // Funzioni per gestire il cambiamento della quantità
   const handleDecrease = () => {
@@ -68,7 +84,14 @@ function ProductDetail() {
     aggiungiAllaWishList(product); // Aggiungi alla wishlist   
   }
   if (!product) {
-    return <div>Caricamento...</div>;
+    return (
+      <div className="container text-center my-5">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Caricamento...</span>
+        </div>
+        <p className="mt-3">Caricamento del prodotto in corso...</p>
+      </div>
+    );
   }
 
   return (

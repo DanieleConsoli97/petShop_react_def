@@ -2,12 +2,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-/* FONT */
-html {
   font-family: 'Poppins', sans-serif;
 }
+
 
 /* HERO */
 .hero-container {
@@ -561,50 +558,66 @@ html {
 .footer {
   background-color: #D4A017;
   color: white;
-  padding: 20px 0;
-  text-align: center;
   font-family: 'Poppins', sans-serif;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
 }
 
+/* Container che contiene le sezioni "Contattaci" e "Social" */
 .footer-container {
   display: flex;
-  flex-wrap: wrap; /* Permette la disposizione a più righe se necessario */
-  justify-content: center; /* Centra tutto nel footer */
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 10px;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-bottom: 20px;
+  align-items: flex-start; /* Allineiamo gli elementi in alto */
 }
 
+/* Sezione Contatti */
 .footer-contact {
-  display: flex; /* Usa flexbox per allineare orizzontalmente gli elementi */
-  flex-wrap: wrap; /* Permette di andare a capo quando necessario */
-  justify-content: space-between; 
-  gap: 15px; 
-  width: 100%; 
+  text-align: left;
+  width: 45%; /* Occupa il 45% della larghezza del footer */
+  padding-left: 80px; /* Distanza dal bordo sinistro */
+  display: flex;
+  flex-direction: column; /* Allinea verticalmente gli elementi */
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.footer-contact p, .footer-contact a {
+.footer-contact p {
   font-size: 16px;
-  margin: 0;
+  margin: 5px 0; /* Aggiungi margine per migliorare l'allineamento */
+  color: #333;
+  font-weight: bold;
+  display: flex; 
+  align-items: center; /* Centra verticalmente il contenuto */
+}
+
+.footer-contact a {
   color: white;
   text-decoration: none;
-  display: inline-block; /* Assicura che gli elementi non vadano a capo */
-  text-align: center; /* Aggiunto per centrare il testo */
+  display: inline-block; /* Assicura che i link non vadano a capo */
+  margin-left: 5px; /* Distanza tra il testo e il link */
 }
 
 .footer-contact a:hover {
-  text-decoration: underline; /* Sottolinea i link quando ci si passa sopra */
+  text-decoration: underline;
 }
 
-.footer-contact strong {
-  font-size: 20px;
-}
-
-/* Social Icons */
+/* Sezione Social */
 .footer-social {
-  margin-top: 20px;
-  text-align: center; /* Centra le icone social */
+  text-align: right;
+  width: 45%; /* Occupa il 45% della larghezza del footer */
+  padding-right: 80px;
+  margin-top: 10px;
+}
+
+.footer-social p {
+  font-size: 16px;
+  margin: 5px 0; /* Aggiungi margine per migliorare l'allineamento */
+  color: #333;
 }
 
 .footer-social a {
@@ -612,17 +625,52 @@ html {
   color: white;
   margin-left: 15px;
   transition: color 0.3s ease;
+  text-decoration: none;
 }
 
 .footer-social a:hover {
   color: #28a745;
 }
 
-.footer p {
-  margin: 0;
+/* Copyright centrato in basso */
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
   font-size: 16px;
-  color: #333;
 }
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column; /* Imposta le sezioni in colonna */
+    align-items: center; /* Centra le sezioni */
+  }
+
+  .footer-contact,
+  .footer-social {
+    width: 90%; /* Le sezioni occupano il 90% della larghezza */
+    text-align: center; /* Centra il testo */
+    padding: 0; /* Rimuove il padding */
+    margin-bottom: 20px; /* Distanza tra le sezioni */
+  }
+
+  .footer-contact p {
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 14px; /* Riduce la dimensione del font su dispositivi mobili */
+  }
+
+  .footer-contact a {
+    margin-left: 0; /* Rimuove il margine sinistro nei link */
+    margin-bottom: 5px; /* Aggiunge spazio tra i link */
+  }
+
+  .footer-social {
+    margin-top: 20px; /* Aggiunge un margine in alto per separare dalle altre sezioni */
+  }
+}
+
+
 
 
 /* Carrello.css */
@@ -646,6 +694,7 @@ html {
   font-family: 'Poppins', sans-serif;
 }
 
+
 /* Stile per il bottone 'Vai alla Pagina di Checkout' */
 .button-container .checkout-btn {
   background-color: #28a745; /* Bottone verde */
@@ -665,3 +714,14 @@ html {
 .button-container .empty-cart-btn:hover {
   background-color: #c82333; /* Colore rosso più scuro quando hover */
 }
+
+.button-container .checkout-btn{
+  margin-bottom: 8px;
+  border-radius: 5px;
+}
+
+.button-container .empty-cart-btn{
+  margin-bottom: 8px;
+  border-radius: 5px;
+}
+

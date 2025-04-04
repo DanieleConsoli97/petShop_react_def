@@ -1,5 +1,6 @@
 import React from "react";
-import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa"; 
+import { FaFacebook, FaInstagram } from "react-icons/fa"; 
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
@@ -8,9 +9,9 @@ const Footer = () => {
         {/* Sezione Contatti */}
         <div className="footer-contact">
           <p><strong>Contattaci</strong></p>
-          <p><a href="mailto:info@pawplanet.com">Email: info@pawplanet.com</a></p>
-          <p><a href="tel:+1234567890">Numero: +123 456 7890</a></p>
-          <p><a href="https://goo.gl/maps/xyz">Indirizzo: Via Roma 123, Milano</a></p>
+          <p>Email: <a href="mailto:info@pawplanet.com">info@pawplanet.com</a></p>
+          <p>Numero: <a href="tel:+1234567890"> +123 456 7890</a></p>
+          <p>Indirizzo: <a href="https://goo.gl/maps/xyz">Via Roma 123, Milano</a></p>
         </div>
 
         {/* Sezione Social */}
@@ -20,7 +21,7 @@ const Footer = () => {
             <FaFacebook size={25} /> 
           </a>
           <a href="https://twitter.com/pawplanet" target="_blank" rel="noopener noreferrer">
-            <FaTwitter size={25} /> 
+            <FaXTwitter size={25} /> 
           </a>
           <a href="https://www.instagram.com/pawplanet" target="_blank" rel="noopener noreferrer">
             <FaInstagram size={25} /> 

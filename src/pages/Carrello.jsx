@@ -3,10 +3,13 @@ import { useGlobalContext } from '../context/GlobalContext';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-
-
 function Carrello() {
   const { carrello, rimuoviDalCarrello, svuotaCarrello } = useGlobalContext();
+
+  // Calcola il subtotale degli articoli nel carrello
+  const subtotale = carrello.reduce((total, product) => {
+    return total + product.price * product.quantity;
+  }, 0);
 
   return (
     <div>
@@ -28,6 +31,13 @@ function Carrello() {
             </div>
           ))}
         </div>
+
+        {/* Inserimento del subtotale */}
+        {carrello.length > 0 && (
+          <div className="subtotale">
+            <strong>Subtotale: {subtotale.toFixed(2)} €</strong>
+          </div>
+        )}
       </div>
 
       {/* Contenitore dei bottoni */}

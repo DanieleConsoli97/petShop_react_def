@@ -3,6 +3,7 @@
 import { useState } from "react";
 import regioniItaliane from "../data/Regioni";
 import { useGlobalContext } from "../context/GlobalContext";
+import Toasts from "../components/Toasts"; // 
 
 // Componente principale per la gestione del checkout
 const CheckOut = () => {
@@ -169,16 +170,32 @@ const CheckOut = () => {
     };
     const calculateTotal = () => {
         const subtotal = carrello.reduce((total, product) => {
-          return total + (product.price * product.quantity);
+            return total + (product.price * product.quantity);
         }, 0);
-        
+
         const shippingCost = 5.00; // Costo di spedizione fisso
         return subtotal + shippingCost;
-      };
+    };
     const cartTotal = calculateTotal();
-    return (
+    return (    
+    <main>
         <div className="container">
-            <main>
+        <button type="button" className="btn btn-primary" id="liveToastBtn">Show live toast</button>
+            
+            <div className="toast-container position-fixed bottom-0 end-0 p-3">
+                <div id="liveToast" className="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div className="toast-header">
+                        <img src="..." className="rounded me-2" alt="..."/>
+                            <strong className="me-auto">Bootstrap</strong>
+                            <small>11 mins ago</small>
+                            <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div className="toast-body">
+                        Hello, world! This is a toast message.
+                    </div>
+                </div>
+            </div>
+        
                 <div className="py-5 text-center">
                     <img className="d-block mx-auto mb-4" src="/Planet_1.png" alt="" width="90" height="90" />
                     <h2>Checkout</h2>
@@ -195,7 +212,7 @@ const CheckOut = () => {
                             {/* ... contenuto del carrello ... */}
 
                             {
-                                carrello.map((product,index) => {
+                                carrello.map((product, index) => {
                                     const { name, price, quantity } = product
                                     return (
                                         <li key={index} className="list-group-item d-flex justify-content-between lh-sm">
@@ -209,12 +226,12 @@ const CheckOut = () => {
                                 })
 
                             }
-                            <li  className="list-group-item d-flex justify-content-between lh-sm">
-                                            <div>
-                                                <small className="text-body-secondary fw-bold"> Costi di spedizione</small>
-                                            </div>
-                                            <span className="text-body-secondary">5 € </span>
-                                        </li>
+                            <li className="list-group-item d-flex justify-content-between lh-sm">
+                                <div>
+                                    <small className="text-body-secondary fw-bold"> Costi di spedizione</small>
+                                </div>
+                                <span className="text-body-secondary">5 € </span>
+                            </li>
                             <li className="list-group-item d-flex justify-content-between bg-body-tertiary">  {/*NOTE - promo code */}
                                 <div className="text-success">
                                     <h6 className="my-0">Promo code</h6>
@@ -239,7 +256,7 @@ const CheckOut = () => {
 
                     {/*NOTE logica form*/}
                     <div className="col-md-7 col-lg-8 mb-5">
-                        <h4 className="mb-3">Indirizzo di spedizione</h4>
+                        <h4 className="mb-3">Dati di spedizione</h4>
                         <form className="needs-validation" noValidate onSubmit={handleSubmit}>
                             <div className="row g-3">
                                 <div className="col-sm-6">
@@ -450,9 +467,11 @@ const CheckOut = () => {
                             <button className="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
                         </form>
                     </div>
+                    
                 </div>
+            </div >
+            <Toasts  title="Successo!" text="Il tuo documento è stato salvato."   />
             </main >
-        </div >
     );
 };
 

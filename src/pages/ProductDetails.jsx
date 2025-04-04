@@ -20,7 +20,7 @@ function ProductDetail() {
   // Stato per la quantità del prodotto
   const [quantity, setQuantity] = useState(1);
 
-  const { aggiungiAlCarrello } = useGlobalContext();
+  const { aggiungiAlCarrello, aggiungiAllaWishList } = useGlobalContext();
 
   // Scroll in alto quando lo slug cambia
   useEffect(() => {
@@ -64,6 +64,9 @@ function ProductDetail() {
     aggiungiAlCarrello(product, quantity); // Passa il prodotto e la quantità
   };
 
+  const handleAddToWishlist = () => {
+    aggiungiAllaWishList(product); // Aggiungi alla wishlist   
+  }
   if (!product) {
     return <div>Caricamento...</div>;
   }
@@ -99,6 +102,9 @@ function ProductDetail() {
               <button className="quantity-btn" onClick={handleIncrease}>+</button>
             </div>
             <button onClick={handleAddToCart} className="btn btn-primary mt-3">Aggiungi al Carrello</button>
+            {/* Aggiungi alla wishlist */}
+            <button onClick={handleAddToWishlist} className="btn btn-primary mt-3 mx-2">Aggiungi alla Wishlist</button> 
+
           </div>
         </div>
 

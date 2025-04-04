@@ -4,6 +4,7 @@ import { useState } from "react";
 import regioniItaliane from "../data/Regioni";
 import { useGlobalContext } from "../context/GlobalContext";
 
+
 // Componente principale per la gestione del checkout
 const CheckOut = () => {
     const { carrello } = useGlobalContext()
@@ -169,16 +170,16 @@ const CheckOut = () => {
     };
     const calculateTotal = () => {
         const subtotal = carrello.reduce((total, product) => {
-          return total + (product.price * product.quantity);
+            return total + (product.price * product.quantity);
         }, 0);
-        
+
         const shippingCost = 5.00; // Costo di spedizione fisso
         return subtotal + shippingCost;
-      };
+    };
     const cartTotal = calculateTotal();
     return (
-        <div className="container">
-            <main>
+        <main>
+            <div className="container">
                 <div className="py-5 text-center">
                     <img className="d-block mx-auto mb-4" src="/Planet_1.png" alt="" width="90" height="90" />
                     <h2>Checkout</h2>
@@ -195,7 +196,7 @@ const CheckOut = () => {
                             {/* ... contenuto del carrello ... */}
 
                             {
-                                carrello.map((product,index) => {
+                                carrello.map((product, index) => {
                                     const { name, price, quantity } = product
                                     return (
                                         <li key={index} className="list-group-item d-flex justify-content-between lh-sm">
@@ -209,12 +210,12 @@ const CheckOut = () => {
                                 })
 
                             }
-                            <li  className="list-group-item d-flex justify-content-between lh-sm">
-                                            <div>
-                                                <small className="text-body-secondary fw-bold"> Costi di spedizione</small>
-                                            </div>
-                                            <span className="text-body-secondary">5 € </span>
-                                        </li>
+                            <li className="list-group-item d-flex justify-content-between lh-sm">
+                                <div>
+                                    <small className="text-body-secondary fw-bold"> Costi di spedizione</small>
+                                </div>
+                                <span className="text-body-secondary">5 € </span>
+                            </li>
                             <li className="list-group-item d-flex justify-content-between bg-body-tertiary">  {/*NOTE - promo code */}
                                 <div className="text-success">
                                     <h6 className="my-0">Promo code</h6>
@@ -239,7 +240,7 @@ const CheckOut = () => {
 
                     {/*NOTE logica form*/}
                     <div className="col-md-7 col-lg-8 mb-5">
-                        <h4 className="mb-3">Indirizzo di spedizione</h4>
+                        <h4 className="mb-3">Dati di spedizione</h4>
                         <form className="needs-validation" noValidate onSubmit={handleSubmit}>
                             <div className="row g-3">
                                 <div className="col-sm-6">
@@ -450,9 +451,11 @@ const CheckOut = () => {
                             <button className="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
                         </form>
                     </div>
+
                 </div>
-            </main >
-        </div >
+            </div >
+
+        </main >
     );
 };
 

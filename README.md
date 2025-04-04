@@ -4,7 +4,7 @@
 
 ## 📝 Descrizione
 
-PawPlanet è un e-commerce completo per prodotti e accessori per animali domestici. L'applicazione offre un'interfaccia intuitiva e moderna per la gestione e l'acquisto di prodotti per cani 🐕 e gatti 🐱.
+PawPlanet è un e-commerce completo per prodotti e accessori per animali domestici. L'applicazione offre un'interfaccia intuitiva e moderna per la gestione e l'acquisto di prodotti per cani 🐕 e gatti 🐱, con un design responsive che si adatta a tutti i dispositivi.
 
 ## 🛠️ Tecnologie Utilizzate
 
@@ -16,6 +16,7 @@ PawPlanet è un e-commerce completo per prodotti e accessori per animali domesti
 - 💫 React Icons per le icone
 - 🎠 Swiper per i carousel
 - ✨ ESLint per il linting del codice
+- 🗄️ JSON Server (mock backend)
 
 ## ✨ Funzionalità Principali
 
@@ -23,8 +24,8 @@ PawPlanet è un e-commerce completo per prodotti e accessori per animali domesti
   - 🐕 Sezione dedicata per prodotti per cani
   - 🐱 Sezione dedicata per prodotti per gatti
   - 🏷️ Visualizzazione prodotti scontati
-  - 🔍 Ricerca prodotti
-  - 📋 Dettaglio prodotto
+  - 🔍 Ricerca prodotti avanzata
+  - 📋 Dettaglio prodotto con immagini e descrizioni
 
 - 🗂️ **Categorie Specifiche**
   - 🍖 Alimenti per cani e gatti
@@ -32,15 +33,18 @@ PawPlanet è un e-commerce completo per prodotti e accessori per animali domesti
   - 🛍️ Accessori vari
 
 - 🛒 **Carrello e Checkout**
-  - 🛍️ Gestione carrello della spesa
-  - ✅ Processo di checkout con validazione
-  - 📍 Selezione regione di spedizione
+  - 🛍️ Gestione carrello della spesa con persistenza dati (localStorage)
+  - ➕ Aggiunta/rimozione prodotti e modifica quantità
+  - ✅ Processo di checkout con validazione dei campi
+  - 📍 Selezione regione di spedizione italiana
+  - 🏠 Gestione indirizzi di spedizione e fatturazione
 
 - 🎯 **Interfaccia Utente**
-  - 📱 Design responsive
-  - 🧭 Navigazione intuitiva
-  - 🎠 Carousel per presentazione prodotti
-  - 🗺️ Breadcrumb per navigazione
+  - 📱 Design responsive per mobile, tablet e desktop
+  - 🧭 Navigazione intuitiva con menu dropdown
+  - 🎠 Carousel per presentazione prodotti in evidenza
+  - 🗺️ Breadcrumb per navigazione contestuale
+  - 🎨 Tema coerente con colori verdi e arancioni
 
 ## 📁 Struttura del Progetto
 
@@ -56,30 +60,33 @@ petShop_react_def/
 │   │       └── Hero-animals1.jpg
 │   ├── components/       # Componenti riutilizzabili
 │   │   ├── Carousel.jsx  # Slider prodotti
+│   │   ├── Footer.jsx    # Footer del sito
 │   │   ├── Hero.jsx      # Sezione hero
 │   │   ├── Navbar.jsx    # Barra di navigazione
 │   │   ├── PathNav.jsx   # Breadcrumb navigation
 │   │   └── SearchForm.jsx # Form di ricerca
 │   ├── context/          # Context API
-│   │   └── GlobalContext.jsx # Stato globale
+│   │   └── GlobalContext.jsx # Stato globale dell'app
 │   ├── data/             # Dati statici
 │   │   └── Regioni.js    # Lista regioni per spedizione
 │   ├── layout/           # Layout components
 │   │   └── DefaultLayout.jsx # Layout principale
 │   ├── pages/            # Componenti pagina
-│   │   ├── Home.jsx
-│   │   ├── ProductDetails.jsx
-│   │   ├── ProductsList.jsx
-│   │   ├── Search.jsx
-│   │   ├── CheckOut.jsx
-│   │   ├── DogProducts.jsx
-│   │   ├── CatProducts.jsx
-│   │   ├── DogFoodList.jsx
-│   │   ├── CatFoodList.jsx
-│   │   ├── DogGamesList.jsx
-│   │   ├── CatGamesList.jsx
-│   │   ├── Accesories.jsx
-│   │   └── DiscountedProducts.jsx
+│   │   ├── Home.jsx      # Homepage
+│   │   ├── ProductDetails.jsx # Dettaglio prodotto
+│   │   ├── ProductsList.jsx # Lista prodotti
+│   │   ├── Search.jsx    # Risultati ricerca
+│   │   ├── CheckOut.jsx  # Pagina checkout
+│   │   ├── Carrello.jsx  # Carrello acquisti
+│   │   ├── DogProducts.jsx # Prodotti per cani
+│   │   ├── CatProducts.jsx # Prodotti per gatti
+│   │   ├── DogFoodList.jsx # Cibo per cani
+│   │   ├── CatFoodList.jsx # Cibo per gatti
+│   │   ├── DogGamesList.jsx # Giochi per cani
+│   │   ├── CatGamesList.jsx # Giochi per gatti
+│   │   ├── Accesories.jsx # Accessori
+│   │   ├── DiscountedProducts.jsx # Prodotti in offerta
+│   │   └── NotFound.jsx  # Pagina 404
 │   ├── App.jsx           # Componente root
 │   ├── main.jsx          # Entry point
 │   └── index.css         # Stili globali
@@ -90,6 +97,16 @@ petShop_react_def/
 ├── package.json         # Dipendenze e script
 └── vite.config.js       # Configurazione Vite
 ```
+
+## 🧠 Gestione dello Stato
+
+L'applicazione utilizza React Context API per la gestione dello stato globale:
+
+- 🛒 **Carrello**: Gestione completa del carrello con persistenza in localStorage
+- 🔄 **Funzioni principali**:
+  - `aggiungiAlCarrello`: Aggiunge prodotti al carrello o incrementa la quantità
+  - `rimuoviDalCarrello`: Rimuove prodotti dal carrello
+  - `svuotaCarrello`: Svuota completamente il carrello
 
 ## 🚀 Come Iniziare
 
@@ -110,7 +127,12 @@ git clone [url-del-repository]
 npm install
 ```
 
-3. Avvia il server di sviluppo
+3. Avvia il mock server (JSON Server)
+```bash
+json-server --watch db.json
+```
+
+4. Avvia il server di sviluppo
 ```bash
 npm run dev
 ```
@@ -123,40 +145,52 @@ npm run dev
 - 🏗️ `npm run build` - Crea la build di produzione
 - 👀 `npm run preview` - Visualizza la build di produzione
 - 🔍 `npm run lint` - Esegue il linting del codice
+
 ## 📚 API e Endpoints
 
-- `GET /prodotti` - Recupera lista prodotti
-- `GET /prodotti/:id` - Recupera dettaglio prodotto
-- `GET /prodotti/categoria/:categoria` - Filtra prodotti per categoria
-- `POST /prodotti/orders` - Crea un nuovo ordine
+L'applicazione utilizza JSON Server come mock backend, con i seguenti endpoints:
 
-## 🧪 Testing
+- `GET http://localhost:3000/prodotti` - Recupera lista prodotti
+- `GET http://localhost:3000/prodotti/:slug` - Recupera dettaglio prodotto
+- `GET http://localhost:3000/prodotti/cani` - Filtra prodotti per cani
+- `GET http://localhost:3000/prodotti/gatti` - Filtra prodotti per gatti
+- `GET http://localhost:3000/prodotti/cani/cibo` - Filtra cibo per cani
+- `GET http://localhost:3000/prodotti/gatti/cibo` - Filtra cibo per gatti
+- `GET http://localhost:3000/prodotti/cani/giochi` - Filtra giochi per cani
+- `GET http://localhost:3000/prodotti/gatti/giochi` - Filtra giochi per gatti
+- `GET http://localhost:3000/prodotti/accessori` - Filtra accessori
+- `GET http://localhost:3000/prodotti/promozioni` - Filtra prodotti in promozione
+- `GET http://localhost:3000/prodotti/search/:term` - Ricerca prodotti
 
-```bash
-# Esegui i test
-npm run test
+## 🎨 UI/UX Design
 
-# Esegui i test con coverage
-npm run test:coverage
-```
+- 🎯 **Tema Colori**:
+  - Verde: Rappresenta natura e salute per gli animali
+  - Arancione: Utilizzato per call-to-action e bottoni
+  - Bianco/Grigio chiaro: Sfondo per leggibilità ottimale
 
-## 🤝 Contribuire
+- 📱 **Responsive Design**:
+  - Mobile-first approach
+  - Breakpoints per dispositivi mobili, tablet e desktop
+  - Layout fluido con Flexbox e Grid
 
-1. 🍴 Fai un fork del progetto
-2. 🔨 Crea un branch per la tua feature (`git checkout -b feature/AmazingFeature`)
-3. 📝 Committa i tuoi cambiamenti (`git commit -m 'Add some AmazingFeature'`)
-4. 📤 Pusha sul branch (`git push origin feature/AmazingFeature`)
-5. 🔄 Apri una Pull Request
+- 🧩 **Componenti UI**:
+  - Navbar con dropdown per categorie
+  - Hero section con immagine di sfondo
+  - Carousel per prodotti in evidenza
+  - Card prodotto con hover effects
+  - Form di checkout con validazione
 
 ## 🔮 Sviluppi Futuri
 
 - 🔐 Implementazione sistema di autenticazione
 - 👤 Gestione profilo utente
 - ⭐ Sistema di recensioni prodotti
-- 💳 Integrazione pagamenti
+- 💳 Integrazione pagamenti reali
 - 💝 Wishlist prodotti
 - ⚡ Ottimizzazione performance
 - 🧪 Test automatizzati
+- 📱 App mobile con React Native
 
 ## 📄 Licenza
 

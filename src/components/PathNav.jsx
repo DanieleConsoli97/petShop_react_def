@@ -84,8 +84,9 @@ const PathNav = () => {
             }
 
             return (
-              <li key={index} className={`breadcrumb-item ${isLast ? "active" : ""}`} aria-current={isLast ? "page" : undefined}>
-                {isLast ? (
+              <li key={index} className={`breadcrumb-item ${isLast ? "active" : ""}`} aria-current={isLast ? "page" : undefined}  
+              >
+                {isLast || crumb === "search" ? ( // Modifica qui
                   <span>{formattedCrumb}</span>
                 ) : (
                   <Link to={currentLink} className="link-body-emphasis fw-semibold text-decoration-none">

@@ -83,7 +83,7 @@ const GlobalProvider = ({ children }) => {
         setWishList([]);
     }
 
-//NOTE - Toast
+    //NOTE - Toast
 
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState({
@@ -107,7 +107,7 @@ const GlobalProvider = ({ children }) => {
         setToastMessage({ title, text, type });
         handleShowToast();
     };
-     
+
 
 
     const value = {

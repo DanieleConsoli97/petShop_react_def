@@ -4,7 +4,7 @@ import { useGlobalContext } from '../context/GlobalContext';
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { IoAlertCircleOutline } from "react-icons/io5";
 import { IoInformationCircleOutline } from "react-icons/io5";
-import {formatDistanceToNow} from 'date-fns';
+import { formatDistanceToNow } from 'date-fns';
 import { it } from 'date-fns/locale'; //import locale italiano.
 
 function ReactStateToast(props) {
@@ -16,7 +16,7 @@ function ReactStateToast(props) {
 
     // Determina l'icona e il colore in base al tipo di toast
     const getToastIcon = () => {
-        switch(type) {
+        switch (type) {
             case "warning":
                 return <IoAlertCircleOutline color="orange" />;
             case "info":
@@ -29,7 +29,7 @@ function ReactStateToast(props) {
 
     // Determina il colore di sfondo dell'header in base al tipo
     const getHeaderStyle = () => {
-        switch(type) {
+        switch (type) {
             case "warning":
                 return { backgroundColor: "#FFF3CD" };
             case "info":

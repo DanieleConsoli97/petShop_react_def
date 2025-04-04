@@ -3,7 +3,7 @@
 import { useState } from "react";
 import regioniItaliane from "../data/Regioni";
 import { useGlobalContext } from "../context/GlobalContext";
-import Toasts from "../components/Toasts"; // 
+
 
 // Componente principale per la gestione del checkout
 const CheckOut = () => {
@@ -177,25 +177,9 @@ const CheckOut = () => {
         return subtotal + shippingCost;
     };
     const cartTotal = calculateTotal();
-    return (    
-    <main>
-        <div className="container">
-        <button type="button" className="btn btn-primary" id="liveToastBtn">Show live toast</button>
-            
-            <div className="toast-container position-fixed bottom-0 end-0 p-3">
-                <div id="liveToast" className="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div className="toast-header">
-                        <img src="..." className="rounded me-2" alt="..."/>
-                            <strong className="me-auto">Bootstrap</strong>
-                            <small>11 mins ago</small>
-                            <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div className="toast-body">
-                        Hello, world! This is a toast message.
-                    </div>
-                </div>
-            </div>
-        
+    return (
+        <main>
+            <div className="container">
                 <div className="py-5 text-center">
                     <img className="d-block mx-auto mb-4" src="/Planet_1.png" alt="" width="90" height="90" />
                     <h2>Checkout</h2>
@@ -467,11 +451,11 @@ const CheckOut = () => {
                             <button className="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
                         </form>
                     </div>
-                    
+
                 </div>
             </div >
-            <ReactStateToast title="Successo!" text="Il tuo documento è stato salvato." type="success" />
-            </main >
+
+        </main >
     );
 };
 

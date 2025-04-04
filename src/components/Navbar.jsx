@@ -48,6 +48,11 @@ function Navbar() {
                 Cani
               </a>
               <ul className="dropdown-menu" aria-labelledby="caniDropdown">
+              <li>
+                  <Link className="dropdown-item" to={'/prodotti/cani/'}>
+                    Prodotti per cani
+                  </Link>
+                </li>
                 <li>
                   <Link className="dropdown-item" to={'/prodotti/cani/cibo'} >
                     Cibo per cani
@@ -72,6 +77,11 @@ function Navbar() {
                 Gatti
               </a>
               <ul className="dropdown-menu" aria-labelledby="gattiDropdown">
+              <li>
+                  <Link className="dropdown-item" to={'/prodotti/gatti/'}>
+                    Prodotti per gatti
+                  </Link>
+                </li>
                 <li>
                   <Link className="dropdown-item" to={'/prodotti/gatti/cibo'}>
                     Cibo per gatti

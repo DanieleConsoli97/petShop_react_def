@@ -84,14 +84,18 @@ const PathNav = () => {
             }
 
             return (
-              <li key={index} className={`breadcrumb-item ${isLast ? "active" : ""}`} aria-current={isLast ? "page" : undefined}  
-              >
-                {isLast || crumb === "search" ? ( // Modifica qui
+
+              <li key={index} className={`breadcrumb-item ${isLast || crumb === "search" ? "active" : ""}`} aria-current={isLast || crumb === "search" ? "page" : undefined}>
+                {crumb === "search" ? (
                   <span>{formattedCrumb}</span>
                 ) : (
-                  <Link to={currentLink} className="link-body-emphasis fw-semibold text-decoration-none">
-                    {formattedCrumb}
-                  </Link>
+                  isLast ? (
+                    <span>{formattedCrumb}</span>
+                  ) : (
+                    <Link to={currentLink} className="link-body-emphasis fw-semibold text-decoration-none">
+                      {formattedCrumb}
+                    </Link>
+                  )
                 )}
               </li>
             );

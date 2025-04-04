@@ -1,7 +1,7 @@
 
 import Home from "./pages/Home";
 import { GlobalProvider } from "./context/GlobalContext";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 
 //layout
 import DefaultLayout from "./layout/DefaultLayout";
@@ -48,6 +48,9 @@ function App() {
             <Route path="/checkout" element={<CheckOut />} />
             <Route path="/carrello" element={<Carrello />} />
             <Route path="/wishList" element={<WishList />} />
+            {/* Rotta dedicata per la pagina 404 */}
+            <Route path="/404" element={<NotFound />} />
+            {/* Rotta catch-all per gestire tutti i percorsi non validi */}
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

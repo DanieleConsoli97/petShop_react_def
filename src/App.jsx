@@ -21,6 +21,7 @@ import CatProducts from "./pages/CatProducts";
 import CheckOut from "./pages/CheckOut";
 import Carrello from "./pages/Carrello";
 import NotFound from "./pages/NotFound";
+import WishList from "./pages/WishList";
 
 
 
@@ -46,6 +47,7 @@ function App() {
             <Route path="/prodotti/search/:term" element={<Search />} />
             <Route path="/checkout" element={<CheckOut />} />
             <Route path="/carrello" element={<Carrello />} />
+            <Route path="/wishList" element={<WishList />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

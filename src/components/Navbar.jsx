@@ -1,4 +1,5 @@
 import { FaShoppingCart } from "react-icons/fa";
+import { FaBone } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import logo from '/PawPlanet.logo(3).png'
 import { Link } from "react-router-dom";
@@ -23,6 +24,11 @@ function Navbar() {
           <div className="ms-auto">
             <Link to={'/carrello'} className="cart-icon">
               <FaShoppingCart size={30} />
+            </Link>
+          </div>
+          <div className="mx-2">
+            <Link to={'/wishlist'} className="cart-icon">
+              <FaBone size={30} />
             </Link>
           </div>
         </div>

@@ -25,17 +25,43 @@ const GlobalProvider = ({ children }) => {
             setCarrello(carrello.map((item) =>
                 item.slug === prodotto.slug ? { ...item, quantity: item.quantity + quantity } : item
             ));
+            // Mostra toast di aggiornamento quantità
+            setToastMessage({
+                title: "Carrello aggiornato",
+                text: `La quantità di ${prodotto.name} è stata aggiornata nel carrello!`,
+                type: "info"
+            });
         } else {
             setCarrello([...carrello, { ...prodotto, quantity }]);
+            // Mostra toast di aggiunta al carrello
+            setToastMessage({
+                title: "Aggiunto al Carrello",
+                text: `${prodotto.name} è stato aggiunto al tuo carrello!`,
+                type: "success"
+            });
         }
+        handleShowToast();
     };
 
     const aggiungiAllaWishList = (prodotto) => {
         const prodottoEsistente = wishList.find((item) => item.slug === prodotto.slug);
         if (!prodottoEsistente) {
             setWishList([...wishList, prodotto]);
+            // Mostra toast di successo
+            setToastMessage({
+                title: "Aggiunto alla Wishlist",
+                text: `${prodotto.name} è stato aggiunto alla tua lista dei desideri!`,
+                type: "success"
+            });
+            handleShowToast();
         } else {
-            alert('Il prodotto è già presente nella tua lista dei desideri!');
+            // Mostra toast di avviso
+            setToastMessage({
+                title: "Attenzione",
+                text: "Il prodotto è già presente nella tua lista dei desideri!",
+                type: "warning"
+            });
+            handleShowToast();
         }
     };
 
@@ -57,6 +83,33 @@ const GlobalProvider = ({ children }) => {
         setWishList([]);
     }
 
+//NOTE - Toast
+
+    const [showToast, setShowToast] = useState(false);
+    const [toastMessage, setToastMessage] = useState({
+        title: "",
+        text: "",
+        type: "success" // Valori possibili: success, warning, info
+    });
+
+    const handleShowToast = () => {
+        setShowToast(true);
+        // Nasconde automaticamente dopo 5 secondi
+        setTimeout(() => setShowToast(false), 5000);
+    };
+
+    const handleCloseToast = () => {
+        setShowToast(false);
+    };
+
+    // Funzione generica per mostrare un toast
+    const showToastMessage = (title, text, type = "success") => {
+        setToastMessage({ title, text, type });
+        handleShowToast();
+    };
+     
+
+
     const value = {
         carrello,
         aggiungiAlCarrello,
@@ -67,8 +120,17 @@ const GlobalProvider = ({ children }) => {
         aggiungiAllaWishList,
         rimuoviDallaWishList,
         svuotaWishList,
-        setWishList
+        setWishList,
+        handleShowToast,
+        handleCloseToast,
+        showToast,
+        setShowToast,
+        toastMessage,
+        setToastMessage,
+        showToastMessage
     };
+
+
 
     return (
         <GlobalContext.Provider value={value}>

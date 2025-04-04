@@ -470,7 +470,7 @@ const CheckOut = () => {
                     
                 </div>
             </div >
-            <Toasts  title="Successo!" text="Il tuo documento è stato salvato."   />
+            <ReactStateToast title="Successo!" text="Il tuo documento è stato salvato." type="success" />
             </main >
     );
 };

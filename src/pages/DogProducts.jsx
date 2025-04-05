@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 
+import { BsFillGrid3X3GapFill } from "react-icons/bs";
+import { GrSort } from "react-icons/gr";
+
 function DogProducts() {
     const [dogProducts, setDogProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -31,12 +34,12 @@ function DogProducts() {
     return (
         <>
             <h1 className='text-center my-4'>Prodotti per Cani</h1>
-            <div className="d-flex justify-content-end mb-3">
-                <button className={`btn btn-outline-primary me-2 ${isGridView ? 'active' : ''}`} onClick={() => setIsGridView(true)}>
-                    Griglia
+            <div className="container d-flex justify-content-end mb-3">
+                <button className={`btn btn-outline-success me-2 ${isGridView ? 'active' : ''}`} onClick={() => setIsGridView(true)}>
+                    <BsFillGrid3X3GapFill />
                 </button>
-                <button className={`btn btn-outline-primary ${!isGridView ? 'active' : ''}`} onClick={() => setIsGridView(false)}>
-                    Lista
+                <button className={`btn btn-outline-success ${!isGridView ? 'active' : ''}`} onClick={() => setIsGridView(false)}>
+                    <GrSort />
                 </button>
             </div>
             <div className={`products-container ${isGridView ? 'grid-view' : 'list-view'}`}>

@@ -1,141 +1,33 @@
-/* Stili e animazioni per il componente HoldButton */
+/* Stili e animazioni per il componente HoldButton - Solo Progresso Circolare */
 
-/* Animazione di pulsazione durante la pressione */
-@keyframes pulse {
-  0% {
-    opacity: 0.6;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.3;
-    transform: scale(1.05);
-  }
-  100% {
-    opacity: 0.6;
-    transform: scale(1);
-  }
-}
-
-/* Animazione di dissolvenza per l'effetto di completamento */
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-/* Animazione ripple effect */
-@keyframes ripple {
-  0% {
-    transform: scale(0);
-    opacity: 0.7;
-  }
-  50% {
-    opacity: 0.4;
-  }
-  100% {
-    transform: scale(2.5);
-    opacity: 0;
-  }
-}
-
-/* Animazione shake per feedback di errore */
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-  20%, 40%, 60%, 80% { transform: translateX(5px); }
-}
-
-/* Animazione shake migliorata per feedback più intenso */
-@keyframes shake-improved {
-  0%, 100% { transform: translateX(0) rotate(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-8px) rotate(-2deg); }
-  20%, 40%, 60%, 80% { transform: translateX(8px) rotate(2deg); }
-}
-
-/* Animazione bounce per completamento */
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0) scale(1); }
-  40% { transform: translateY(-10px) scale(1.05); }
-  60% { transform: translateY(-5px) scale(1.02); }
-}
-
-/* Animazione glow per evidenziare */
-@keyframes glow {
-  0% { box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); filter: brightness(1); }
-  50% { box-shadow: 0 0 20px rgba(0, 123, 255, 0.8); filter: brightness(1.1); }
-  100% { box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); filter: brightness(1); }
-}
-
-/* Animazione glow per successo */
-@keyframes success-glow {
-  0% { box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); filter: brightness(1); }
-  50% { box-shadow: 0 0 20px rgba(40, 167, 69, 0.8); filter: brightness(1.2); }
-  100% { box-shadow: 0 0 10px rgba(40, 167, 69, 0.6); filter: brightness(1.1); }
-}
-
-/* Animazioni per le particelle */
-@keyframes particle-animation {
-  0% {
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-    transform: translate(
-      calc(-50% + var(--x-offset) * 30px),
-      calc(-50% + var(--y-offset) * 30px)
-    ) scale(0.7);
-  }
-  100% {
-    transform: translate(
-      calc(-50% + var(--x-offset) * 80px),
-      calc(-50% + var(--y-offset) * 80px)
-    ) scale(1);
-    opacity: 0;
-  }
-}
-
-/* Stile per le particelle */
-.hold-button.particles-style .particle {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  border-radius: 50%;
-  box-shadow: 0 0 8px currentColor;
-  z-index: 10;
-}
-
-@keyframes success-glow {
-  0% { box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); }
-  50% { box-shadow: 0 0 20px rgba(40, 167, 69, 0.8); }
-  100% { box-shadow: 0 0 10px rgba(40, 167, 69, 0.6); }
-}
-
-/* Animazioni per il progresso circolare migliorato */
-@keyframes rotate {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
+/* Animazioni per il progresso circolare */
 @keyframes pulse-circle {
   0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.85; }
+  50% { transform: scale(1.08); opacity: 0.85; }
   100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes progress-dot-pulse {
-  0% { opacity: 0.4; r: 1.5; }
-  50% { opacity: 1; r: 2.5; }
-  100% { opacity: 0.4; r: 1.5; }
+  0% { opacity: 0.4; r: 1.5; filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.5)); }
+  50% { opacity: 1; r: 3; filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8)); }
+  100% { opacity: 0.4; r: 1.5; filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.5)); }
 }
 
 @keyframes checkmark-animation {
-  0% { transform: scale(0); opacity: 0; }
-  50% { transform: scale(1.2); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
+  0% { transform: scale(0) rotate(-20deg); opacity: 0; }
+  50% { transform: scale(1.3) rotate(10deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+@keyframes success-glow {
+  0% { box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); filter: brightness(1); }
+  50% { box-shadow: 0 0 25px rgba(40, 167, 69, 0.8); filter: brightness(1.3); }
+  100% { box-shadow: 0 0 15px rgba(40, 167, 69, 0.6); filter: brightness(1.15); }
+}
+
+@keyframes percentage-fade {
+  0% { opacity: 0.7; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 /* Stili base per il pulsante */
@@ -143,36 +35,66 @@
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
-}
-
-/* Stili per il progresso circolare migliorato */
-.progress-circle {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
-  filter: drop-shadow(0 0 2px rgba(0, 123, 255, 0.3));
+  gap: 10px;
+}
+
+/* Stile quando il pulsante è in stato di pressione */
+.hold-button.holding {
+  transform: scale(0.97);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Stile quando l'azione è completata */
+.hold-button.completed {
+  transform: scale(1.03);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  box-shadow: 0 0 15px rgba(40, 167, 69, 0.5);
+  animation: success-glow 1.2s forwards;
+}
+
+/* Effetto hover sul pulsante */
+.hold-button:hover:not(.holding) {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Stili per il progresso circolare */
+.progress-circle {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  z-index: 5;
 }
 
 .progress-circle svg {
   overflow: visible;
+  width: 100%;
+  height: 100%;
 }
 
 .progress-circle svg.pulse-circle {
-  animation: pulse-circle 2s infinite ease-in-out;
+  animation: pulse-circle 1.8s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .progress-circle .circle-background {
-  opacity: 0.5;
+  opacity: 0.6;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.4));
+  transition: all 0.3s ease;
 }
 
 .progress-circle .progress-indicator {
   stroke-linecap: round;
+  filter: drop-shadow(0 0 4px rgba(0, 123, 255, 0.7));
+  transition: stroke-dashoffset 0.05s linear, stroke 0.3s ease, filter 0.3s ease;
 }
 
 .progress-circle .progress-dot {
   animation: progress-dot-pulse 1.5s infinite;
-  filter: drop-shadow(0 0 2px white);
+  filter: drop-shadow(0 0 3px white);
 }
 
 .progress-circle .checkmark-animation {
@@ -180,138 +102,40 @@
   animation: checkmark-animation 0.5s ease-out forwards;
 }
 
-/* Stile quando il pulsante è in stato di pressione */
-.hold-button.holding {
-  transform: scale(0.98);
-}
-
-/* Stile quando l'azione è completata */
-.hold-button.completed {
-  transform: scale(1.02);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
-  box-shadow: 0 0 15px rgba(40, 167, 69, 0.5);
-}
-
-/* Stile per l'indicatore di progresso */
-.hold-progress {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 4px;
-  background-color: var(--bs-primary, #0d6efd);
-  transition: width 0.05s linear, background-color 0.3s ease;
-  border-radius: 0 2px 2px 0;
-  background-image: linear-gradient(to right, rgba(255,255,255,0.2), rgba(255,255,255,0.5));
-  box-shadow: 0 0 3px rgba(13, 110, 253, 0.5);
-}
-
-/* Effetto hover sul pulsante */
-.hold-button:hover:not(.holding) {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Stili per diversi tipi di animazione */
-
-/* Stile ripple */
-.hold-button.ripple-style .ripple-effect {
-  position: absolute;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.4);
-  width: 100px;
-  height: 100px;
-  margin-top: -50px;
-  margin-left: -50px;
-  animation: ripple 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  background-image: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,0.1) 70%);
-  pointer-events: none;
-}
-
-/* Stile bounce per completamento */
-.hold-button.bounce-style.completed {
-  animation: bounce 0.8s cubic-bezier(0.28, 0.84, 0.42, 1);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Stile shake per errore */
-.hold-button.shake-style.error {
-  animation: shake 0.5s ease-in-out;
-}
-
-/* Stile shake avanzata */
-/* Animazione shake avanzata per un effetto più intenso */
-@keyframes shake-advanced {
-  0%, 100% { transform: translateX(0) rotate(0); }
-  10%, 50%, 90% { transform: translateX(-12px) rotate(-3deg); }
-  30%, 70% { transform: translateX(12px) rotate(3deg); }
-}
-
-/* Stile shake migliorato */
-.hold-button.shake-improved-style.error {
-  animation: shake-improved 0.6s ease-in-out;
-}
-
-/* Stile shake avanzato */
-.hold-button.shake-advanced.error {
-  animation: shake-advanced 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-  transform-origin: center;
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
-/* Stile glow per evidenziare */
-.hold-button.glow-style.holding {
-  animation: glow 1.5s infinite;
-  border-color: transparent;
-}
-
-.hold-button.glow-style.completed {
-  animation: success-glow 1s forwards;
-}
-
-/* Stile per effetto particellare */
-.hold-button.particles-style {
+/* Stile per il contenitore del testo nel pulsante */
+.button-content {
   position: relative;
-  overflow: visible !important;
+  z-index: 1;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
 }
 
-.hold-button.particles-style .particles-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 10;
+.hold-button.holding .button-content {
+  opacity: 0.7;
 }
 
-.hold-button.particles-style .particle {
-  --x-offset: 0;
-  --y-offset: 0;
-  position: absolute;
-  animation: particle-animation 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+.hold-button.completed .button-content {
+  opacity: 1;
 }
 
-.hold-button.particles-style.completed {
-  animation: success-glow 1s forwards;
-}
-
-/* Stile per progresso circolare */
-.hold-button.circular-progress .progress-circle {
+/* Stile per il contenitore della percentuale */
+.progress-percentage {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 40px;
-  animation: rotate 2s linear infinite;
-  height: 40px;
-  border-radius: 50%;
-  border: 3px solid rgba(0, 0, 0, 0.1);
-  border-top-color: var(--bs-primary, #0d6efd);
-  animation: spin 1s linear infinite;
+  color: #007bff;
+  font-weight: 600;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+  animation: percentage-fade 0.2s ease-out;
+  font-size: 12px;
+  font-weight: bold;
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+  transition: color 0.3s ease;
+  z-index: 6;
 }
 
-@keyframes spin {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
+.progress-percentage.completed {
+  color: #28a745;
+  text-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
 }

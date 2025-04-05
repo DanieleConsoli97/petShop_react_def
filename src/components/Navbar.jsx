@@ -2,10 +2,12 @@ import { FaShoppingCart } from "react-icons/fa";
 import { FaBone } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import logo from '/PawPlanet.logo(3).png'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../context/GlobalContext";
 import SearchForm from "./SearchForm";
+import HoldButton from "./HoldButton";
 
-function Navbar() {
+const Navbar = () => {
   return (
     <>
       {/* Navbar principale con logo, barra di ricerca e carrello */}
@@ -108,6 +110,11 @@ function Navbar() {
             <li className="nav-item">
               <Link className="nav-link" to={'/prodotti/promozioni'}>
                 Offerte
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to={'/hold-button-demo'}>
+                Demo Hold Button
               </Link>
             </li>
           </ul>

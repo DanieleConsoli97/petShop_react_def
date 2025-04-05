@@ -22,6 +22,7 @@ import CheckOut from "./pages/CheckOut";
 import Carrello from "./pages/Carrello";
 import NotFound from "./pages/NotFound";
 import WishList from "./pages/WishList";
+import HoldButtonDemo from "./pages/HoldButtonDemo";
 
 
 
@@ -48,6 +49,7 @@ function App() {
             <Route path="/checkout" element={<CheckOut />} />
             <Route path="/carrello" element={<Carrello />} />
             <Route path="/wishList" element={<WishList />} />
+            <Route path="/hold-button-demo" element={<HoldButtonDemo />} />
             {/* Rotta dedicata per la pagina 404 */}
             <Route path="/404" element={<NotFound />} />
             {/* Rotta catch-all per gestire tutti i percorsi non validi */}

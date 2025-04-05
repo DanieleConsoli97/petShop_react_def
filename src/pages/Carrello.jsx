@@ -12,7 +12,7 @@ function Carrello() {
 
         {/* Messaggio se il carrello è vuoto */}
         {carrello.length === 0 ? (
-          <p className="text-center">Il tuo carrello è vuoto. Inizia a fare shopping <Link to="/prodotti">qui</Link>.</p>
+          <p className="text-center">Il tuo carrello è vuoto. Inizia a fare shopping <Link className='link-underline link-underline-opacity-0 text-warning' to="/prodotti">qui</Link>.</p>
         ) : (
           <div className='row'>
             {carrello.map((product) => (

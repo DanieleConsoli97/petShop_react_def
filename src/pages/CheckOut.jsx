@@ -3,7 +3,7 @@
 import { useState } from "react";
 import regioniItaliane from "../data/Regioni";
 import { useGlobalContext } from "../context/GlobalContext";
-
+import { Navigate,useNavigate } from "react-router-dom";
 
 // Componente principale per la gestione del checkout
 const CheckOut = () => {
@@ -53,6 +53,9 @@ const CheckOut = () => {
             [name]: value
         }));
     };
+
+    // Per gestire la navigazione alla pagina di checkout completato
+    const navigate = useNavigate();
 
     // Funzioni di validazione per i campi del form
     const validateEmail = (email) => {
@@ -157,7 +160,7 @@ const CheckOut = () => {
                 })
                 .then(data => {
                     console.log('Ordine creato con successo:', data);
-                    // TODO: Reindirizzare alla pagina di conferma
+                    navigate("/checkoutDone");
                 })
                 .catch(error => {
                     console.error('Errore dettagliato:', error);
@@ -448,7 +451,7 @@ const CheckOut = () => {
                                 </div>
                             )}
                             <hr className="my-4" />
-                            <button className="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+                            <button  className="w-100 btn btn-primary btn-lg" type="submit" >Procedi con l'ordine</button>
                         </form>
                     </div>
 

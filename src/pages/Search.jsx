@@ -52,7 +52,7 @@ const Search = () => {
 
     return (
         <>
-            <h4 className='products-container'>Risultati di ricerca: <span className='fw-bold'>{products.length}</span></h4>
+            <h4 className='products-container'>Risultati di ricerca: <span className='fw-bold text-warning'>{products.length}</span></h4>
             <div className="container d-flex justify-content-end mb-3">
                 <button className={`btn btn-outline-success me-2 ${isGridView ? 'active' : ''}`} onClick={() => setIsGridView(true)}>
                     <BsFillGrid3X3GapFill />

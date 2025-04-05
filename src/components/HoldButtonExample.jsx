@@ -24,6 +24,24 @@ const HoldButtonExample = () => {
       <h2 className="mb-4">Esempi di HoldButton</h2>
       
       <div className="row g-4">
+        {/* Esempio 10: Pulsante con effetto particellare */}
+        <div className="col-md-6">
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">Effetto Particellare</h5>
+              <p className="card-text">Esplosione di particelle colorate al completamento.</p>
+              <HoldButton 
+                onHold={() => alert('Effetto particellare attivato!')} 
+                holdTime={1500} 
+                className="btn btn-primary"
+                animationStyle="particles"
+              >
+                Effetto Particellare
+              </HoldButton>
+            </div>
+          </div>
+        </div>
+        
         {/* Esempio 9: Pulsante con feedback tattile */}
         <div className="col-md-6">
           <div className="card">
@@ -169,6 +187,84 @@ const HoldButtonExample = () => {
           </div>
         </div>
 
+        {/* Esempio 11: Pulsante con effetto shake migliorato */}
+        <div className="col-md-6">
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">Effetto Shake Migliorato</h5>
+              <p className="card-text">Pulsante con effetto shake che si attiva al click.</p>
+              <HoldButton 
+                onHold={() => {
+                  console.log('Effetto shake attivato!');
+                  // Simuliamo un errore per attivare l'effetto shake
+                  const button = document.querySelector('.btn.shake-improved-style');
+                  if (button) {
+                    button.classList.add('error');
+                    setTimeout(() => button.classList.remove('error'), 600);
+                  }
+                }} 
+                holdTime={800} 
+                className="btn btn-danger shake-improved-style"
+                animationStyle="shake-improved"
+              >
+                Premi per Shake
+              </HoldButton>
+            </div>
+          </div>
+        </div>
+        
+        {/* Esempio 11: Pulsante con effetto shake interattivo */}
+        <div className="col-md-6">
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">Effetto Shake Interattivo</h5>
+              <p className="card-text">Premi il pulsante per attivare l'effetto shake.</p>
+              <HoldButton 
+                onHold={() => {
+                  // Attiva l'effetto shake immediatamente
+                  const button = document.querySelector('.shake-interactive');
+                  if (button) {
+                    button.classList.add('error');
+                    setTimeout(() => button.classList.remove('error'), 600);
+                  }
+                  console.log('Effetto shake interattivo attivato!');
+                }} 
+                holdTime={500} 
+                className="btn btn-danger shake-interactive"
+                animationStyle="shake"
+              >
+                Premi per Shake
+              </HoldButton>
+            </div>
+          </div>
+        </div>
+        
+        {/* Esempio 12: Pulsante con effetto shake avanzato */}
+        <div className="col-md-6">
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">Effetto Shake Avanzato</h5>
+              <p className="card-text">Un effetto shake più intenso che si attiva immediatamente.</p>
+              <HoldButton 
+                onHold={() => {
+                  console.log('Effetto shake avanzato attivato!');
+                  // Attiva l'effetto shake immediatamente
+                  const button = document.querySelector('.shake-advanced');
+                  if (button) {
+                    button.classList.add('error');
+                    setTimeout(() => button.classList.remove('error'), 800);
+                  }
+                }} 
+                holdTime={800} 
+                className="btn btn-danger shake-advanced"
+                animationStyle="shake"
+              >
+                Shake Avanzato
+              </HoldButton>
+            </div>
+          </div>
+        </div>
+        
         {/* Esempio 8: Pulsante con stile personalizzato */}
         <div className="col-md-6">
           <div className="card">
@@ -206,7 +302,7 @@ const HoldButtonExample = () => {
   holdTime={1000} // Tempo in ms (opzionale, default: 1000)
   className="btn btn-primary" // Classi CSS (opzionale)
   style={{ /* stili inline */ }} // Stili inline (opzionale)
-  animationStyle="default" // Stile animazione: default, ripple, bounce, shake, glow, circular
+  animationStyle="default" // Stile animazione: default, ripple, bounce, shake, glow, circular, particles
   enableVibration={false} // Abilita vibrazione al completamento (opzionale, default: false)
 >
   Testo del Pulsante

@@ -48,6 +48,13 @@
   20%, 40%, 60%, 80% { transform: translateX(5px); }
 }
 
+/* Animazione shake migliorata per feedback più intenso */
+@keyframes shake-improved {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-8px) rotate(-2deg); }
+  20%, 40%, 60%, 80% { transform: translateX(8px) rotate(2deg); }
+}
+
 /* Animazione bounce per completamento */
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% { transform: translateY(0) scale(1); }
@@ -64,15 +71,71 @@
 
 /* Animazione glow per successo */
 @keyframes success-glow {
+  0% { box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); filter: brightness(1); }
+  50% { box-shadow: 0 0 20px rgba(40, 167, 69, 0.8); filter: brightness(1.2); }
+  100% { box-shadow: 0 0 10px rgba(40, 167, 69, 0.6); filter: brightness(1.1); }
+}
+
+/* Animazioni per le particelle */
+@keyframes particle-animation {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+    transform: translate(
+      calc(-50% + var(--x-offset) * 30px),
+      calc(-50% + var(--y-offset) * 30px)
+    ) scale(0.7);
+  }
+  100% {
+    transform: translate(
+      calc(-50% + var(--x-offset) * 80px),
+      calc(-50% + var(--y-offset) * 80px)
+    ) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Stile per le particelle */
+.hold-button.particles-style .particle {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
+  z-index: 10;
+}
+
+@keyframes success-glow {
   0% { box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); }
   50% { box-shadow: 0 0 20px rgba(40, 167, 69, 0.8); }
   100% { box-shadow: 0 0 10px rgba(40, 167, 69, 0.6); }
 }
 
-/* Animazione di rotazione per il progresso circolare */
+/* Animazioni per il progresso circolare migliorato */
 @keyframes rotate {
   0% { transform: translate(-50%, -50%) rotate(0deg); }
   100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes pulse-circle {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.85; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes progress-dot-pulse {
+  0% { opacity: 0.4; r: 1.5; }
+  50% { opacity: 1; r: 2.5; }
+  100% { opacity: 0.4; r: 1.5; }
+}
+
+@keyframes checkmark-animation {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 /* Stili base per il pulsante */
@@ -80,6 +143,41 @@
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
+}
+
+/* Stili per il progresso circolare migliorato */
+.progress-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 2px rgba(0, 123, 255, 0.3));
+}
+
+.progress-circle svg {
+  overflow: visible;
+}
+
+.progress-circle svg.pulse-circle {
+  animation: pulse-circle 2s infinite ease-in-out;
+}
+
+.progress-circle .circle-background {
+  opacity: 0.5;
+}
+
+.progress-circle .progress-indicator {
+  stroke-linecap: round;
+}
+
+.progress-circle .progress-dot {
+  animation: progress-dot-pulse 1.5s infinite;
+  filter: drop-shadow(0 0 2px white);
+}
+
+.progress-circle .checkmark-animation {
+  display: inline-block;
+  animation: checkmark-animation 0.5s ease-out forwards;
 }
 
 /* Stile quando il pulsante è in stato di pressione */
@@ -140,6 +238,27 @@
   animation: shake 0.5s ease-in-out;
 }
 
+/* Stile shake avanzata */
+/* Animazione shake avanzata per un effetto più intenso */
+@keyframes shake-advanced {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  10%, 50%, 90% { transform: translateX(-12px) rotate(-3deg); }
+  30%, 70% { transform: translateX(12px) rotate(3deg); }
+}
+
+/* Stile shake migliorato */
+.hold-button.shake-improved-style.error {
+  animation: shake-improved 0.6s ease-in-out;
+}
+
+/* Stile shake avanzato */
+.hold-button.shake-advanced.error {
+  animation: shake-advanced 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform-origin: center;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
 /* Stile glow per evidenziare */
 .hold-button.glow-style.holding {
   animation: glow 1.5s infinite;
@@ -147,6 +266,33 @@
 }
 
 .hold-button.glow-style.completed {
+  animation: success-glow 1s forwards;
+}
+
+/* Stile per effetto particellare */
+.hold-button.particles-style {
+  position: relative;
+  overflow: visible !important;
+}
+
+.hold-button.particles-style .particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.hold-button.particles-style .particle {
+  --x-offset: 0;
+  --y-offset: 0;
+  position: absolute;
+  animation: particle-animation 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.hold-button.particles-style.completed {
   animation: success-glow 1s forwards;
 }
 

@@ -97,6 +97,17 @@
   text-transform: uppercase;
 }
 
+.hamburger {
+  cursor: pointer;
+  display: none;
+  color: #333;
+}
+
+.hamburger:hover {
+  color: green;
+  transform: scale(1.1);
+}
+
 /* SETTAGGI VISUALIZZAZIONE LISTA O GRIGLIA*/
 .products-container {
   display: flex;
@@ -364,15 +375,7 @@
 
 
 /* Media queries */
-@media (max-width: 768px) {
-  .product-detail {
-    padding: 10px;
-    gap: 2rem; /* Riduce il gap su schermi piccoli */
-  }
-
-  .product-info {
-    max-width: 100%; /* Permette al testo di adattarsi alla larghezza */
-  }
+@media (max-width: 600px) {
 
   .product-image-container {
     max-width: 100%; /* L'immagine occupa tutta la larghezza */
@@ -455,10 +458,46 @@
   .breadcrumb-chevron {
     font-size: 0.8rem !important; 
   }
+
+  /*navbar hamburger menu*/
+  .hamburger {
+    display: block;
+  }
+
+  .menu-container {
+    display: none;
+    background-color: #e9fbe9;
+    padding: 1rem 0;
+  }
+
+  .menu-container.open {
+    display: block;
+  }
+
+  .nav.justify-content-center {
+    flex-direction: column !important;
+    align-items: flex-start;
+    padding-left: 1rem;
+  }
+
+  .nav-link {
+    padding: 10px 0;
+    font-size: 18px;
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: static;
+    box-shadow: none;
+  }
+
+  .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+  }
 }
 
 /* Per schermi medio-grandi (tablet, piccoli desktop) */
-@media (min-width: 769px) and (max-width: 1200px) {
+@media (min-width: 601px) and (max-width: 1024px) {
   .hero-container {
     height: 70vh;
     background-position: 55% 50%;
@@ -485,7 +524,7 @@
   
   /* Immagine prodotto */
   .product-image-container {
-    width: 400px; 
+    width: 400px; /* max-width: 400px;*/
   }
   
   .product-image {
@@ -509,41 +548,15 @@
     font-size: 1.2rem;
 
   }
-}
 
-@media (min-width: 768px) and (max-width: 1200px) {
-  .product-detail {
-    max-width: 1000px; /* Imposta una larghezza massima per i dispositivi intermedi */
-    gap: 3rem;
-  }
 
-  .product-info {
-    max-width: 65%;
-  }
-
-  .product-image-container {
-    max-width: 400px;
-
-  }
-  
-  /* Bottone di acquisto */
-  .btn-primary {
-    padding: 1rem 2rem;
-  }
-  
-  .products-card {
-    flex: 1 1 calc(25% - 20px); 
-    max-width: calc(25% - 20px);
-  }
-  
- 
 }
 
 
 
 /* Per schermi desktop (oltre 1200px) */
 
-@media (min-width: 1201px) {
+@media (min-width: 1025px) {
   .product-detail {
     gap: 4rem;
   }

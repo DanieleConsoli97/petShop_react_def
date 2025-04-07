@@ -373,6 +373,11 @@
   color: green !important; /* Colore verde per le frecce */
 }
 
+.animation {
+  animation: fadeIn 0.5s ease-in-out;
+  width: 300px
+}
+
 
 /* Media queries */
 @media (max-width: 768px) {

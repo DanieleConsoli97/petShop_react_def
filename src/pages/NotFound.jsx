@@ -8,12 +8,12 @@ function NotFound() {
             <div className="row justify-content-center ">
                 <div className="col-md-8">
                     <img 
-                        src="/PawPlanet.logo(3).png" 
-                        alt="PawPlanet Logo" 
-                        className="img-fluid mb-4" 
-                        style={{ maxWidth: '150px' }}
+                        src="/Animation - 1744018340396.gif" 
+                        alt="animation-not-found" 
+                        className="img-fluid mb-4 animation" 
+                        
                     />
-                    <h1 className="display-4 text-danger mb-3">404 - Pagina non trovata</h1>
+                    <h1 className="display-4 text-danger mb-3">Pagina non trovata</h1>
                     <p className="lead mb-4">La pagina <strong>{location.pathname}</strong> che stai cercando non esiste o è stata spostata.</p>
                     <p className="mb-4">Puoi tornare alla home page.</p>
                     <div className="mt-4">

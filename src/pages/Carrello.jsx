@@ -1,6 +1,9 @@
 import React from 'react';
 import { useGlobalContext } from '../context/GlobalContext';
 import { Link } from 'react-router-dom';
+import HoldButton from '../components/HoldButton';
+
+import { TbShoppingCartX } from "react-icons/tb";
 
 function Carrello() {
   const { carrello, rimuoviDalCarrello, svuotaCarrello, aggiornaQuantita } = useGlobalContext();
@@ -63,6 +66,13 @@ function Carrello() {
             <button className="checkout-btn">Completa ordine</button>
           </Link>
           <button className="empty-cart-btn" onClick={svuotaCarrello}>Svuota Carrello</button>
+          <HoldButton 
+                onHold={svuotaCarrello} 
+                holdTime={2000}
+                className="empty-cart-btn"
+              >
+               Tieni premuto per svuotare <TbShoppingCartX />
+              </HoldButton>
         </div>
       )}
     </div>

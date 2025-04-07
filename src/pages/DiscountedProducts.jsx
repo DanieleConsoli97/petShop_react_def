@@ -29,13 +29,13 @@ function DiscountedProducts() {
     }, []);
 
     if (loading) return (
-        
-        <div 
-        className = "container d-flex justify-content-center align-items-center" 
-        style = {{ height: '100vh' }}
+
+        <div
+            className="container d-flex justify-content-center align-items-center"
+            style={{ height: '100vh' }}
         >
-    <p>Caricamento...</p>
-    </div >
+            <p>Caricamento...</p>
+        </div >
     );
     if (error) return <p>Errore: {error}</p>;
 
@@ -60,6 +60,10 @@ function DiscountedProducts() {
                         {discountedProducts.map(product => (
                             <div className="col" key={product.id}>
                                 <div className="card h-100">
+                                    <div className='promotion'>
+                                        <span>Offerta! </span>
+                                        <span>{product.discounted_price}</span>
+                                    </div>
                                     <img
                                         src={product.image_url}
                                         className="card-img-top"
@@ -67,9 +71,8 @@ function DiscountedProducts() {
                                     />
                                     <div className="card-body">
                                         <h5 className="card-title">{product.name}</h5>
-                                        <p className="card-text"><del>{product.price} €</del></p>
-                                        <p className="card-text text-success" style={{ fontWeight: 'bold' }}>
-                                            {product.discounted_price} €
+                                        <p className="card-text" style={{ fontWeight: 'bold' }}>
+                                            <span>Prezzo precedente: <del>{product.price} €</del></span>
                                         </p>
                                         <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                                             Vedi Dettagli
@@ -93,8 +96,8 @@ function DiscountedProducts() {
                                 style={{
                                     borderRadius: '8px',
                                     marginBottom: '30px',  // Distanza tra le card
-                                    padding: '20px',  
-                                    boxShadow: '0 6px 8px rgba(0,0,0,0.1)',  
+                                    padding: '20px',
+                                    boxShadow: '0 6px 8px rgba(0,0,0,0.1)',
                                 }}
                             >
                                 {/* Immagine del prodotto */}

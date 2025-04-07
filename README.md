@@ -45,6 +45,9 @@ PawPlanet è un e-commerce completo per prodotti e accessori per animali domesti
   - 🎠 Carousel per presentazione prodotti in evidenza
   - 🗺️ Breadcrumb per navigazione contestuale
   - 🎨 Tema coerente con colori verdi e arancioni
+  - 🔄 HoldButton con animazione circolare per azioni prolungate
+  - 🔔 Sistema di notifiche Toast unificato con feedback visivo
+  - 🚫 Pagina 404 migliorata con animazione personalizzata
 
 ## 📁 Struttura del Progetto
 
@@ -103,10 +106,12 @@ petShop_react_def/
 L'applicazione utilizza React Context API per la gestione dello stato globale:
 
 - 🛒 **Carrello**: Gestione completa del carrello con persistenza in localStorage
+- 🔔 **Notifiche**: Sistema unificato di Toast per feedback all'utente
 - 🔄 **Funzioni principali**:
   - `aggiungiAlCarrello`: Aggiunge prodotti al carrello o incrementa la quantità
   - `rimuoviDalCarrello`: Rimuove prodotti dal carrello
   - `svuotaCarrello`: Svuota completamente il carrello
+  - `showToastMessage`: Mostra notifiche contestuali (success, warning, info)
 
 ## 🚀 Come Iniziare
 
@@ -161,6 +166,8 @@ L'applicazione utilizza JSON Server come mock backend, con i seguenti endpoints:
 - `GET http://localhost:3000/prodotti/accessori` - Filtra accessori
 - `GET http://localhost:3000/prodotti/promozioni` - Filtra prodotti in promozione
 - `GET http://localhost:3000/prodotti/search/:term` - Ricerca prodotti
+- `POST http://localhost:3000/prodotti/orders` - Crea un nuovo ordine
+- `POST http://localhost:3000/prodotti/validateDiscountCode` - Valida codici sconto
 
 ## 🎨 UI/UX Design
 
@@ -187,10 +194,11 @@ L'applicazione utilizza JSON Server come mock backend, con i seguenti endpoints:
 - 👤 Gestione profilo utente
 - ⭐ Sistema di recensioni prodotti
 - 💳 Integrazione pagamenti reali
-- 💝 Wishlist prodotti
+- 💝 Wishlist prodotti avanzata
 - ⚡ Ottimizzazione performance
 - 🧪 Test automatizzati
 - 📱 App mobile con React Native
+- 📊 Dashboard amministrativa
 
 ## 📄 Licenza
 

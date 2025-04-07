@@ -30,17 +30,18 @@ function ProductList() {
     }, []);
 
     if (loading) return (
-        
-        <div 
-        className = "container d-flex justify-content-center align-items-center" 
-        style = {{ height: '100vh' }}
+
+        <div
+            className="container d-flex justify-content-center align-items-center"
+            style={{ height: '100vh' }}
         >
-    <p>Caricamento...</p>
-    </div >
+            <p>Caricamento...</p>
+        </div >
     );
 
-if (error) return <p>Errore: {error}</p>;
+    if (error) return <p>Errore: {error}</p>;
 
+<<<<<<< HEAD
 return (
     <>
          <h1 className='text-center my-4'>Lista Prodotti</h1>
@@ -106,6 +107,35 @@ return (
         )}
     </>
 );
+=======
+    return (
+        <>
+            <h1 className='text-center my-4'>Lista Prodotti</h1>
+            <div className="container d-flex justify-content-end mb-3">
+                <button className={`btn btn-outline-success me-2 ${isGridView ? 'active' : ''}`} onClick={() => setIsGridView(true)}>
+                    <BsFillGrid3X3GapFill />
+                </button>
+                <button className={`btn btn-outline-success ${!isGridView ? 'active' : ''}`} onClick={() => setIsGridView(false)}>
+                    <GrSort />
+                </button>
+            </div>
+            <div className={`products-container ${isGridView ? 'grid-view' : 'list-view'}`}>
+                {products.map(product => (
+                    <div className={`products-card ${isGridView ? '' : 'list-item'}`} key={product.id}>
+                        <img src={product.image_url} className={`card-img-top ${isGridView ? '' : 'list-image'}`} alt={product.name} />
+                        <div className={`card-body ${isGridView ? '' : 'list-body'}`}>
+                            <h5 className="card-title">{product.name}</h5>
+                            {product.discounted_price !== null ? <p className="card-text">{product.discounted_price}€</p> : <p className="price">{product.price}€</p>}
+                            <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
+                                Vedi Dettagli
+                            </Link>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </>
+    );
+>>>>>>> 15c7d4b6f9c3bda42d1be9b9c8e4d12c7e4f46ec
 }
 
 export default ProductList;

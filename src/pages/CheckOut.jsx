@@ -34,7 +34,8 @@ const CheckOut = () => {
         indirizzo: '',
         citta: '',
         regione: '',
-        cap: ''
+        cap: '',
+        codiceFiscale: ''
     });
 
     // Handler per l'aggiornamento dei dati di spedizione
@@ -61,16 +62,21 @@ const CheckOut = () => {
 
     // Funzioni di validazione per i campi del form
     const validateEmail = (email) => {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+€/;
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
     };
 
     const validateCAP = (cap) => {
-        return /^\d{5}€/.test(cap);
+        return /^\d{5}$/.test(cap);
     };
 
     const validateName = (name) => {
-        return /^[A-Za-zÀ-ÿ\s]+€/.test(name);
+        return /^[A-Za-zÀ-ÿ\s]+$/.test(name);
+    };
+    
+    const validateCodiceFiscale = (cf) => {
+        // Validazione semplificata del codice fiscale italiano (16 caratteri alfanumerici)
+        return /^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$/i.test(cf);
     };
 
     // Funzione principale di validazione del form
@@ -105,8 +111,29 @@ const CheckOut = () => {
 
         // Validazione campi fatturazione se necessario
         if (isBillingDifferent) {
+            if (!billingData.nome.trim()) {
+                newErrors.billingNome = "Il nome è obbligatorio";
+            } else if (!validateName(billingData.nome)) {
+                newErrors.billingNome = "Il nome può contenere solo lettere e spazi";
+            }
+            if (!billingData.cognome.trim()) {
+                newErrors.billingCognome = "Il cognome è obbligatorio";
+            } else if (!validateName(billingData.cognome)) {
+                newErrors.billingCognome = "Il cognome può contenere solo lettere e spazi";
+            }
             if (!billingData.indirizzo.trim()) newErrors.billingIndirizzo = "L'indirizzo di fatturazione è obbligatorio";
-            if (!billingData.citta.trim()) newErrors.billingCitta = "Il codice fiscale/P.IVA è obbligatorio";
+            if (!billingData.citta.trim()) newErrors.billingCitta = "La città è obbligatoria";
+            if (!billingData.regione) newErrors.billingRegione = "La regione è obbligatoria";
+            if (!billingData.cap.trim()) {
+                newErrors.billingCap = "Il CAP è obbligatorio";
+            } else if (!validateCAP(billingData.cap)) {
+                newErrors.billingCap = "Il CAP deve essere composto da 5 numeri";
+            }
+            if (!billingData.codiceFiscale.trim()) {
+                newErrors.billingCodiceFiscale = "Il codice fiscale è obbligatorio";
+            } else if (!validateCodiceFiscale(billingData.codiceFiscale)) {
+                newErrors.billingCodiceFiscale = "Inserisci un codice fiscale valido (16 caratteri)";
+            }
         }
 
         setErrors(newErrors);
@@ -126,7 +153,14 @@ const CheckOut = () => {
 
             // Preparazione dei dati per l'invio
             const shippingAddressFormatted = formatAddress(shippingData);
-            const billingAddressFormatted = isBillingDifferent ? billingData.indirizzo : shippingAddressFormatted;
+            
+            // Formattazione dell'indirizzo di fatturazione completo se diverso
+            let billingAddressFormatted;
+            if (isBillingDifferent) {
+                billingAddressFormatted = `${billingData.indirizzo}, ${billingData.cap} ${billingData.citta}, ${billingData.regione}, ${shippingData.paese}`;
+            } else {
+                billingAddressFormatted = shippingAddressFormatted;
+            }
 
             // Costruzione dell'oggetto ordine 
             const orderData = {
@@ -459,33 +493,67 @@ const CheckOut = () => {
                             </div>
 
                             <hr className="my-4" />
-
-                            <div className="form-check">
-                                <input
-                                    type="checkbox"
-                                    className="form-check-input"
-                                    id="same-address"
-                                    checked={isBillingDifferent}
-                                    onChange={(e) => setIsBillingDifferent(e.target.checked)}
-                                />
-                                <label className="form-check-label">
-                                    L'indirizzo di spedizione è diverso dall'indirizzo di fatturazione?
-                                </label>
-                            </div>
+                              
+                              <div className="form-check mb-3">
+                                  <input 
+                                      type="checkbox" 
+                                      className="form-check-input" 
+                                      id="billing-different" 
+                                      checked={isBillingDifferent}
+                                      onChange={() => setIsBillingDifferent(!isBillingDifferent)}
+                                  />
+                                  <label className="form-check-label" htmlFor="billing-different">
+                                      Indirizzo di fatturazione diverso da quello di spedizione
+                                  </label>
+                              </div>
 
                             {isBillingDifferent && (
-                                <div className="billing-address mt-4">
-                                    <h4 className="mb-3">Indirizzo di fatturazione</h4>
+                                <div className="billing-section mt-4">
+                                    <h4 className="mb-3">Dati di fatturazione</h4>
                                     <div className="row g-3">
-
-                                        <div className="col-lg-6 col-md-12 col-sm-12">
-                                            <label className="form-label">Indirizzo di fatturazione</label>
+                                        <div className="col-sm-6">
+                                            <label className="form-label">Nome</label>
+                                            <input
+                                                type="text"
+                                                className={`form-control ${errors.billingNome ? 'is-invalid' : ''}`}
+                                                name="nome"
+                                                value={billingData.nome}
+                                                onChange={handleBillingChange}
+                                                required
+                                            />
+                                            {errors.billingNome && (
+                                                <div className="invalid-feedback">
+                                                    {errors.billingNome}
+                                                </div>
+                                            )}
+                                        </div>
+                                        
+                                        <div className="col-sm-6">
+                                            <label className="form-label">Cognome</label>
+                                            <input
+                                                type="text"
+                                                className={`form-control ${errors.billingCognome ? 'is-invalid' : ''}`}
+                                                name="cognome"
+                                                value={billingData.cognome}
+                                                onChange={handleBillingChange}
+                                                required
+                                            />
+                                            {errors.billingCognome && (
+                                                <div className="invalid-feedback">
+                                                    {errors.billingCognome}
+                                                </div>
+                                            )}
+                                        </div>
+                                        
+                                        <div className="col-12">
+                                            <label className="form-label">Indirizzo</label>
                                             <input
                                                 type="text"
                                                 className={`form-control ${errors.billingIndirizzo ? 'is-invalid' : ''}`}
                                                 name="indirizzo"
                                                 value={billingData.indirizzo}
                                                 onChange={handleBillingChange}
+                                                placeholder="via ..."
                                                 required
                                             />
                                             {errors.billingIndirizzo && (
@@ -494,84 +562,9 @@ const CheckOut = () => {
                                                 </div>
                                             )}
                                         </div>
-                                        <div className="col-md-6">
-                                            <label className="form-label">Paese</label>
-                                            <select
-                                                className={`form-select ${errors.paese ? 'is-invalid' : ''}`}
-                                                name="paese"
-                                                value={shippingData.paese}
-                                                onChange={handleShippingChange}
-                                                required
-                                            >
-                                                <option value="">Scegli Paese</option>
-                                                <option value="Italia">Italia</option>
-                                            </select>
-                                            {errors.paese && (
-                                                <div className="invalid-feedback">
-                                                    {errors.paese}
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        <div className="col-md-6">
-                                            <label className="form-label">Regione</label>
-                                            <select
-                                                className={`form-select ${errors.regione ? 'is-invalid' : ''}`}
-                                                name="regione"
-                                                value={shippingData.regione}
-                                                onChange={handleShippingChange}
-                                                required
-                                            >
-                                                <option value="">Scegli Regione</option>
-                                                {regioniItaliane?.map((regione, index) => (
-                                                    <option key={index} value={regione.nome}>
-                                                        {regione.nome}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                            {errors.regione && (
-                                                <div className="invalid-feedback">
-                                                    {errors.regione}
-                                                </div>
-                                            )}
-                                        </div>
-
+                                        
                                         <div className="col-md-6">
                                             <label className="form-label">Città</label>
-                                            <input
-                                                type="text"
-                                                className={`form-control ${errors.citta ? 'is-invalid' : ''}`}
-                                                name="citta"
-                                                value={shippingData.citta}
-                                                onChange={handleShippingChange}
-                                                required
-                                            />
-                                            {errors.citta && (
-                                                <div className="invalid-feedback">
-                                                    {errors.citta}
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        <div className="col-md-6">
-                                            <label className="form-label">Codice Postale</label>
-                                            <input
-                                                type="text"
-                                                className={`form-control ${errors.cap ? 'is-invalid' : ''}`}
-                                                name="cap"
-                                                value={shippingData.cap}
-                                                onChange={handleShippingChange}
-                                                required
-                                                maxLength={5}
-                                            />
-                                            {errors.cap && (
-                                                <div className="invalid-feedback">
-                                                    {errors.cap}
-                                                </div>
-                                            )}
-                                        </div>
-                                        <div className="col-lg-6 col-md-12 col-sm-12">
-                                            <label className="form-label">Codice fiscale o partita IVA</label>
                                             <input
                                                 type="text"
                                                 className={`form-control ${errors.billingCitta ? 'is-invalid' : ''}`}
@@ -586,11 +579,79 @@ const CheckOut = () => {
                                                 </div>
                                             )}
                                         </div>
+                                        
+                                        <div className="col-md-6">
+                                            <label className="form-label">Regione</label>
+                                            <select
+                                                className={`form-select ${errors.billingRegione ? 'is-invalid' : ''}`}
+                                                name="regione"
+                                                value={billingData.regione}
+                                                onChange={handleBillingChange}
+                                                required
+                                            >
+                                                <option value="">Scegli Regione</option>
+                                                {regioniItaliane?.map((regione, index) => (
+                                                    <option key={`billing-${index}`} value={regione.nome}>
+                                                        {regione.nome}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                            {errors.billingRegione && (
+                                                <div className="invalid-feedback">
+                                                    {errors.billingRegione}
+                                                </div>
+                                            )}
+                                        </div>
+                                        
+                                        <div className="col-md-6">
+                                            <label className="form-label">CAP</label>
+                                            <input
+                                                type="text"
+                                                className={`form-control ${errors.billingCap ? 'is-invalid' : ''}`}
+                                                name="cap"
+                                                value={billingData.cap}
+                                                onChange={handleBillingChange}
+                                                required
+                                            />
+                                            {errors.billingCap && (
+                                                <div className="invalid-feedback">
+                                                    {errors.billingCap}
+                                                </div>
+                                            )}
+                                        </div>
+                                        
+                                        <div className="col-12">
+                                            <label className="form-label">Codice Fiscale</label>
+                                            <input
+                                                type="text"
+                                                className={`form-control ${errors.billingCodiceFiscale ? 'is-invalid' : ''}`}
+                                                name="codiceFiscale"
+                                                value={billingData.codiceFiscale}
+                                                onChange={handleBillingChange}
+                                                placeholder="Inserisci il codice fiscale"
+                                                required
+                                                maxLength={16}
+                                            />
+                                            {errors.billingCodiceFiscale && (
+                                                <div className="invalid-feedback">
+                                                    {errors.billingCodiceFiscale}
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             )}
                             <hr className="my-4" />
-                            <button className="w-100 btn btn-primary btn-lg" type="submit" >Procedi con l'ordine</button>
+                            
+                            {errors.submit && (
+                              <div className="alert alert-danger mb-3" role="alert">
+                                  {errors.submit}
+                              </div>
+                            )}
+                            
+                            <button className="w-100 btn btn-primary btn-lg" type="submit">
+                                Completa l'ordine
+                            </button>
                         </form>
                     </div>
 

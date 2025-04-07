@@ -110,8 +110,7 @@ function ProductDetail() {
             <h1>{product.name}</h1>
             <h6>Brand: {product.brand}</h6>
             <p>{product.description}</p>
-            <p className="price">{product.price}€</p>
-
+            {product.discounted_price !== null ? <p className="card-text">{product.discounted_price}€</p> : <p className="price">{product.price}€</p>}
             {/* Selettore quantità */}
             <div className="quantity-container">
               <button className="quantity-btn" onClick={handleDecrease}>-</button>

@@ -21,7 +21,7 @@ const SearchForm = () => {
     };
 
     return (
-        <div onSubmit={handleSearchSubmit} className="mx-auto search-container">
+        <div onSubmit={handleSearchSubmit} className="ms-auto search-container">
             <form className="d-flex">
                 <input
                     className="form-control me-2"

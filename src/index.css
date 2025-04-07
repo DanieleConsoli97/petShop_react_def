@@ -97,6 +97,17 @@
   text-transform: uppercase;
 }
 
+.hamburger {
+  cursor: pointer;
+  display: none;
+  color: #333;
+}
+
+.hamburger:hover {
+  color: green;
+  transform: scale(1.1);
+}
+
 /* SETTAGGI VISUALIZZAZIONE LISTA O GRIGLIA*/
 .products-container {
   display: flex;
@@ -364,20 +375,7 @@
 
 
 /* Media queries */
-@media (max-width: 768px) {
-  .product-detail {
-    padding: 10px;
-    gap: 2rem; /* Riduce il gap su schermi piccoli */
-  }
-
-  .product-info {
-    max-width: 100%; /* Permette al testo di adattarsi alla larghezza */
-  }
-
-  .product-image-container {
-    max-width: 100%; /* L'immagine occupa tutta la larghezza */
-  }
-
+@media (max-width: 600px) {
 
   .hero-container {
     height: 70vh;
@@ -396,12 +394,7 @@
   .hero-content h1 {
     display: none;
   }
-
-  .products-card {
-    flex: 1 1 100%; 
-    max-width: 100%;
-  }
-
+/* Sezione informazioni del prodotto */
   .products-card {
     flex: 1 1 100%; 
     max-width: 100%;
@@ -421,10 +414,11 @@
     justify-content: center;
     gap: 1rem;
   }
+
+  .product-image-container {
+    max-width: 100%; /* L'immagine occupa tutta la larghezza */
+  }
   
-  
-  
-  /* Sezione informazioni del prodotto */
   .product-info {
     max-width: 80%;
     display: flex;
@@ -447,18 +441,96 @@
     font-size: 1rem;
   }
   
-  .products-card {
-    flex: 1 1 100%; /* 1 card per riga */
-    max-width: 100%;
-  }
-  
   .breadcrumb-chevron {
     font-size: 0.8rem !important; 
   }
+
+  /*navbar hamburger menu*/
+  .hamburger {
+    display: block;
+  }
+
+  .menu-container {
+    display: none;
+    background-color: #e9fbe9;
+    padding: 1rem 0;
+  }
+
+  .menu-container.open {
+    display: block;
+  }
+
+  .nav.justify-content-center {
+    flex-direction: column !important;
+    align-items: flex-start;
+    padding-left: 1rem;
+  }
+
+  .nav-link {
+    padding: 10px 0;
+    font-size: 18px;
+  }
+
+  .search-container {
+    width: 100% !important;
+  }
+
+  /*se vogliamo che le categorie stiano nella parte destra del menu
+  .menu-container .container {
+    text-align: right;
+  }
+
+  .menu-container .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .menu-container .dropdown-menu {
+    text-align: right;
+    right: 0;
+    left: auto;
+  }
+
+  .menu-container .d-flex.flex-column {
+    align-items: flex-end !important;
+  }*/
+
+  .menu-container .d-flex.flex-column {
+    order: 2; /* Move search and icons below categories */
+    width: 100%;
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+  }
+
+  .menu-container .nav.flex-column {
+    order: 1; /* Categories appear first */
+    width: 100%;
+    }
+    .menu-container .container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  
+    .menu-container .mt-3.d-flex.gap-3 {
+      margin-top: 15px !important;
+    }
+    .dropdown-menu {
+      display: none;
+    }
+    .dropdown-menu.open {
+      display: block !important;
+      position: relative; /* o static, per evitare sovrapposizioni */
+      border: none; /* se non vuoi il bordo classico */
+      box-shadow: none; /* opzionale */
+    }
+  
 }
 
 /* Per schermi medio-grandi (tablet, piccoli desktop) */
-@media (min-width: 769px) and (max-width: 1200px) {
+@media (min-width: 601px) and (max-width: 1024px) {
   .hero-container {
     height: 70vh;
     background-position: 55% 50%;
@@ -485,7 +557,7 @@
   
   /* Immagine prodotto */
   .product-image-container {
-    width: 400px; 
+    width: 400px; /* max-width: 400px;*/
   }
   
   .product-image {
@@ -509,41 +581,15 @@
     font-size: 1.2rem;
 
   }
-}
 
-@media (min-width: 768px) and (max-width: 1200px) {
-  .product-detail {
-    max-width: 1000px; /* Imposta una larghezza massima per i dispositivi intermedi */
-    gap: 3rem;
-  }
 
-  .product-info {
-    max-width: 65%;
-  }
-
-  .product-image-container {
-    max-width: 400px;
-
-  }
-  
-  /* Bottone di acquisto */
-  .btn-primary {
-    padding: 1rem 2rem;
-  }
-  
-  .products-card {
-    flex: 1 1 calc(25% - 20px); 
-    max-width: calc(25% - 20px);
-  }
-  
- 
 }
 
 
 
 /* Per schermi desktop (oltre 1200px) */
 
-@media (min-width: 1201px) {
+@media (min-width: 1025px) {
   .product-detail {
     gap: 4rem;
   }

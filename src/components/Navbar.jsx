@@ -1,15 +1,29 @@
 import { FaShoppingCart, FaBars } from "react-icons/fa";
 import { FaBone } from "react-icons/fa6";
 import { useState, useEffect } from "react";
-import logo from '/PawPlanet.logo(3).png'
+import logo from '/PawPlanet.logo(3).png';
 import { Link, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext";
 import SearchForm from "./SearchForm";
 
-
-
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { carrello, wishList } = useGlobalContext();
+
+  const getCartCount = () => {
+    if (!carrello || carrello.length === 0) {
+      return null;
+    }
+    return carrello.length;
+  };
+
+  const getWishlistCount = () => {
+    if (!wishList || wishList.length === 0) {
+      return null;
+    }
+    return wishList.length;
+  };
+
   return (
     <>
       {/* Navbar principale con logo, barra di ricerca e carrello */}
@@ -25,8 +39,8 @@ function Navbar() {
             />
           </Link>
 
-           {/* HAMBURGER SOLO SU MOBILE */}
-           <FaBars
+          {/* HAMBURGER SOLO SU MOBILE */}
+          <FaBars
             className="hamburger d-md-none d-lg-none"
             size={28}
             onClick={() => setMenuOpen(!menuOpen)}
@@ -35,12 +49,22 @@ function Navbar() {
           <div className="d-none d-md-flex align-items-center flex-grow-1">
             <SearchForm />
             <div className="ms-auto">
-              <Link to={'/carrello'} className="cart-icon">
+              <Link to={'/carrello'} className="cart-icon position-relative">
+                {getCartCount() !== null && (
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                    {getCartCount()}
+                  </span>
+                )}
                 <FaShoppingCart size={30} />
               </Link>
             </div>
             <div className="mx-2">
-              <Link to={'/wishlist'} className="cart-icon">
+              <Link to={'/wishlist'} className="cart-icon position-relative">
+                {getWishlistCount() !== null && (
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                    {getWishlistCount()}
+                  </span>
+                )}
                 <FaBone size={30} />
               </Link>
             </div>
@@ -68,18 +92,18 @@ function Navbar() {
                 Cani
               </a>
               <ul className="dropdown-menu" aria-labelledby="caniDropdown">
-              <li>
+                <li>
                   <Link className="dropdown-item" to={'/prodotti/cani/'}>
                     Prodotti per cani
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to={'/prodotti/cani/cibo'} >
+                  <Link className="dropdown-item" to={'/prodotti/cani/cibo'}>
                     Cibo per cani
                   </Link>
                 </li>
                 <li>
-                  <Link to={'/prodotti/cani/giochi'} className="dropdown-item" >
+                  <Link to={'/prodotti/cani/giochi'} className="dropdown-item">
                     Giochi per cani
                   </Link>
                 </li>
@@ -97,7 +121,7 @@ function Navbar() {
                 Gatti
               </a>
               <ul className="dropdown-menu" aria-labelledby="gattiDropdown">
-              <li>
+                <li>
                   <Link className="dropdown-item" to={'/prodotti/gatti/'}>
                     Prodotti per gatti
                   </Link>
@@ -135,10 +159,20 @@ function Navbar() {
           <div className="d-flex flex-column align-items-start mb-3">
             <SearchForm />
             <div className="mt-3 d-flex gap-3">
-              <Link to={'/carrello'} className="cart-icon">
+              <Link to={'/carrello'} className="cart-icon position-relative">
+                {getCartCount() !== null && (
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                    {getCartCount()}
+                  </span>
+                )}
                 <FaShoppingCart size={30} />
               </Link>
-              <Link to={'/wishlist'} className="cart-icon">
+              <Link to={'/wishlist'} className="cart-icon position-relative">
+                {getWishlistCount() !== null && (
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                    {getWishlistCount()}
+                  </span>
+                )}
                 <FaBone size={30} />
               </Link>
             </div>

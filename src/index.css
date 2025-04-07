@@ -556,7 +556,7 @@
 /* Footer */
 
 .footer {
-  background-color: #D4A017;
+  background: linear-gradient(135deg, #6DBE45, #3D9C56); 
   color: white;
   font-family: 'Poppins', sans-serif;
   padding: 20px 0;
@@ -564,42 +564,45 @@
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  
 }
 
-/* Container che contiene le sezioni "Contattaci" e "Social" */
 .footer-container {
   display: flex;
   justify-content: space-between;
   padding: 0 20px;
   margin-bottom: 20px;
-  align-items: flex-start; /* Allineiamo gli elementi in alto */
+  align-items: flex-start;
+  
 }
 
 /* Sezione Contatti */
 .footer-contact {
   text-align: left;
-  width: 45%; /* Occupa il 45% della larghezza del footer */
-  padding-left: 80px; /* Distanza dal bordo sinistro */
+  width: 45%;
+  padding-left: 80px;
   display: flex;
-  flex-direction: column; /* Allinea verticalmente gli elementi */
+  flex-direction: column;
   gap: 10px;
   margin-top: 10px;
+  background-color: rgba(255, 255, 255, 0.1); 
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .footer-contact p {
   font-size: 16px;
-  margin: 5px 0; /* Aggiungi margine per migliorare l'allineamento */
-  color: #333;
+  margin: 5px 0;
+  color: #1E3A8A; 
   font-weight: bold;
-  display: flex; 
-  align-items: center; /* Centra verticalmente il contenuto */
 }
 
 .footer-contact a {
-  color: white;
+  color: white; 
   text-decoration: none;
-  display: inline-block; /* Assicura che i link non vadano a capo */
-  margin-left: 5px; /* Distanza tra il testo e il link */
+  display: inline-block;
+  margin-left: 5px;
 }
 
 .footer-contact a:hover {
@@ -609,71 +612,92 @@
 /* Sezione Social */
 .footer-social {
   text-align: right;
-  width: 45%; /* Occupa il 45% della larghezza del footer */
+  width: 45%;
   padding-right: 80px;
   margin-top: 10px;
+  background-color: rgba(255, 255, 255, 0.1); 
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .footer-social p {
   font-size: 16px;
-  margin: 5px 0; /* Aggiungi margine per migliorare l'allineamento */
-  color: #333;
+  margin: 5px 0;
+  color: #1E3A8A; 
+  margin-bottom: 15px;
+  
 }
 
 .footer-social a {
   font-size: 30px;
-  color: white;
+  color: white; 
   margin-left: 15px;
-  transition: color 0.3s ease;
+  transition: transform 0.3s ease, color 0.3s ease;
   text-decoration: none;
+  
 }
 
 .footer-social a:hover {
-  color: #28a745;
+  color: #FFD700; 
+  transform: scale(1.2); 
 }
 
-/* Copyright centrato in basso */
-.footer-bottom {
-  text-align: center;
-  padding-top: 20px;
-  font-size: 16px;
+
+/* icona-zampa */
+.footer-container:before {
+  content: "\1F43E"; 
+  font-size: 40px;
+  display: block;
+  margin: 0 auto 10px;
 }
 
 /* Media query per dispositivi mobili */
 @media (max-width: 768px) {
+  .footer {
+    padding: 40px 0; 
+  }
+
   .footer-container {
-    flex-direction: column; /* Imposta le sezioni in colonna */
-    align-items: center; /* Centra le sezioni */
+    flex-direction: column; 
+    align-items: center; 
   }
 
   .footer-contact,
   .footer-social {
     width: 90%; /* Le sezioni occupano il 90% della larghezza */
-    text-align: center; /* Centra il testo */
-    padding: 0; /* Rimuove il padding */
-    margin-bottom: 20px; /* Distanza tra le sezioni */
+    text-align: center; 
+    padding: 0; 
+    margin-bottom: 20px; 
+    padding-left: 15px;
+    padding-bottom: 5px;
+    padding-top: 5px;
   }
 
   .footer-contact p {
     margin-left: 0;
     margin-right: 0;
-    font-size: 14px; /* Riduce la dimensione del font su dispositivi mobili */
+    font-size: 14px; 
+    text-align: left; 
   }
 
   .footer-contact a {
-    margin-left: 0; /* Rimuove il margine sinistro nei link */
-    margin-bottom: 5px; /* Aggiunge spazio tra i link */
+    margin-left: 0; 
+    margin-bottom: 5px; 
   }
 
   .footer-social {
-    margin-top: 20px; /* Aggiunge un margine in alto per separare dalle altre sezioni */
+    margin-top: 20px; 
+  }
+
+  .footer-social a {
+    font-size: 25px;
+    margin-left: 10px;
+    padding: 8px; 
   }
 }
 
 
-
-
-/* Carrello.css */
+/* Carrello-css */
 
 /* Stile per il contenitore dei bottoni */
 .button-container {
@@ -697,22 +721,22 @@
 
 /* Stile per il bottone 'Vai alla Pagina di Checkout' */
 .button-container .checkout-btn {
-  background-color: #28a745; /* Bottone verde */
+  background-color: #28a745; 
   color: white;
 }
 
 .button-container .checkout-btn:hover {
-  background-color: #218838; /* Colore verde più scuro quando hover */
+  background-color: #218838; 
 }
 
 /* Stile per il bottone 'Svouta Carrello' */
 .button-container .empty-cart-btn {
-  background-color: #dc3545; /* Bottone rosso */
+  background-color: #dc3545; 
   color: white;
 }
 
 .button-container .empty-cart-btn:hover {
-  background-color: #c82333; /* Colore rosso più scuro quando hover */
+  background-color: #c82333; 
 }
 
 .button-container .checkout-btn{

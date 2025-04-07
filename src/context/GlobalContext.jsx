@@ -69,6 +69,7 @@ const GlobalProvider = ({ children }) => {
         setCarrello(carrello.filter((item) => item.slug !== prodottoSlug));
     };
 
+
     const rimuoviDallaWishList = (prodottoSlug) => {
         setWishList(wishList.filter((item) => item.slug !== prodottoSlug));
     };
@@ -108,6 +109,10 @@ const GlobalProvider = ({ children }) => {
         handleShowToast();
     };
 
+    const handleQuantityChange = (slug, quantity) => {
+        setCarrello(carrello.map((item) => item.slug === slug ? { ...item, quantity } : item));
+    }
+
 
 
     const value = {
@@ -116,6 +121,7 @@ const GlobalProvider = ({ children }) => {
         rimuoviDalCarrello,
         svuotaCarrello,
         setCarrello, // Aggiunto per eventuali modifiche esterne
+        handleQuantityChange,
         wishList,
         aggiungiAllaWishList,
         rimuoviDallaWishList,

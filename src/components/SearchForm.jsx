@@ -1,28 +1,61 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const SearchForm = () => {
-    const [searchTerm, setSearchTerm] = useState(''); // Stato per memorizzare il termine di ricerca
-    const navigate = useNavigate(); // Hook per navigare tramite React Router
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    const [showResults, setShowResults] = useState(false);
+    const [products, setProducts] = useState([]);
 
-    // Gestore dell'evento di cambio del campo di input
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        fetch('http://localhost:3000/prodotti')
+            .then(response => response.json())
+            .then(data => setProducts(data))
+            .catch(error => console.error('Errore nel recupero dei prodotti:', error));
+    }, []);
+
     const handleInputChange = (e) => {
-        setSearchTerm(e.target.value);
-    };
+        const value = e.target.value;
+        setSearchTerm(value);
+        setShowResults(true);
 
-    // Gestore dell'evento di submit del form
-    const handleSearchSubmit = (e) => {
-        e.preventDefault(); // Previeni il comportamento di submit predefinito
-        if (searchTerm.trim()) {
-            // Naviga alla pagina dei risultati aggiungendo il termine di ricerca nell'URL
-            navigate(`prodotti/search/${searchTerm}`);
-            setSearchTerm('');
+        if (value.trim()) {
+            const filteredResults = products.filter(product =>
+                product.name.toLowerCase().includes(value.toLowerCase()) ||
+                product.description.toLowerCase().includes(value.toLowerCase())
+            );
+            setSearchResults(filteredResults);
+        } else {
+            setSearchResults([]);
         }
     };
 
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        if (searchTerm.trim()) {
+            navigate(`prodotti/search/${searchTerm}`);
+            setSearchTerm('');
+            setShowResults(false);
+        }
+    };
+
+    const handleProductClick = (slug) => {
+        navigate(`/prodotti/${slug}`);
+        setShowResults(false);
+    };
+
+    useEffect(() => {
+        if (location.pathname.startsWith('/prodotti/search/')) {
+            setShowResults(false);
+        }
+    }, [location]);
+
     return (
-        <div onSubmit={handleSearchSubmit} className="ms-auto search-container">
-            <form className="d-flex">
+        <div className="ms-auto search-container">
+            <form onSubmit={handleSearchSubmit} className="d-flex">
                 <input
                     className="form-control me-2"
                     type="search"
@@ -35,6 +68,19 @@ const SearchForm = () => {
                     Cerca
                 </button>
             </form>
+            {showResults && searchResults.length > 0 && (
+                <div className="search-results-dropdown">
+                    {searchResults.map(result => (
+                        <div
+                            key={result.id}
+                            className="search-result-item"
+                            onClick={() => handleProductClick(result.slug)}
+                        >
+                            {result.name}
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

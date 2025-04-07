@@ -278,10 +278,48 @@
 /* BREADCRUMB */
 .breadcrumb-chevron {
   background-color: #F9F5EC !important;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
-  width: 80% !important;
+  width: 100% !important;
   margin: 0 auto !important;
+}
+
+/* Banner styles */
+.banner-wrapper {
+  width: 100%;
+  padding: 1rem;
+  background-color: #fff;
+}
+
+.banner-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.banner-image {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+
+/*lista prodotti visualizzazione in lista */
+.btn-success {
+  background: #D4A017 !important;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border: none !important;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.btn-succes:hover {
+  background: #e0a800 !important;
 }
 
 /* CONTENITORE DETTAGLIO PRODOTTO */
@@ -291,7 +329,7 @@
   margin: 0 auto;
   /* Assicura che il contenitore sia centrato */
   border-radius: 10px;
-  max-width: 1200px;
+  max-width: 1400px;
   /* Limita la larghezza massima per evitare allungamenti */
 }
 
@@ -394,7 +432,6 @@
 /* Bottoni arancioni */
 .btn-primary {
   background: #D4A017 !important;
-  /* Bottone arancione */
   font-weight: bold;
   padding: 0.75rem 1.5rem;
   border: none !important;
@@ -422,6 +459,11 @@
 
 /* Media queries */
 @media (max-width: 768px) {
+
+  .banner-image {
+    max-height: 150px;
+
+  }
 
   .hero-container {
     height: 70vh;
@@ -581,6 +623,14 @@
     /* se non vuoi il bordo classico */
     box-shadow: none;
     /* opzionale */
+  }
+
+  .row.g-0 {
+    flex-direction: column;
+  }
+
+  .col-md-4 img {
+    height: 200px !important;
   }
 
 }

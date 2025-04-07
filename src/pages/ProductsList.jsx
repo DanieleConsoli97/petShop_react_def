@@ -43,7 +43,7 @@ if (error) return <p>Errore: {error}</p>;
 
 return (
     <>
-        <h1 className='text-center my-4'>Lista Prodotti</h1>
+         <h1 className='text-center my-4'>Lista Prodotti</h1>
         <div className="container d-flex justify-content-end mb-3">
             <button className={`btn btn-outline-success me-2 ${isGridView ? 'active' : ''}`} onClick={() => setIsGridView(true)}>
                 <BsFillGrid3X3GapFill />
@@ -52,20 +52,58 @@ return (
                 <GrSort />
             </button>
         </div>
-        <div className={`products-container ${isGridView ? 'grid-view' : 'list-view'}`}>
-            {products.map(product => (
-                <div className={`products-card ${isGridView ? '' : 'list-item'}`} key={product.id}>
-                    <img src={product.image_url} className={`card-img-top ${isGridView ? '' : 'list-image'}`} alt={product.name} />
-                    <div className={`card-body ${isGridView ? '' : 'list-body'}`}>
-                        <h5 className="card-title">{product.name}</h5>
-                        <p className="card-text">{product.price} €</p>
-                        <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
-                            Vedi Dettagli
-                        </Link>
+        {isGridView ? (
+            // Grid View
+            <div className="products-container grid-view">
+                {products.map(product => (
+                    <div className="products-card" key={product.id}>
+                        <img src={product.image_url} className="card-img-top" alt={product.name} />
+                        <div className="card-body">
+                            <h5 className="card-title">{product.name}</h5>
+                            <p className="card-text">{product.price} €</p>
+                            <Link to={`/prodotti/${product.slug}`} className="btn btn-success">
+                                Vedi Dettagli
+                            </Link>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        ) : (
+            // List View
+             <div className="container">
+        <div className="list-group list-group-flush">
+            {products.map((product) => (
+                <div className="list-group-item py-4" key={product.id}>
+                    <div className="row g-0">
+                        <div className="col-md-4">
+                            <img 
+                                src={product.image_url} 
+                                className="img-fluid p-3" 
+                                alt={product.name}
+                                style={{ objectFit: 'contain', height: '250px', width: '100%' }}
+                            />
+                        </div>
+                        <div className="col-md-8">
+                            <div className="h-100 d-flex flex-column justify-content-between">
+                                <div>
+                                    <h4 className="mb-3">{product.name}</h4>
+                                    <p className="text-muted mb-3">{product.brand}</p>
+                                    <p className="mb-3">{product.description}</p>
+                                </div>
+                                <div className="d-flex justify-content-between align-items-center">
+                                    <h5 className="mb-0 fw-bold">{product.price} €</h5>
+                                    <Link to={`/prodotti/${product.slug}`} className="btn btn-success">
+                                        Vedi Dettagli
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             ))}
         </div>
+    </div>
+        )}
     </>
 );
 }

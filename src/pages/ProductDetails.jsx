@@ -127,7 +127,7 @@ function ProductDetail() {
             </div>
             <button onClick={handleAddToCart} className="btn btn-primary mt-3">Aggiungi al Carrello</button>
             {/* Aggiungi alla wishlist */}
-            <button onClick={handleAddToWishlist} className="btn btn-primary mt-3 mx-2">Aggiungi alla Wishlist</button>
+            <span onClick={handleAddToWishlist} className="btn btn-primary mt-3 mx-2">Aggiungi alla Wishlist</span>
 
           </div>
         </div>

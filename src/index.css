@@ -375,7 +375,7 @@
 
 
 /* Media queries */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
 
   .hero-container {
     height: 70vh;
@@ -530,7 +530,7 @@
 }
 
 /* Per schermi medio-grandi (tablet, piccoli desktop) */
-@media (min-width: 601px) and (max-width: 1024px) {
+@media (min-width: 769px) and (max-width: 1024px) {
   .hero-container {
     height: 70vh;
     background-position: 55% 50%;

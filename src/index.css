@@ -377,11 +377,6 @@
 /* Media queries */
 @media (max-width: 600px) {
 
-  .product-image-container {
-    max-width: 100%; /* L'immagine occupa tutta la larghezza */
-  }
-
-
   .hero-container {
     height: 70vh;
     background-position: 58% 50%;
@@ -399,12 +394,7 @@
   .hero-content h1 {
     display: none;
   }
-
-  .products-card {
-    flex: 1 1 100%; 
-    max-width: 100%;
-  }
-
+/* Sezione informazioni del prodotto */
   .products-card {
     flex: 1 1 100%; 
     max-width: 100%;
@@ -424,10 +414,11 @@
     justify-content: center;
     gap: 1rem;
   }
+
+  .product-image-container {
+    max-width: 100%; /* L'immagine occupa tutta la larghezza */
+  }
   
-  
-  
-  /* Sezione informazioni del prodotto */
   .product-info {
     max-width: 80%;
     display: flex;
@@ -448,11 +439,6 @@
 
   .product-info h6 {
     font-size: 1rem;
-  }
-  
-  .products-card {
-    flex: 1 1 100%; /* 1 card per riga */
-    max-width: 100%;
   }
   
   .breadcrumb-chevron {
@@ -485,15 +471,62 @@
     font-size: 18px;
   }
 
-  .dropdown-menu {
-    display: none;
-    position: static;
-    box-shadow: none;
+  .search-container {
+    width: 100% !important;
   }
 
-  .nav-item.dropdown:hover .dropdown-menu {
-    display: block;
+  /*se vogliamo che le categorie stiano nella parte destra del menu
+  .menu-container .container {
+    text-align: right;
   }
+
+  .menu-container .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .menu-container .dropdown-menu {
+    text-align: right;
+    right: 0;
+    left: auto;
+  }
+
+  .menu-container .d-flex.flex-column {
+    align-items: flex-end !important;
+  }*/
+
+  .menu-container .d-flex.flex-column {
+    order: 2; /* Move search and icons below categories */
+    width: 100%;
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+  }
+
+  .menu-container .nav.flex-column {
+    order: 1; /* Categories appear first */
+    width: 100%;
+    }
+    .menu-container .container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  
+    .menu-container .mt-3.d-flex.gap-3 {
+      margin-top: 15px !important;
+    }
+    .dropdown-menu {
+      display: none;
+    }
+    .dropdown-menu.open {
+      display: block !important;
+      position: relative; /* o static, per evitare sovrapposizioni */
+      border: none; /* se non vuoi il bordo classico */
+      box-shadow: none; /* opzionale */
+    }
+  
 }
 
 /* Per schermi medio-grandi (tablet, piccoli desktop) */

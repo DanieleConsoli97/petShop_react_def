@@ -148,7 +148,7 @@ function Navbar() {
                 Tutti i Prodotti
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item dropdown">
               <span className="nav-link dropdown-toggle" role="button">Cani</span>
               <ul className="dropdown-menu">
                 <li><Link className="dropdown-item" to={'/prodotti/cani/'} onClick={() => setMenuOpen(false)}>Prodotti per cani</Link></li>

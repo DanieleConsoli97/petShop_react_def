@@ -169,6 +169,7 @@ const CheckOut = () => {
                         submit: error.message || 'Si è verificato un errore durante l\'invio dell\'ordine. Riprova più tardi.'
                     }));
                 });
+
         }
     };
     const calculateTotal = () => {

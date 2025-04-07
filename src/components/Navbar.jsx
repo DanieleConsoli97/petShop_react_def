@@ -2,12 +2,14 @@ import { FaShoppingCart, FaBars } from "react-icons/fa";
 import { FaBone } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import logo from '/PawPlanet.logo(3).png'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../context/GlobalContext";
 import SearchForm from "./SearchForm";
+
+
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-
   return (
     <>
       {/* Navbar principale con logo, barra di ricerca e carrello */}

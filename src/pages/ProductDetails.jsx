@@ -85,14 +85,15 @@ function ProductDetail() {
   }
   if (!product) {
     return (
-      <div className="container text-center my-5">
-        <div className="spinner-border text-primary" role="status">
-          <span className="visually-hidden">Caricamento...</span>
-        </div>
-        <p className="mt-3">Caricamento del prodotto in corso...</p>
-      </div>
+      <div
+        className="container d-flex justify-content-center align-items-center"
+        style={{ height: '100vh' }}
+      >
+        <p>Caricamento...</p>
+      </div >
     );
   }
+
 
   return (
     <div className="container">
@@ -126,7 +127,7 @@ function ProductDetail() {
             </div>
             <button onClick={handleAddToCart} className="btn btn-primary mt-3">Aggiungi al Carrello</button>
             {/* Aggiungi alla wishlist */}
-            <button onClick={handleAddToWishlist} className="btn btn-primary mt-3 mx-2">Aggiungi alla Wishlist</button> 
+            <button onClick={handleAddToWishlist} className="btn btn-primary mt-3 mx-2">Aggiungi alla Wishlist</button>
 
           </div>
         </div>
@@ -169,7 +170,7 @@ function ProductDetail() {
                       <Link to={`/prodotti/${relatedProduct.slug}`} className="btn btn-primary">
                         Vedi Dettagli
                       </Link>
-                      
+
                     </div>
                   </div>
                 </SwiperSlide>
@@ -179,7 +180,7 @@ function ProductDetail() {
         </div>
       </div>
     </div>
-   
+
   );
 }
 

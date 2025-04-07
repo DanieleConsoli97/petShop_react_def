@@ -122,34 +122,47 @@
 }
 
 .products-container.list-view {
-  flex-direction: column; /* Imposta la visualizzazione a colonna */
-  align-items: center; /* Centra le card orizzontalmente nella lista */
+  flex-direction: column;
+  /* Imposta la visualizzazione a colonna */
+  align-items: center;
+  /* Centra le card orizzontalmente nella lista */
 }
 
 .products-container.list-view .products-card {
-  flex-direction: row; /* Allinea immagine e testo orizzontalmente */
-  align-items: center; /* Allinea verticalmente gli elementi */
+  flex-direction: row;
+  /* Allinea immagine e testo orizzontalmente */
+  align-items: center;
+  /* Allinea verticalmente gli elementi */
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 15px;
-  text-align: left; /* Allinea il testo a sinistra nella visualizzazione a lista */
-  width: 70%; /* Imposta la larghezza al 70% */
-  max-width: 70%; /* Assicura che non superi il 70% */
-  margin-bottom: 15px; /* Aggiunge spazio tra le card nella lista */
+  text-align: left;
+  /* Allinea il testo a sinistra nella visualizzazione a lista */
+  width: 70%;
+  /* Imposta la larghezza al 70% */
+  max-width: 70%;
+  /* Assicura che non superi il 70% */
+  margin-bottom: 15px;
+  /* Aggiunge spazio tra le card nella lista */
 }
 
 .products-container.list-view .products-card img {
-  width: 150px; /* Larghezza fissa per l'immagine nella lista */
-  height: 150px; /* Altezza fissa per l'immagine nella lista */
+  width: 150px;
+  /* Larghezza fissa per l'immagine nella lista */
+  height: 150px;
+  /* Altezza fissa per l'immagine nella lista */
   object-fit: contain;
-  margin-right: 20px; /* Spazio tra immagine e testo */
+  margin-right: 20px;
+  /* Spazio tra immagine e testo */
 }
 
 .products-container.list-view .products-card .card-body {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Allinea il contenuto del body a sinistra */
-  flex-grow: 1; /* Permette al body di occupare lo spazio rimanente */
+  align-items: flex-start;
+  /* Allinea il contenuto del body a sinistra */
+  flex-grow: 1;
+  /* Permette al body di occupare lo spazio rimanente */
 }
 
 .products-container.list-view .products-card .card-body .card-title {
@@ -180,14 +193,14 @@
 .products-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; 
-  gap: 20px; 
+  justify-content: center;
+  gap: 20px;
   padding: 20px;
 }
 
 .products-card {
-  flex: 1 1 calc(16.66% - 20px); 
-  max-width: calc(16.66% - 20px); 
+  flex: 1 1 calc(16.66% - 20px);
+  max-width: calc(16.66% - 20px);
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 10px;
@@ -195,7 +208,7 @@
   text-align: center;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
-  height: 350px; 
+  height: 350px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -208,12 +221,13 @@
 .products-card img {
   max-width: 100%;
   height: 200px;
-  object-fit: contain; 
+  object-fit: contain;
   border-radius: 5px;
 }
 
 /* CAROUSEL */
-.card, .card-related{
+.card,
+.card-related {
   width: 100%;
   height: 300px;
   display: flex;
@@ -271,17 +285,20 @@
 }
 
 /* CONTENITORE DETTAGLIO PRODOTTO */
-.container-product{
+.container-product {
   background-color: #F9F5EC;
   padding: 20px;
-  margin: 0 auto; /* Assicura che il contenitore sia centrato */
+  margin: 0 auto;
+  /* Assicura che il contenitore sia centrato */
   border-radius: 10px;
-  max-width: 1200px; /* Limita la larghezza massima per evitare allungamenti */
+  max-width: 1200px;
+  /* Limita la larghezza massima per evitare allungamenti */
 }
 
 .product-detail {
   display: flex;
-  flex-wrap: wrap; /* Aggiunto per permettere agli elementi di andare a capo su schermi piccoli */
+  flex-wrap: wrap;
+  /* Aggiunto per permettere agli elementi di andare a capo su schermi piccoli */
   align-items: flex-start;
   justify-content: center;
   gap: 4rem;
@@ -292,9 +309,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%; /* Impostato al 100% per migliorare la responsività */
-  max-width: 450px; /* Limita la larghezza massima dell'immagine */
-  height: auto; /* Permette all'immagine di adattarsi al contenitore */
+  width: 100%;
+  /* Impostato al 100% per migliorare la responsività */
+  max-width: 450px;
+  /* Limita la larghezza massima dell'immagine */
+  height: auto;
+  /* Permette all'immagine di adattarsi al contenitore */
   background-color: #fff;
 }
 
@@ -373,7 +393,8 @@
 
 /* Bottoni arancioni */
 .btn-primary {
-  background: #D4A017 !important; /* Bottone arancione */
+  background: #D4A017 !important;
+  /* Bottone arancione */
   font-weight: bold;
   padding: 0.75rem 1.5rem;
   border: none !important;
@@ -388,8 +409,9 @@
 
 /* Frecce del carosello di scorrimento */
 .swiper-button-next,
-.swiper-button-prev{
-  color: green !important; /* Colore verde per le frecce */
+.swiper-button-prev {
+  color: green !important;
+  /* Colore verde per le frecce */
 }
 
 .animation {
@@ -406,21 +428,22 @@
     background-position: 58% 50%;
   }
 
-  .hero-content h4, 
+  .hero-content h4,
   .hero-content h5 {
     font-size: 1rem;
   }
 
-  .hero-content h4{
+  .hero-content h4 {
     margin-top: 20px;
   }
 
   .hero-content h1 {
     display: none;
   }
-/* Sezione informazioni del prodotto */
+
+  /* Sezione informazioni del prodotto */
   .products-card {
-    flex: 1 1 100%; 
+    flex: 1 1 100%;
     max-width: 100%;
   }
 
@@ -430,19 +453,20 @@
   }
 
   .product-detail {
-    max-width: 1000px !important; 
-    padding: 1rem !important; 
+    max-width: 1000px !important;
+    padding: 1rem !important;
     display: flex;
     align-items: center;
-    flex-direction: column; 
+    flex-direction: column;
     justify-content: center;
     gap: 1rem;
   }
 
   .product-image-container {
-    max-width: 100%; /* L'immagine occupa tutta la larghezza */
+    max-width: 100%;
+    /* L'immagine occupa tutta la larghezza */
   }
-  
+
   .product-info {
     max-width: 80%;
     display: flex;
@@ -451,11 +475,11 @@
     justify-content: center;
     gap: 0.5rem;
   }
-  
+
   .product-info h1 {
     font-size: 1.5rem;
   }
-  
+
   .product-info p {
     margin-bottom: 0.5rem;
     font-size: 1rem;
@@ -464,9 +488,9 @@
   .product-info h6 {
     font-size: 1rem;
   }
-  
+
   .breadcrumb-chevron {
-    font-size: 0.8rem !important; 
+    font-size: 0.8rem !important;
   }
 
   /*navbar hamburger menu*/
@@ -521,7 +545,8 @@
   }*/
 
   .menu-container .d-flex.flex-column {
-    order: 2; /* Move search and icons below categories */
+    order: 2;
+    /* Move search and icons below categories */
     width: 100%;
     margin-top: 20px;
     border-top: 1px solid #ddd;
@@ -529,28 +554,35 @@
   }
 
   .menu-container .nav.flex-column {
-    order: 1; /* Categories appear first */
+    order: 1;
+    /* Categories appear first */
     width: 100%;
-    }
-    .menu-container .container {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-    }
-  
-    .menu-container .mt-3.d-flex.gap-3 {
-      margin-top: 15px !important;
-    }
-    .dropdown-menu {
-      display: none;
-    }
-    .dropdown-menu.open {
-      display: block !important;
-      position: relative; /* o static, per evitare sovrapposizioni */
-      border: none; /* se non vuoi il bordo classico */
-      box-shadow: none; /* opzionale */
-    }
-  
+  }
+
+  .menu-container .container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .menu-container .mt-3.d-flex.gap-3 {
+    margin-top: 15px !important;
+  }
+
+  .dropdown-menu {
+    display: none;
+  }
+
+  .dropdown-menu.open {
+    display: block !important;
+    position: relative;
+    /* o static, per evitare sovrapposizioni */
+    border: none;
+    /* se non vuoi il bordo classico */
+    box-shadow: none;
+    /* opzionale */
+  }
+
 }
 
 /* Per schermi medio-grandi (tablet, piccoli desktop) */
@@ -570,32 +602,34 @@
   }
 
   .product-detail {
-    max-width: 1000px !important; 
-    padding: 1rem !important; 
+    max-width: 1000px !important;
+    padding: 1rem !important;
     display: flex;
     align-items: center;
-    flex-direction: column; 
+    flex-direction: column;
     justify-content: center;
     gap: 2rem;
   }
-  
+
   /* Immagine prodotto */
   .product-image-container {
-    width: 400px; /* max-width: 400px;*/
+    width: 400px;
+    /* max-width: 400px;*/
   }
-  
+
   .product-image {
     max-height: 250px;
   }
+
   /* Sezione informazioni del prodotto */
   .product-info {
     max-width: 70%;
   }
-  
+
   .product-info h1 {
     font-size: 2.3rem;
   }
-  
+
   .product-info p {
     margin-bottom: 0.5rem;
     font-size: 1.3rem;
@@ -626,7 +660,7 @@
 /* Footer */
 
 .footer {
-  background: linear-gradient(135deg, #6DBE45, #3D9C56); 
+  background: linear-gradient(135deg, #6DBE45, #3D9C56);
   color: white;
   font-family: 'Poppins', sans-serif;
   padding: 20px 0;
@@ -635,7 +669,7 @@
   justify-content: space-between;
   text-align: center;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  
+
 }
 
 .footer-container {
@@ -644,7 +678,7 @@
   padding: 0 20px;
   margin-bottom: 20px;
   align-items: flex-start;
-  
+
 }
 
 /* Sezione Contatti */
@@ -656,7 +690,7 @@
   flex-direction: column;
   gap: 10px;
   margin-top: 10px;
-  background-color: rgba(255, 255, 255, 0.1); 
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 20px;
   border-radius: 8px;
 }
@@ -664,12 +698,12 @@
 .footer-contact p {
   font-size: 16px;
   margin: 5px 0;
-  color: #1E3A8A; 
+  color: #1E3A8A;
   font-weight: bold;
 }
 
 .footer-contact a {
-  color: white; 
+  color: white;
   text-decoration: none;
   display: inline-block;
   margin-left: 5px;
@@ -685,7 +719,7 @@
   width: 45%;
   padding-right: 80px;
   margin-top: 10px;
-  background-color: rgba(255, 255, 255, 0.1); 
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 20px;
   border-radius: 8px;
 }
@@ -693,29 +727,29 @@
 .footer-social p {
   font-size: 16px;
   margin: 5px 0;
-  color: #1E3A8A; 
+  color: #1E3A8A;
   margin-bottom: 15px;
-  
+
 }
 
 .footer-social a {
   font-size: 30px;
-  color: white; 
+  color: white;
   margin-left: 15px;
   transition: transform 0.3s ease, color 0.3s ease;
   text-decoration: none;
-  
+
 }
 
 .footer-social a:hover {
-  color: #FFD700; 
-  transform: scale(1.2); 
+  color: #FFD700;
+  transform: scale(1.2);
 }
 
 
 /* icona-zampa */
 .footer-container:before {
-  content: "\1F43E"; 
+  content: "\1F43E";
   font-size: 40px;
   display: block;
   margin: 0 auto 10px;
@@ -724,20 +758,21 @@
 /* Media query per dispositivi mobili */
 @media (max-width: 768px) {
   .footer {
-    padding: 40px 0; 
+    padding: 40px 0;
   }
 
   .footer-container {
-    flex-direction: column; 
-    align-items: center; 
+    flex-direction: column;
+    align-items: center;
   }
 
   .footer-contact,
   .footer-social {
-    width: 90%; /* Le sezioni occupano il 90% della larghezza */
-    text-align: center; 
-    padding: 0; 
-    margin-bottom: 20px; 
+    width: 90%;
+    /* Le sezioni occupano il 90% della larghezza */
+    text-align: center;
+    padding: 0;
+    margin-bottom: 20px;
     padding-left: 15px;
     padding-bottom: 5px;
     padding-top: 5px;
@@ -746,23 +781,23 @@
   .footer-contact p {
     margin-left: 0;
     margin-right: 0;
-    font-size: 14px; 
-    text-align: left; 
+    font-size: 14px;
+    text-align: left;
   }
 
   .footer-contact a {
-    margin-left: 0; 
-    margin-bottom: 5px; 
+    margin-left: 0;
+    margin-bottom: 5px;
   }
 
   .footer-social {
-    margin-top: 20px; 
+    margin-top: 20px;
   }
 
   .footer-social a {
     font-size: 25px;
     margin-left: 10px;
-    padding: 8px; 
+    padding: 8px;
   }
 }
 
@@ -772,8 +807,10 @@
 /* Stile per il contenitore dei bottoni */
 .button-container {
   display: flex;
-  gap: 15px;  /* Aggiunge spazio tra i bottoni */
-  justify-content: center;  /* Centra i bottoni orizzontalmente */
+  gap: 15px;
+  /* Aggiunge spazio tra i bottoni */
+  justify-content: center;
+  /* Centra i bottoni orizzontalmente */
   margin-top: 20px;
 }
 
@@ -791,31 +828,54 @@
 
 /* Stile per il bottone 'Vai alla Pagina di Checkout' */
 .button-container .checkout-btn {
-  background-color: #28a745; 
+  background-color: #28a745;
   color: white;
 }
 
 .button-container .checkout-btn:hover {
-  background-color: #218838; 
+  background-color: #218838;
 }
 
 /* Stile per il bottone 'Svouta Carrello' */
 .button-container .empty-cart-btn {
-  background-color: #dc3545; 
+  background-color: #dc3545;
   color: white;
 }
 
 .button-container .empty-cart-btn:hover {
-  background-color: #c82333; 
+  background-color: #c82333;
 }
 
-.button-container .checkout-btn{
+.button-container .checkout-btn {
   margin-bottom: 8px;
   border-radius: 5px;
 }
 
-.button-container .empty-cart-btn{
+.button-container .empty-cart-btn {
   margin-bottom: 8px;
   border-radius: 5px;
 }
 
+/* Stile per la searchBar con autocomplete */
+.search-results-dropdown {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  width: 300px;
+  /* O la larghezza desiderata */
+  z-index: 1000;
+  margin-top: 5px;
+}
+
+.search-result-item {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: black;
+}
+
+.search-result-item:hover {
+  color:white;
+  background-color: #198754;
+  cursor: pointer;
+}

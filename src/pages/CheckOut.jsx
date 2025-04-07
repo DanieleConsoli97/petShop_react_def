@@ -7,8 +7,8 @@ import { Navigate,useNavigate } from "react-router-dom";
 
 // Componente principale per la gestione del checkout
 const CheckOut = () => {
-    const { carrello } = useGlobalContext()
 
+    const { carrello } = useGlobalContext()
     // Gestione degli stati del form
     const [isBillingDifferent, setIsBillingDifferent] = useState(false); // Stato per gestire indirizzi di spedizione/fatturazione diversi
     const [errors, setErrors] = useState({}); // Stato per la gestione degli errori di validazione
@@ -111,7 +111,7 @@ const CheckOut = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    //FIXME - Dati di esempio del carrello (da sostituire con dati reali)
+    //NOTE - Dati carrello 
     const cartItems = carrello
     // Handler per la gestione dell'invio del form
     const handleSubmit = (e) => {
@@ -181,6 +181,25 @@ const CheckOut = () => {
         return subtotal + shippingCost;
     };
     const cartTotal = calculateTotal();
+
+    //NOTE - gestione codice sconto
+    
+    const [DiscountIsTrue, setDiscountisTrue] = useState(false); // Stato per il filtro sconto
+    
+    const [Discount, setDiscount] = useState(false); // Sconto inserito
+    
+    const handleDiscountSubmit = (e) => {   //NOTE - gestione validazione sconto se lo sconto è true viene visualizzato nel carrello se false non viene visualizzato 
+        e.preventDefault();
+        setDiscountisTrue(true);
+        console.log("sconto inserito")
+
+    }
+    const handleDiscountChange = (e) => {
+        const { value } = e.target;
+        console.log(value)
+        setDiscount(value);
+
+    };
     return (
         <main>
             <div className="container">
@@ -220,13 +239,13 @@ const CheckOut = () => {
                                 </div>
                                 <span className="text-body-secondary">5 € </span>
                             </li>
-                            <li className="list-group-item d-flex justify-content-between bg-body-tertiary">  {/*NOTE - promo code */}
+                            {DiscountIsTrue &&(<li className="list-group-item d-flex justify-content-between bg-body-tertiary">  {/*NOTE - banner promo code */}
                                 <div className="text-success">
                                     <h6 className="my-0">Promo code</h6>
                                     <small>EXAMPLECODE</small>
                                 </div>
                                 <span className="text-success">−$5</span>
-                            </li>
+                            </li>)}
 
                             <li className="list-group-item d-flex justify-content-between">
                                 <span>Totale (EUR)</span>
@@ -234,10 +253,10 @@ const CheckOut = () => {
                             </li>
                         </ul>
 
-                        <form className="card p-2">                                               {/* NOTE - pulsante agguinta promocode*/}
+                        <form onSubmit={handleDiscountSubmit} className="card p-2">                                               {/* NOTE - pulsante agguinta promocode*/}
                             <div className="input-group">
-                                <input type="text" className="form-control" placeholder="Promo code" />
-                                <button type="submit" className="btn btn-secondary">Redeem</button>
+                                <input type="text" className="form-control" placeholder="Promo code" onChange={handleDiscountChange} />
+                                <button type="submit" className="btn btn-secondary">Aggingi</button>
                             </div>
                         </form>
                     </div>
@@ -431,8 +450,83 @@ const CheckOut = () => {
                                                 </div>
                                             )}
                                         </div>
+                                        <div className="col-md-6">
+                                    <label className="form-label">Paese</label>
+                                    <select
+                                        className={`form-select ${errors.paese ? 'is-invalid' : ''}`}
+                                        name="paese"
+                                        value={shippingData.paese}
+                                        onChange={handleShippingChange}
+                                        required
+                                    >
+                                        <option value="">Scegli Paese</option>
+                                        <option value="Italia">Italia</option>
+                                    </select>
+                                    {errors.paese && (
+                                        <div className="invalid-feedback">
+                                            {errors.paese}
+                                        </div>
+                                    )}
+                                </div>
 
-                                        <div className="col-lg-6 col-md-12 col-sm-12">
+                                <div className="col-md-6">
+                                    <label className="form-label">Regione</label>
+                                    <select
+                                        className={`form-select ${errors.regione ? 'is-invalid' : ''}`}
+                                        name="regione"
+                                        value={shippingData.regione}
+                                        onChange={handleShippingChange}
+                                        required
+                                    >
+                                        <option value="">Scegli Regione</option>
+                                        {regioniItaliane?.map((regione, index) => (
+                                            <option key={index} value={regione.nome}>
+                                                {regione.nome}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    {errors.regione && (
+                                        <div className="invalid-feedback">
+                                            {errors.regione}
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="col-md-6">
+                                    <label className="form-label">Città</label>
+                                    <input
+                                        type="text"
+                                        className={`form-control ${errors.citta ? 'is-invalid' : ''}`}
+                                        name="citta"
+                                        value={shippingData.citta}
+                                        onChange={handleShippingChange}
+                                        required
+                                    />
+                                    {errors.citta && (
+                                        <div className="invalid-feedback">
+                                            {errors.citta}
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="col-md-6">
+                                    <label className="form-label">Codice Postale</label>
+                                    <input
+                                        type="text"
+                                        className={`form-control ${errors.cap ? 'is-invalid' : ''}`}
+                                        name="cap"
+                                        value={shippingData.cap}
+                                        onChange={handleShippingChange}
+                                        required
+                                        maxLength={5}
+                                    />
+                                    {errors.cap && (
+                                        <div className="invalid-feedback">
+                                            {errors.cap}
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="col-lg-6 col-md-12 col-sm-12">
                                             <label className="form-label">Codice fiscale o partita IVA</label>
                                             <input
                                                 type="text"

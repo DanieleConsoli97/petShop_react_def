@@ -28,7 +28,15 @@ function DogProducts() {
             });
     }, []);
 
-    if (loading) return <p>Caricamento...</p>;
+    if (loading) return (
+        
+        <div 
+        className = "container d-flex justify-content-center align-items-center" 
+        style = {{ height: '100vh' }}
+        >
+    <p>Caricamento...</p>
+    </div >
+    );
     if (error) return <p>Errore: {error}</p>;
 
     return (

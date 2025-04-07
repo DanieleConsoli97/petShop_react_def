@@ -2,8 +2,7 @@ import React from 'react';
 import { useGlobalContext } from '../context/GlobalContext';
 import { Link } from 'react-router-dom';
 import HoldButton from '../components/HoldButton';
-
-import { TbShoppingCartX } from "react-icons/tb";
+import { TbShoppingCartX,TbTrash } from "react-icons/tb";
 
 function Carrello() {
   const { carrello, rimuoviDalCarrello, svuotaCarrello, handleQuantityChange } = useGlobalContext();
@@ -43,11 +42,13 @@ function Carrello() {
                   </div>
 
                   <div className="button-container">
-                    <button
-                      onClick={() => rimuoviDalCarrello(product.slug)}
-                      className='btn btn-danger'>
-                      Rimuovi dal carrello
-                    </button>
+                    <HoldButton
+                      onHold={() => rimuoviDalCarrello(product.slug)}
+                      holdTime={2000}
+                      className="btn btn-danger"
+                    >
+                      Tieni premuto per eliminare <TbTrash />
+                    </HoldButton>
 
                     <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                       Vedi Dettagli
@@ -66,14 +67,13 @@ function Carrello() {
           <Link to={'/checkout'}>
             <button className="checkout-btn">Completa ordine</button>
           </Link>
-          <button className="empty-cart-btn" onClick={svuotaCarrello}>Svuota Carrello</button>
-          <HoldButton 
-                onHold={svuotaCarrello} 
-                holdTime={2000}
-                className="empty-cart-btn"
-              >
-               Tieni premuto per svuotare <TbShoppingCartX />
-              </HoldButton>
+          <HoldButton
+            onHold={svuotaCarrello}
+            holdTime={2000}
+            className="empty-cart-btn"
+          >
+            Tieni premuto per svuotare <TbShoppingCartX />
+          </HoldButton>
         </div>
       )}
     </div>

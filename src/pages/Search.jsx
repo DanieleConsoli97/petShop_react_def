@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 
+import { BsFillGrid3X3GapFill } from "react-icons/bs";
+import { GrSort } from "react-icons/gr";
+
 const Search = () => {
     const { term } = useParams(); //2
 
@@ -49,13 +52,13 @@ const Search = () => {
 
     return (
         <>
-            <p>Risultati di ricerca: {products.length}</p>
-            <div className="d-flex justify-content-end mb-3">
-                <button className={`btn btn-outline-primary me-2 ${isGridView ? 'active' : ''}`} onClick={() => setIsGridView(true)}>
-                    Griglia
+            <h4 className='products-container'>Risultati di ricerca: <span className='fw-bold text-warning'>{products.length}</span></h4>
+            <div className="container d-flex justify-content-end mb-3">
+                <button className={`btn btn-outline-success me-2 ${isGridView ? 'active' : ''}`} onClick={() => setIsGridView(true)}>
+                    <BsFillGrid3X3GapFill />
                 </button>
-                <button className={`btn btn-outline-primary ${!isGridView ? 'active' : ''}`} onClick={() => setIsGridView(false)}>
-                    Lista
+                <button className={`btn btn-outline-success ${!isGridView ? 'active' : ''}`} onClick={() => setIsGridView(false)}>
+                    <GrSort />
                 </button>
             </div>
             <div className={`products-container ${isGridView ? 'grid-view' : 'list-view'}`}>

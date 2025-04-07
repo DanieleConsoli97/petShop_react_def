@@ -59,16 +59,16 @@ const CheckOut = () => {
 
     // Funzioni di validazione per i campi del form
     const validateEmail = (email) => {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+€/;
         return re.test(email);
     };
 
     const validateCAP = (cap) => {
-        return /^\d{5}$/.test(cap);
+        return /^\d{5}€/.test(cap);
     };
 
     const validateName = (name) => {
-        return /^[A-Za-zÀ-ÿ\s]+$/.test(name);
+        return /^[A-Za-zÀ-ÿ\s]+€/.test(name);
     };
 
     // Funzione principale di validazione del form

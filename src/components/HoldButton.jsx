@@ -5,13 +5,11 @@ import './HoldButton.css';
  * Componente HoldButton - un pulsante che risponde quando viene tenuto premuto
  * con animazione di progresso circolare e feedback visivo
  * 
- * @param {Object} props - Le proprietà del componente
- * @param {Function} props.onHold - Funzione da eseguire quando il pulsante viene tenuto premuto
- * @param {number} props.holdTime - Tempo in millisecondi necessario per attivare l'azione (default: 1000ms)
- * @param {string} props.className - Classi CSS aggiuntive
- * @param {React.ReactNode} props.children - Contenuto del pulsante
- * @param {Object} props.style - Stili inline aggiuntivi
- * @returns {JSX.Element}
+ * @param {Function} onHold - Funzione da eseguire quando il pulsante viene tenuto premuto
+ * @param {number} holdTime - Tempo in millisecondi necessario per attivare l'azione (default: 1000ms)
+ * @param {string} className - Classi CSS aggiuntive
+ * @param {React.ReactNode} children - Contenuto del pulsante
+ * @param {Object} style - Stili inline aggiuntivi
  */
 const HoldButton = ({
   onHold,
@@ -21,14 +19,16 @@ const HoldButton = ({
   style = {},
   ...props
 }) => {
+  // Stati
   const [isHolding, setIsHolding] = useState(false);
   const [holdProgress, setHoldProgress] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
+  
+  // Refs
   const timerRef = useRef(null);
   const startTimeRef = useRef(null);
   const animationRef = useRef(null);
-  const completionTimerRef = useRef(null);
-
+  
   // Gestisce l'inizio della pressione del pulsante
   const startHolding = () => {
     setIsHolding(true);
@@ -45,9 +45,7 @@ const HoldButton = ({
         setIsCompleted(true);
         
         // Reset dello stato di completamento dopo un breve periodo
-        completionTimerRef.current = setTimeout(() => {
-          setIsCompleted(false);
-        }, 1500);
+        setTimeout(() => setIsCompleted(false), 1500);
       }
     }, holdTime);
   };
@@ -56,8 +54,7 @@ const HoldButton = ({
   const updateProgress = () => {
     if (!startTimeRef.current) return;
     
-    const elapsedTime = Date.now() - startTimeRef.current;
-    const progress = Math.min(100, (elapsedTime / holdTime) * 100);
+    const progress = Math.min(100, ((Date.now() - startTimeRef.current) / holdTime) * 100);
     setHoldProgress(progress);
     
     if (progress < 100) {
@@ -86,27 +83,14 @@ const HoldButton = ({
       cancelAnimationFrame(animationRef.current);
       animationRef.current = null;
     }
-    
-    if (completionTimerRef.current) {
-      clearTimeout(completionTimerRef.current);
-      completionTimerRef.current = null;
-    }
   };
 
   // Pulizia quando il componente viene smontato
-  useEffect(() => {
-    return clearTimers;
-  }, []);
-
-  // Determina le classi CSS
-  const getButtonClasses = () => {
-    let classes = `hold-button ${isHolding ? 'holding' : ''} ${isCompleted ? 'completed' : ''}`;
-    return `${classes} ${className}`;
-  };
+  useEffect(() => clearTimers, []);
 
   return (
     <button
-      className={getButtonClasses()}
+      className={`hold-button ${isHolding ? 'holding' : ''} ${isCompleted ? 'completed' : ''} ${className}`}
       style={style}
       onMouseDown={startHolding}
       onMouseUp={stopHolding}
@@ -117,14 +101,12 @@ const HoldButton = ({
       {...props}
     >
       {/* Contenuto del pulsante */}
-      <div className="button-content">
-        {children}
-      </div>
+      <div className="button-content">{children}</div>
       
       {/* Indicatore di progresso circolare */}
       {isHolding && (
         <div className="progress-circle">
-          <svg width="30" height="30" viewBox="0 0 50 50" className={isHolding ? 'pulse-circle' : ''}>
+          <svg width="30" height="30" viewBox="0 0 50 50" className="pulse-circle">
             {/* Cerchio di sfondo */}
             <circle
               cx="25"
@@ -160,7 +142,7 @@ const HoldButton = ({
               />
             )}
           </svg>
-          {/* Contenuto centrale che mostra solo il segno di spunta al completamento */}
+          {/* Segno di spunta al completamento */}
           <div className="progress-percentage">
             {isCompleted && <span className="checkmark-animation">✓</span>}
           </div>

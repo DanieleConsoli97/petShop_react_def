@@ -1,9 +1,6 @@
 import { useGlobalContext } from '../context/GlobalContext';
 import { Link } from 'react-router-dom';
 
-
-
-
 function WishList() {
     const { wishList, rimuoviDallaWishList, svuotaWishList } = useGlobalContext();
 
@@ -17,10 +14,16 @@ function WishList() {
                             <img src={product.image_url} className="card-img-top" alt={product.name} />
                             <div className="card-body">
                                 <h5 className="card-title">{product.name}</h5>
-                                <button onClick={() => rimuoviDallaWishList(product.slug)} className='btn btn-danger'>Rimuovi dalla WishList</button>
-                                <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
-                                    Vedi Dettagli
-                                </Link>
+
+                                {/* Aggiunto d-flex per affiancare i bottoni */}
+                                <div className="d-flex gap-2">
+                                    <button onClick={() => rimuoviDallaWishList(product.slug)} className='btn btn-danger flex-grow-1'>
+                                        Rimuovi dalla WishList
+                                    </button>
+                                    <Link to={`/prodotti/${product.slug}`} className="btn btn-primary flex-grow-1">
+                                        Vedi Dettagli
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     ))}

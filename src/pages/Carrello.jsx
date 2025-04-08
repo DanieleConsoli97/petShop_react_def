@@ -2,10 +2,19 @@ import React from 'react';
 import { useGlobalContext } from '../context/GlobalContext';
 import { Link } from 'react-router-dom';
 import HoldButton from '../components/HoldButton';
-import { TbShoppingCartX,TbTrash } from "react-icons/tb";
+import { TbShoppingCartX, TbTrash } from "react-icons/tb";
 
 function Carrello() {
   const { carrello, rimuoviDalCarrello, svuotaCarrello, handleQuantityChange } = useGlobalContext();
+
+  // Funzione per formattare il prezzo in formato valuta
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('it-IT', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 2
+    }).format(price);
+  };
 
   return (
     <div>
@@ -22,8 +31,8 @@ function Carrello() {
                 <img src={product.image_url} className="card-img-top" alt={product.name} />
                 <div className="card-body">
                   <h5 className="card-title">{product.name}</h5>
-                  <p className="card-text">Prezzo Unitario: {product.price} €</p>
-                  <p className="card-text">Prezzo Totale: {(product.price * product.quantity).toFixed(2)} €</p>
+                  <p className="card-text">Prezzo Unitario: {formatPrice(product.price)}</p>
+                  <p className="card-text">Prezzo Totale: {formatPrice(product.price * product.quantity)}</p>
                   <p className="card-text">Quantità:</p>
 
                   {/* Bottoni per aumentare o diminuire la quantità con i simboli "+" e "-" */}

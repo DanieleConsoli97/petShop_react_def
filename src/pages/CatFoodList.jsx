@@ -56,7 +56,12 @@ function CatFoodList() {
                         <img src={product.image_url} className={`card-img-top ${isGridView ? '' : 'list-image'}`} alt={product.name} />
                         <div className={`card-body ${isGridView ? '' : 'list-body'}`}>
                             <h5 className="card-title">{product.name}</h5>
-                            <p className="card-text">{product.price} €</p>
+                            <p className="card-text">
+                              {new Intl.NumberFormat('it-IT', {
+                                style: 'currency',
+                                currency: 'EUR',
+                              }).format(product.price)}
+                            </p>
                             <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                                 Vedi Dettagli
                             </Link>

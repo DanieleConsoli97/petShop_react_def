@@ -5,6 +5,14 @@ import regioniItaliane from "../data/Regioni";
 import { useGlobalContext } from "../context/GlobalContext";
 import { Navigate,useNavigate } from "react-router-dom";
 
+
+const formatPrice = (price) => {
+    return new Intl.NumberFormat('it-IT', {
+        style: 'currency',
+        currency: 'EUR',
+    }).format(price);
+};
+
 // Componente principale per la gestione del checkout
 const CheckOut = () => {
     const { carrello } = useGlobalContext()
@@ -204,33 +212,34 @@ const CheckOut = () => {
                                     const { name, price, quantity } = product
                                     return (
                                         <li key={index} className="list-group-item d-flex justify-content-between lh-sm">
-                                            <div>
-                                                <h6 className="my-0">{name}</h6>
-                                                <small className="text-body-secondary fw-bold"> {` Quantità : ${quantity}`}</small>
-                                            </div>
-                                            <span className="text-body-secondary">{`${price * quantity} €`}</span>
-                                        </li>
+                                        <div>
+                                            <h6 className="my-0">{name}</h6>
+                                            <small className="text-body-secondary fw-bold"> {` Quantità : ${quantity}`}</small>
+                                        </div>
+                                        <span className="text-body-secondary">{formatPrice(price * quantity)}</span>
+                                    </li>
+                                    
                                     )
                                 })
 
                             }
                             <li className="list-group-item d-flex justify-content-between lh-sm">
-                                <div>
-                                    <small className="text-body-secondary fw-bold"> Costi di spedizione</small>
-                                </div>
-                                <span className="text-body-secondary">5 € </span>
+                               <div>
+                                  <small className="text-body-secondary fw-bold">Costi di spedizione</small>
+                               </div>
+                               <span className="text-body-secondary">{formatPrice(5.00)}</span>
                             </li>
                             <li className="list-group-item d-flex justify-content-between bg-body-tertiary">  {/*NOTE - promo code */}
                                 <div className="text-success">
                                     <h6 className="my-0">Promo code</h6>
                                     <small>EXAMPLECODE</small>
                                 </div>
-                                <span className="text-success">−$5</span>
+                                <span className="text-success">−{formatPrice(5)}</span>
                             </li>
 
                             <li className="list-group-item d-flex justify-content-between">
                                 <span>Totale (EUR)</span>
-                                <strong>{cartTotal.toFixed(2)} €</strong>
+                                <strong>{formatPrice(cartTotal)}</strong>
                             </li>
                         </ul>
 
@@ -452,7 +461,16 @@ const CheckOut = () => {
                                 </div>
                             )}
                             <hr className="my-4" />
-                            <button  className="w-100 btn btn-primary btn-lg" type="submit" >Procedi con l'ordine</button>
+                            <button className="w-100 btn btn-primary btn-lg" type="submit">
+                               <i className="bi bi-cart-check fs-3"></i> Procedi con l'ordine
+                            </button>
+
+
+
+
+
+
+
                         </form>
                     </div>
 

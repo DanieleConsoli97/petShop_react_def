@@ -286,6 +286,8 @@ const CheckOut = () => {
         console.log(value)
         setDiscount(value);
 
+        
+
     };
     return (
         <main>
@@ -334,8 +336,8 @@ const CheckOut = () => {
                                <div>
                                   <small className="text-body-secondary fw-bold">Costi di spedizione</small>
                                </div>
-                               <span className="text-body-secondary">{formatPrice(5.00)}</span>
-                            </li>
+                               {/* {product.discounted_price !== null ? <p className="price">{formatPrice(product.discounted_price)}</p> : <p className="price">{formatPrice(product.price)}</p>} */}
+                               </li>
                             {DiscountIsTrue.valid && (<li className="list-group-item d-flex justify-content-between bg-body-tertiary">  {/*NOTE - banner promo code */}
                                 <div className="text-success">
                                     <h6 className="my-0">Codice Sconto</h6>

@@ -18,7 +18,7 @@ const formatPrice = (price) => {
 // Componente principale per la gestione del checkout
 const CheckOut = () => {
 
-    const { carrello, rimuoviDalCarrello } = useGlobalContext()
+    const { carrello, rimuoviDalCarrello, svuotaCarrello } = useGlobalContext()
     // Gestione degli stati del form
     const [isBillingDifferent, setIsBillingDifferent] = useState(false); // Stato per gestire indirizzi di spedizione/fatturazione diversi
     const [errors, setErrors] = useState({}); // Stato per la gestione degli errori di validazione
@@ -185,7 +185,7 @@ const CheckOut = () => {
                 zipCode: shippingData.cap,
                 cartItems: cartItems,
                 discountCode: DiscountIsTrue?.valid ? DiscountIsTrue.discount.code : null,
-                shippingCost: 5.00
+                shippingCost: shippingCost
             };
 
             // Invio dei dati dell'ordine al server
@@ -211,6 +211,8 @@ const CheckOut = () => {
                         setErrors({});
                     }
                     navigate("/checkoutDone");
+                }).then(() => {
+                    svuotaCarrello(); // Svuota il carrello dopo l'ordine
                 })
                 .catch(error => {
                     console.error('Errore dettagliato:', error);
@@ -227,7 +229,9 @@ const CheckOut = () => {
             return total + (product.discounted_price !== null ? (product.discounted_price * product.quantity) : (product.price * product.quantity));
         }, 0);
 
-        const shippingCost = 5.00; // Costo di spedizione fisso
+        // Determina se la spedizione è gratuita (ordini >= 20€)
+        const isShippingFree = subtotal >= 20;
+        const shippingCost = isShippingFree ? 0 : 5.00;
 
         let total = subtotal + shippingCost;
 
@@ -237,10 +241,10 @@ const CheckOut = () => {
             total -= discountAmount;
         }
 
-        return total; // Restituisce il totale finale
+        return { total, isShippingFree, shippingCost }; // Restituisce il totale finale e lo stato della spedizione
 
     };
-    const cartTotal = calculateTotal();
+    const { total: cartTotal, isShippingFree, shippingCost } = calculateTotal();
 
     //NOTE - logica gestione codice sconto
     const handleDiscountSubmit = (e) => {   //NOTE - gestione validazione sconto se lo sconto è true viene visualizzato nel carrello se false non viene visualizzato 
@@ -312,10 +316,8 @@ const CheckOut = () => {
                                     const { name, quantity, slug } = product
                                     return (
                                         <li key={index} className="list-group-item d-flex justify-content-between lh-sm">
-
-                                       
                                             <div className="d-flex align-items-center">
-                                                <DeleteButton 
+                                                <DeleteButton
                                                     onHold={() => rimuoviDalCarrello(slug)}
                                                     style={{ marginRight: '10px' }}
                                                     aria-label="Rimuovi prodotto"
@@ -327,25 +329,30 @@ const CheckOut = () => {
                                             </div>
                                             <span className="text-body-secondary">{`${(product.discounted_price !== null ? product.discounted_price : product.price) * product.quantity} €`}</span>
                                         </li>
-
                                     )
                                 })
 
                             }
                             <li className="list-group-item d-flex justify-content-between lh-sm">
-                               <div>
-                                  <small className="text-body-secondary fw-bold">Costi di spedizione</small>
-                               </div>
-                               <p className="text-body-secondary fw-bold">{formatPrice(5)}</p>
-                               </li>
+
+                                <div>
+                                    <small className="text-body-secondary fw-bold"> Costi di spedizione</small>
+                                    {isShippingFree && <small className="text-success d-block">Spedizione gratuita!</small>}
+                                </div>
+                                <span className={isShippingFree ? "text-success" : "text-body-secondary"}>
+                                    {isShippingFree ? "0.00 €" : "5.00 €"}
+                                </span>
+
+                            </li>
+
                             {DiscountIsTrue.valid && (<li className="list-group-item d-flex justify-content-between bg-body-tertiary">  {/*NOTE - banner promo code */}
                                 <div className="text-success">
                                     <h6 className="my-0">Codice Sconto</h6>
                                     <small>{DiscountIsTrue.discount.code}</small>
                                 </div>
 
-                               
-                          
+
+
 
                                 <span className="text-success">{` - ${DiscountIsTrue.discount.discount} €`}</span>
                             </li>)}
@@ -575,7 +582,24 @@ const CheckOut = () => {
                                                 </div>
                                             )}
                                         </div>
-
+                                        <div className="col-12">
+                                            <label className="form-label">Codice Fiscale</label>
+                                            <input
+                                                type="text"
+                                                className={`form-control ${errors.billingCodiceFiscale ? 'is-invalid' : ''}`}
+                                                name="codiceFiscale"
+                                                value={billingData.codiceFiscale}
+                                                onChange={handleBillingChange}
+                                                placeholder="Inserisci il codice fiscale"
+                                                required
+                                                maxLength={16}
+                                            />
+                                            {errors.billingCodiceFiscale && (
+                                                <div className="invalid-feedback">
+                                                    {errors.billingCodiceFiscale}
+                                                </div>
+                                            )}
+                                        </div>
                                         <div className="col-12">
                                             <label className="form-label">Indirizzo</label>
                                             <input
@@ -643,6 +667,7 @@ const CheckOut = () => {
                                                 value={billingData.cap}
                                                 onChange={handleBillingChange}
                                                 required
+                                                maxLength={5}
                                             />
                                             {errors.billingCap && (
                                                 <div className="invalid-feedback">
@@ -650,52 +675,20 @@ const CheckOut = () => {
                                                 </div>
                                             )}
                                         </div>
-
-                                        <div className="col-12">
-                                            <label className="form-label">Codice Fiscale</label>
-                                            <input
-                                                type="text"
-                                                className={`form-control ${errors.billingCodiceFiscale ? 'is-invalid' : ''}`}
-                                                name="codiceFiscale"
-                                                value={billingData.codiceFiscale}
-                                                onChange={handleBillingChange}
-                                                placeholder="Inserisci il codice fiscale"
-                                                required
-                                                maxLength={16}
-                                            />
-                                            {errors.billingCodiceFiscale && (
-                                                <div className="invalid-feedback">
-                                                    {errors.billingCodiceFiscale}
-                                                </div>
-                                            )}
-                                        </div>
                                     </div>
                                 </div>
                             )}
                             <hr className="my-4" />
-
-                           
-
-
-
-
-
-
-
-
-
-                              {errors.submit && (
+                            {errors.submit && (
                                 <div className="alert alert-danger mb-3" role="alert">
                                     {errors.submit}
                                 </div>
                             )}
 
                             <button className="w-100 btn btn-primary btn-lg" type="submit">
-                             <i className="bi bi-cart-check fs-3"></i> Procedi con l'ordine
-                                
+                                <i className="bi bi-cart-check fs-3"></i> Procedi con l'ordine
 
                             </button>
-
                         </form>
                     </div>
 

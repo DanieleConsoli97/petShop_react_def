@@ -336,7 +336,7 @@ const CheckOut = () => {
                                <div>
                                   <small className="text-body-secondary fw-bold">Costi di spedizione</small>
                                </div>
-                               {/* {product.discounted_price !== null ? <p className="price">{formatPrice(product.discounted_price)}</p> : <p className="price">{formatPrice(product.price)}</p>} */}
+                               <p className="text-body-secondary fw-bold">{formatPrice(5)}</p>
                                </li>
                             {DiscountIsTrue.valid && (<li className="list-group-item d-flex justify-content-between bg-body-tertiary">  {/*NOTE - banner promo code */}
                                 <div className="text-success">

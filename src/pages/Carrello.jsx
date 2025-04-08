@@ -31,11 +31,7 @@ function Carrello() {
                 <img src={product.image_url} className="card-img-top" alt={product.name} />
                 <div className="card-body">
                   <h5 className="card-title">{product.name}</h5>
-
-                  <p className="card-text">Prezzo Unitario: {formatPrice(product.price)}</p>
-                  <p className="card-text">Prezzo Totale: {formatPrice(product.price * product.quantity)}</p>
-
-                  {product.discounted_price !== null ? <p className="card-text">{product.discounted_price}€</p> : <p className="price">{product.price}€</p>}
+                  {product.discounted_price !== null ? <p className="price">{formatPrice(product.discounted_price)}</p> : <p className="price">{formatPrice(product.price)}</p>}
                   <p className="card-text">Prezzo Totale: {product.discounted_price !== null ? (product.discounted_price * product.quantity) : (product.price * product.quantity).toFixed(2)} €</p>
 
                   <p className="card-text">Quantità:</p>

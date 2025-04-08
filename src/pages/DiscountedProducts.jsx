@@ -47,7 +47,7 @@ function DiscountedProducts() {
     if (error) return <p>Errore: {error}</p>;
 
     return (
-        <>  
+        <>
             <Banner />
             <h1 className='text-center my-4'>Prodotti in Promozione</h1>
 
@@ -81,8 +81,7 @@ function DiscountedProducts() {
                                     <div className="card-body">
                                         <h5 className="card-title">{product.name}</h5>
                                         <p className="card-text" style={{ fontWeight: 'bold' }}>
-                                            <span>Prezzo precedente: <del>{product.price} €</del></span>
-                                            {formatPrice(product.discounted_price)}
+                                           <p>Prezzo precedente:<del>{formatPrice(product.price)}</del></p>
 
                                         </p>
                                         <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">

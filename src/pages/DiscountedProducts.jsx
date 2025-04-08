@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import { GrSort } from "react-icons/gr";
+import Banner from "../components/Banner";
 
 // Helper function to format prices
 const formatPrice = (price) => {
@@ -33,14 +34,21 @@ function DiscountedProducts() {
     }, []);
 
     if (loading) return (
-        <div className="container d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+
+
+        <div
+            className="container d-flex justify-content-center align-items-center"
+            style={{ height: '100vh' }}
+        >
             <p>Caricamento...</p>
-        </div>
+        </div >
+
     );
     if (error) return <p>Errore: {error}</p>;
 
     return (
-        <>
+        <>  
+            <Banner />
             <h1 className='text-center my-4'>Prodotti in Promozione</h1>
 
             <div className="container d-flex justify-content-end mb-3">
@@ -59,12 +67,23 @@ function DiscountedProducts() {
                         {discountedProducts.map(product => (
                             <div className="col" key={product.id}>
                                 <div className="card h-100">
-                                    <img src={product.image_url} className="card-img-top" alt={product.name} />
+
+
+                                    <div className='promotion'>
+                                        <span>Offerta! </span>
+                                        <span>{product.discounted_price}</span>
+                                    </div>
+                                    <img
+                                        src={product.image_url}
+                                        className="card-img-top"
+                                        alt={product.name}
+                                    />
                                     <div className="card-body">
                                         <h5 className="card-title">{product.name}</h5>
-                                        <p className="card-text"><del>{formatPrice(product.price)}</del></p>
-                                        <p className="card-text text-success" style={{ fontWeight: 'bold' }}>
+                                        <p className="card-text" style={{ fontWeight: 'bold' }}>
+                                            <span>Prezzo precedente: <del>{product.price} €</del></span>
                                             {formatPrice(product.discounted_price)}
+
                                         </p>
                                         <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                                             Vedi Dettagli
@@ -87,7 +106,9 @@ function DiscountedProducts() {
                                 key={product.id}
                                 style={{
                                     borderRadius: '8px',
+
                                     marginBottom: '30px',
+
                                     padding: '20px',
                                     boxShadow: '0 6px 8px rgba(0,0,0,0.1)',
                                 }}

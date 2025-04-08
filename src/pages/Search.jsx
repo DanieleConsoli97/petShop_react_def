@@ -9,7 +9,7 @@ const Search = () => {
     const { term } = useParams(); // Parametro di ricerca
 
     const [products, setProducts] = useState([]);
-    const [discountedProducts, setDiscountedProducts] = useState([]); 
+    const [discountedProducts, setDiscountedProducts] = useState([]);
     const [showDiscountedProducts, setShowDiscountedProducts] = useState(false); // Stato per mostrare i prodotti scontati
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -44,19 +44,19 @@ const Search = () => {
     }, [term]);
 
     if (loading) return (
-        
-        <div 
-        className = "container d-flex justify-content-center align-items-center" 
-        style = {{ height: '100vh' }}
+
+        <div
+            className="container d-flex justify-content-center align-items-center"
+            style={{ height: '100vh' }}
         >
-    <p>Caricamento...</p>
-    </div >
+            <p>Caricamento...</p>
+        </div >
     );
     if (error) return <p>Errore: {error}</p>;
 
     // Se nessun prodotto corrisponde alla ricerca, mostriamo un messaggio
-    let prodottoTrovato = products.some(product => 
-        product.name.toLowerCase().includes(term.toLowerCase()) || 
+    let prodottoTrovato = products.some(product =>
+        product.name.toLowerCase().includes(term.toLowerCase()) ||
         product.description.toLowerCase().includes(term.toLowerCase())
     );
 
@@ -87,16 +87,16 @@ const Search = () => {
                 {displayedProducts.map(product => (
                     <div className={`products-card ${isGridView ? '' : 'list-item'}`} key={product.id}>
                         {product.discounted_price && (
-                            <div className='promotion'>Offerta!</div>
+                            <div className='promotion'>
+                                <span>Offerta! </span>
+                                <span><del>{product.price}</del></span>
+                            </div>
                         )}
                         <img src={product.image_url} className={`card-img-top ${isGridView ? '' : 'list-image'}`} alt={product.name} />
                         <div className={`card-body ${isGridView ? '' : 'list-body'}`}>
                             <h5 className="card-title">{product.name}</h5>
-                            {product.discounted_price ? (
-                                <p className="card-text">{product.discounted_price} €</p>
-                            ) : (
-                                <p className="card-text">{product.price} €</p>
-                            )}
+                            {product.discounted_price !== null ? <p className="card-text">{product.discounted_price}€</p> : <p className="price">{product.price}€</p>}
+
                             <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                                 Vedi Dettagli
                             </Link>

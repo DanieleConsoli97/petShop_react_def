@@ -31,24 +31,34 @@ function Carrello() {
                 <img src={product.image_url} className="card-img-top" alt={product.name} />
                 <div className="card-body">
                   <h5 className="card-title">{product.name}</h5>
+
                   <p className="card-text">Prezzo Unitario: {formatPrice(product.price)}</p>
                   <p className="card-text">Prezzo Totale: {formatPrice(product.price * product.quantity)}</p>
+
+                  {product.discounted_price !== null ? <p className="card-text">{product.discounted_price}€</p> : <p className="price">{product.price}€</p>}
+                  <p className="card-text">Prezzo Totale: {product.discounted_price !== null ? (product.discounted_price * product.quantity) : (product.price * product.quantity).toFixed(2)} €</p>
+
                   <p className="card-text">Quantità:</p>
 
                   {/* Bottoni per aumentare o diminuire la quantità con i simboli "+" e "-" */}
                   <div className="quantity-container">
                     <button
                       className="quantity-btn"
-                      onClick={() => handleQuantityChange(product.slug, product.quantity > 1 ? product.quantity - 1 : 1)}>
+                      onClick={() => handleQuantityChange(product.slug, product.quantity > 1 ? product.quantity - 1 : 1)}
+                      disabled={product.quantity <= 1}  // Disabilita il bottone "-" se la quantità è 1 o inferiore
+                    >
                       -
                     </button>
                     <span className="quantity-input">{product.quantity}</span>
                     <button
                       className="quantity-btn"
-                      onClick={() => handleQuantityChange(product.slug, product.quantity + 1)}>
+                      onClick={() => handleQuantityChange(product.slug, product.quantity < 10 ? product.quantity + 1 : 10)}  // Limita la quantità massima a 10
+                      disabled={product.quantity >= 10}  // Disabilita il bottone "+" se la quantità è 10 o superiore
+                    >
                       +
                     </button>
                   </div>
+
 
                   <div className="button-container">
                     <HoldButton

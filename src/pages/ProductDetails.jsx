@@ -9,6 +9,7 @@ import 'swiper/css';
 import 'swiper/css/scrollbar';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import Banner from '../components/Banner';
 
 function ProductDetail() {
   // Ottieni lo slug del prodotto dalla URL tramite useParams
@@ -105,10 +106,18 @@ function ProductDetail() {
   }
 
   return (
+    <>
+    <Banner />
     <div className="container">
       {/* Sezione dei dettagli del prodotto */}
       <div className="container-product my-4">
         <div className="product-detail d-flex">
+          {product.discounted_price && (
+            <div className='promotion'>
+              <span>Offerta! </span>
+              <span><del>{product.price}</del></span>
+            </div>
+          )}
           {/* Colonna sinistra: immagine del prodotto */}
           <div className="product-image-container">
             <img src={product?.image_url} className="product-image" alt={product.name} />
@@ -119,7 +128,9 @@ function ProductDetail() {
             <h1>{product.name}</h1>
             <h6>Brand: {product.brand}</h6>
             <p>{product.description}</p>
-            <p className="price">{formatPrice(product.price)}</p> {/* Prezzo formattato */}
+
+             
+            {product.discounted_price !== null ?}<p className="price">{formatPrice(product.discounted_price)}></p> : <p className="price">{formatPrice(product.price)}></p>}
 
             {/* Selettore quantità */}
             <div className="quantity-container">
@@ -134,6 +145,7 @@ function ProductDetail() {
               />
               <button className="quantity-btn" onClick={handleIncrease}>+</button>
             </div>
+           
 
             {/* Sezione dei bottoni con le icone */}
             <div className="buttons-container">
@@ -196,7 +208,12 @@ function ProductDetail() {
         </div>
       </div>
     </div>
+
+
+  </>
+
   );
+
 }
 
 export default ProductDetail;

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import { GrSort } from "react-icons/gr";
+import Banner from '../components/Banner';
 
 function ProductList() {
     const [products, setProducts] = useState([]);
@@ -28,6 +29,7 @@ function ProductList() {
             });
     }, []);
 
+
     // Funzione per formattare il prezzo come valuta
     const formatPrice = (price) => {
         return new Intl.NumberFormat('it-IT', {
@@ -46,8 +48,14 @@ function ProductList() {
 
     if (error) return <p>Errore: {error}</p>;
 
+   
+
+
+    
     return (
         <>
+            <Banner />
+
             <h1 className='text-center my-4'>Lista Prodotti</h1>
             <div className="container d-flex justify-content-end mb-3">
                 <button className={`btn btn-outline-success me-2 ${isGridView ? 'active' : ''}`} onClick={() => setIsGridView(true)}>
@@ -63,7 +71,10 @@ function ProductList() {
                         <img src={product.image_url} className={`card-img-top ${isGridView ? '' : 'list-image'}`} alt={product.name} />
                         <div className={`card-body ${isGridView ? '' : 'list-body'}`}>
                             <h5 className="card-title">{product.name}</h5>
-                            <p className="card-text">{formatPrice(product.price)}</p>
+
+                           {product.discounted_price !== null ?}<p className="price">{formatPrice(product.discounted_price)}></p> : <p className="price">{formatPrice(product.price)}></p>}
+
+
                             <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                                 Vedi Dettagli
                             </Link>
@@ -73,6 +84,7 @@ function ProductList() {
             </div>
         </>
     );
+
 }
 
 export default ProductList;

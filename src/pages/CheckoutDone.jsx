@@ -12,7 +12,8 @@ function CheckouDone() {
                         className="img-fluid mb-4"
                         style={{ maxWidth: '150px' }}
                     />
-                    <h1 className="display-4 mb-3">Ordine effettuato con successo!!</h1>
+                    <h1 className="display-4 mb-3">Grazie per aver scelto PawPlanet!</h1>
+                    <p className="lead mb-4">Il tuo ordine è stato ricevuto, a breve riceverai una mail di conferma.</p>
                     <p className="mb-4">Puoi tornare alla home page.</p>
                     <div className="mt-4">
                         <Link to="/" className="btn btn-primary my-4">Torna alla Home</Link>

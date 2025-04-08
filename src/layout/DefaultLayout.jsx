@@ -4,6 +4,7 @@ import PathNav from '../components/PathNav'
 import Footer from "../components/Footer"
 import ReactStateToast from "../components/Toasts"  // Importo il componente rinominato correttamente
 import { useGlobalContext } from "../context/GlobalContext"
+
 const DefaultLayout = () => {
     const location = useLocation();
     const { toastMessage } = useGlobalContext();
@@ -11,6 +12,7 @@ const DefaultLayout = () => {
     return (
         <>
             <Navbar />
+            
             {
                 location.pathname === "/" || location.pathname === "/404" || location.pathname.includes("*") ? <></> : <PathNav />
             }

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import { GrSort } from "react-icons/gr";
+import Banner from "../components/Banner";
 
 function CatFoodList() {
     const [catFood, setCatFood] = useState([]);
@@ -41,6 +42,7 @@ function CatFoodList() {
 
     return (
         <>
+            <Banner />
             <h1 className='text-center my-4'>Cibo per Gatti</h1>
             <div className="container d-flex justify-content-end mb-3">
                 <button className={`btn btn-outline-success me-2 ${isGridView ? 'active' : ''}`} onClick={() => setIsGridView(true)}>
@@ -56,12 +58,16 @@ function CatFoodList() {
                         <img src={product.image_url} className={`card-img-top ${isGridView ? '' : 'list-image'}`} alt={product.name} />
                         <div className={`card-body ${isGridView ? '' : 'list-body'}`}>
                             <h5 className="card-title">{product.name}</h5>
+
                             <p className="card-text">
                               {new Intl.NumberFormat('it-IT', {
                                 style: 'currency',
                                 currency: 'EUR',
                               }).format(product.price)}
                             </p>
+
+                            {product.discounted_price !== null ? <p className="card-text">{product.discounted_price}€</p> : <p className="price">{product.price}€</p>}
+
                             <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                                 Vedi Dettagli
                             </Link>

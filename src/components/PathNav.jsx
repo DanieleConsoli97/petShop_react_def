@@ -54,6 +54,14 @@ import { useLocation, Link } from "react-router-dom";
 const PathNav = () => {
   const location = useLocation();
 
+  // Array di percorsi dove non mostrare la breadcrumb
+  const hiddenPaths = ['/carrello', '/checkout', '/checkoutDone', '/wishlist'];
+  
+  // Se il percorso corrente è nella lista dei percorsi nascosti, non renderizzare nulla
+  if (hiddenPaths.includes(location.pathname)) {
+    return null;
+  }
+
   let currentLink = "";
   const pathItems = location.pathname.split('/').filter(crumb => crumb !== '');
   

@@ -3,7 +3,10 @@
 import { useState } from "react";
 import regioniItaliane from "../data/Regioni";
 import { useGlobalContext } from "../context/GlobalContext";
-import { Navigate,useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import footprint from "/footprint.png";
+import DeleteButton from "../components/DeleteButton";
+
 
 
 const formatPrice = (price) => {
@@ -12,15 +15,16 @@ const formatPrice = (price) => {
         currency: 'EUR',
     }).format(price);
 };
-
 // Componente principale per la gestione del checkout
 const CheckOut = () => {
-    const { carrello } = useGlobalContext()
 
+    const { carrello, rimuoviDalCarrello } = useGlobalContext()
     // Gestione degli stati del form
     const [isBillingDifferent, setIsBillingDifferent] = useState(false); // Stato per gestire indirizzi di spedizione/fatturazione diversi
     const [errors, setErrors] = useState({}); // Stato per la gestione degli errori di validazione
-
+    //NOTE gestione variabili sconto
+    const [DiscountIsTrue, setDiscountisTrue] = useState({}); // Stato per il filtro sconto
+    const [Discount, setDiscount] = useState(false); // Sconto inserito
     // Stato per i dati di spedizione
     const [shippingData, setShippingData] = useState({
         nome: '',
@@ -40,7 +44,8 @@ const CheckOut = () => {
         indirizzo: '',
         citta: '',
         regione: '',
-        cap: ''
+        cap: '',
+        codiceFiscale: ''
     });
 
     // Handler per l'aggiornamento dei dati di spedizione
@@ -67,16 +72,21 @@ const CheckOut = () => {
 
     // Funzioni di validazione per i campi del form
     const validateEmail = (email) => {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+€/;
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
     };
 
     const validateCAP = (cap) => {
-        return /^\d{5}€/.test(cap);
+        return /^\d{5}$/.test(cap);
     };
 
     const validateName = (name) => {
-        return /^[A-Za-zÀ-ÿ\s]+€/.test(name);
+        return /^[A-Za-zÀ-ÿ\s]+$/.test(name);
+    };
+
+    const validateCodiceFiscale = (cf) => {
+        // Validazione semplificata del codice fiscale italiano (16 caratteri alfanumerici)
+        return /^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$/i.test(cf);
     };
 
     // Funzione principale di validazione del form
@@ -111,15 +121,36 @@ const CheckOut = () => {
 
         // Validazione campi fatturazione se necessario
         if (isBillingDifferent) {
+            if (!billingData.nome.trim()) {
+                newErrors.billingNome = "Il nome è obbligatorio";
+            } else if (!validateName(billingData.nome)) {
+                newErrors.billingNome = "Il nome può contenere solo lettere e spazi";
+            }
+            if (!billingData.cognome.trim()) {
+                newErrors.billingCognome = "Il cognome è obbligatorio";
+            } else if (!validateName(billingData.cognome)) {
+                newErrors.billingCognome = "Il cognome può contenere solo lettere e spazi";
+            }
             if (!billingData.indirizzo.trim()) newErrors.billingIndirizzo = "L'indirizzo di fatturazione è obbligatorio";
-            if (!billingData.citta.trim()) newErrors.billingCitta = "Il codice fiscale/P.IVA è obbligatorio";
+            if (!billingData.citta.trim()) newErrors.billingCitta = "La città è obbligatoria";
+            if (!billingData.regione) newErrors.billingRegione = "La regione è obbligatoria";
+            if (!billingData.cap.trim()) {
+                newErrors.billingCap = "Il CAP è obbligatorio";
+            } else if (!validateCAP(billingData.cap)) {
+                newErrors.billingCap = "Il CAP deve essere composto da 5 numeri";
+            }
+            if (!billingData.codiceFiscale.trim()) {
+                newErrors.billingCodiceFiscale = "Il codice fiscale è obbligatorio";
+            } else if (!validateCodiceFiscale(billingData.codiceFiscale)) {
+                newErrors.billingCodiceFiscale = "Inserisci un codice fiscale valido (16 caratteri)";
+            }
         }
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
-    //FIXME - Dati di esempio del carrello (da sostituire con dati reali)
+    //NOTE - Dati carrello 
     const cartItems = carrello
     // Handler per la gestione dell'invio del form
     const handleSubmit = (e) => {
@@ -132,7 +163,14 @@ const CheckOut = () => {
 
             // Preparazione dei dati per l'invio
             const shippingAddressFormatted = formatAddress(shippingData);
-            const billingAddressFormatted = isBillingDifferent ? billingData.indirizzo : shippingAddressFormatted;
+
+            // Formattazione dell'indirizzo di fatturazione completo se diverso
+            let billingAddressFormatted;
+            if (isBillingDifferent) {
+                billingAddressFormatted = `${billingData.indirizzo}, ${billingData.cap} ${billingData.citta}, ${billingData.regione}, ${shippingData.paese}`;
+            } else {
+                billingAddressFormatted = shippingAddressFormatted;
+            }
 
             // Costruzione dell'oggetto ordine 
             const orderData = {
@@ -146,9 +184,9 @@ const CheckOut = () => {
                 city: shippingData.citta,
                 zipCode: shippingData.cap,
                 cartItems: cartItems,
-                discountCodeId: null,
-                shippingCost: 5.00, // Costo fisso di spedizione
-            }
+                discountCode: DiscountIsTrue?.valid ? DiscountIsTrue.discount.code : null,
+                shippingCost: 5.00
+            };
 
             // Invio dei dati dell'ordine al server
             fetch('http://localhost:3000/prodotti/orders', {
@@ -168,6 +206,10 @@ const CheckOut = () => {
                 })
                 .then(data => {
                     console.log('Ordine creato con successo:', data);
+                    if (data.shippingFree) {
+                        // Mostra un messaggio di successo per la spedizione gratuita
+                        setErrors({});
+                    }
                     navigate("/checkoutDone");
                 })
                 .catch(error => {
@@ -182,20 +224,76 @@ const CheckOut = () => {
     };
     const calculateTotal = () => {
         const subtotal = carrello.reduce((total, product) => {
-            return total + (product.price * product.quantity);
+            return total + (product.discounted_price !== null ? (product.discounted_price * product.quantity) : (product.price * product.quantity));
         }, 0);
 
         const shippingCost = 5.00; // Costo di spedizione fisso
-        return subtotal + shippingCost;
+
+        let total = subtotal + shippingCost;
+
+        // Applica lo sconto SOLO se valido e presente
+        if (DiscountIsTrue?.valid && DiscountIsTrue.discount?.discount) {
+            const discountAmount = parseFloat(DiscountIsTrue.discount.discount);
+            total -= discountAmount;
+        }
+
+        return total; // Restituisce il totale finale
+
     };
     const cartTotal = calculateTotal();
+
+    //NOTE - logica gestione codice sconto
+    const handleDiscountSubmit = (e) => {   //NOTE - gestione validazione sconto se lo sconto è true viene visualizzato nel carrello se false non viene visualizzato 
+        e.preventDefault();
+        fetch('http://localhost:3000/prodotti/validateDiscountCode', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ discountCode: Discount })
+        }
+        ).then(response => {
+            // if (!response.ok) {
+            //     return response.text().then(text => {
+            //         throw new Error(text || 'errore durante l\'inserimento del codice sconto');
+            //     });
+            // }
+            if (!response.ok) {
+                return {
+                    ok: false,
+                    message: 'errore durante l\'inserimento del codice sconto'
+                };
+            }
+            return response.json();
+        }).then(data => {
+
+            if (data.valid) {
+                setDiscountisTrue(data);
+
+                console.log("sconto valido")
+            } else {
+                setDiscountisTrue({ "valid": false });
+                console.log("sconto non valido")
+            }
+        })
+
+        console.log(DiscountIsTrue)
+        console.log("sconto inserito")
+
+    }
+    const handleDiscountChange = (e) => {
+        const { value } = e.target;
+        console.log(value)
+        setDiscount(value);
+
+    };
     return (
         <main>
             <div className="container">
                 <div className="py-5 text-center">
                     <img className="d-block mx-auto mb-4" src="/Planet_1.png" alt="" width="90" height="90" />
-                    <h2>Checkout</h2>
-                    <p className="lead">Ci sei quasi... Inserisci i dati per la spedizione</p>
+                    <span className="lead">Ci sei quasi... Inserisci i dati per la spedizione </span>
+                    <img src={footprint} alt="" width="30" height="30" />
                 </div>
                 <div className="row g-5">
                     <div className="col-md-5 col-lg-4 order-md-last">
@@ -209,16 +307,25 @@ const CheckOut = () => {
 
                             {
                                 carrello.map((product, index) => {
-                                    const { name, price, quantity } = product
+                                    const { name, quantity, slug } = product
                                     return (
                                         <li key={index} className="list-group-item d-flex justify-content-between lh-sm">
-                                        <div>
-                                            <h6 className="my-0">{name}</h6>
-                                            <small className="text-body-secondary fw-bold"> {` Quantità : ${quantity}`}</small>
-                                        </div>
-                                        <span className="text-body-secondary">{formatPrice(price * quantity)}</span>
-                                    </li>
-                                    
+
+                                       
+                                            <div className="d-flex align-items-center">
+                                                <DeleteButton 
+                                                    onHold={() => rimuoviDalCarrello(slug)}
+                                                    style={{ marginRight: '10px' }}
+                                                    aria-label="Rimuovi prodotto"
+                                                />
+                                                <div>
+                                                    <h6 className="my-0">{name}</h6>
+                                                    <small className="text-body-secondary fw-bold"> {` Quantità : ${quantity}`}</small>
+                                                </div>
+                                            </div>
+                                            <span className="text-body-secondary">{`${(product.discounted_price !== null ? product.discounted_price : product.price) * product.quantity} €`}</span>
+                                        </li>
+
                                     )
                                 })
 
@@ -229,13 +336,18 @@ const CheckOut = () => {
                                </div>
                                <span className="text-body-secondary">{formatPrice(5.00)}</span>
                             </li>
-                            <li className="list-group-item d-flex justify-content-between bg-body-tertiary">  {/*NOTE - promo code */}
+                            {DiscountIsTrue.valid && (<li className="list-group-item d-flex justify-content-between bg-body-tertiary">  {/*NOTE - banner promo code */}
                                 <div className="text-success">
-                                    <h6 className="my-0">Promo code</h6>
-                                    <small>EXAMPLECODE</small>
+                                    <h6 className="my-0">Codice Sconto</h6>
+                                    <small>{DiscountIsTrue.discount.code}</small>
                                 </div>
-                                <span className="text-success">−{formatPrice(5)}</span>
-                            </li>
+
+                               
+                          
+
+                                <span className="text-success">{` - ${DiscountIsTrue.discount.discount} €`}</span>
+                            </li>)}
+
 
                             <li className="list-group-item d-flex justify-content-between">
                                 <span>Totale (EUR)</span>
@@ -243,10 +355,15 @@ const CheckOut = () => {
                             </li>
                         </ul>
 
-                        <form className="card p-2">                                               {/* NOTE - pulsante agguinta promocode*/}
+                        <form onSubmit={handleDiscountSubmit} className="card p-2">
                             <div className="input-group">
-                                <input type="text" className="form-control" placeholder="Promo code" />
-                                <button type="submit" className="btn btn-secondary">Redeem</button>
+                                <input type="text" className={`form-control ${DiscountIsTrue?.valid === false ? 'is-invalid' : ''}`} placeholder="Promo code" onChange={handleDiscountChange} />
+                                {DiscountIsTrue?.valid === false && (
+                                    <div className="invalid-feedback">
+                                        {DiscountIsTrue.message || "Codice sconto non valido"}
+                                    </div>
+                                )}
+                                <button type="submit" className="btn btn-secondary">Aggiungi</button>
                             </div>
                         </form>
                     </div>
@@ -406,32 +523,66 @@ const CheckOut = () => {
 
                             <hr className="my-4" />
 
-                            <div className="form-check">
+                            <div className="form-check mb-3">
                                 <input
                                     type="checkbox"
                                     className="form-check-input"
-                                    id="same-address"
+                                    id="billing-different"
                                     checked={isBillingDifferent}
-                                    onChange={(e) => setIsBillingDifferent(e.target.checked)}
+                                    onChange={() => setIsBillingDifferent(!isBillingDifferent)}
                                 />
-                                <label className="form-check-label">
-                                    L'indirizzo di spedizione è diverso dall'indirizzo di fatturazione?
+                                <label className="form-check-label" htmlFor="billing-different">
+                                    Indirizzo di fatturazione diverso da quello di spedizione
                                 </label>
                             </div>
 
                             {isBillingDifferent && (
-                                <div className="billing-address mt-4">
-                                    <h4 className="mb-3">Indirizzo di fatturazione</h4>
+                                <div className="billing-section mt-4">
+                                    <h4 className="mb-3">Dati di fatturazione</h4>
                                     <div className="row g-3">
+                                        <div className="col-sm-6">
+                                            <label className="form-label">Nome</label>
+                                            <input
+                                                type="text"
+                                                className={`form-control ${errors.billingNome ? 'is-invalid' : ''}`}
+                                                name="nome"
+                                                value={billingData.nome}
+                                                onChange={handleBillingChange}
+                                                required
+                                            />
+                                            {errors.billingNome && (
+                                                <div className="invalid-feedback">
+                                                    {errors.billingNome}
+                                                </div>
+                                            )}
+                                        </div>
 
-                                        <div className="col-lg-6 col-md-12 col-sm-12">
-                                            <label className="form-label">Indirizzo di fatturazione</label>
+                                        <div className="col-sm-6">
+                                            <label className="form-label">Cognome</label>
+                                            <input
+                                                type="text"
+                                                className={`form-control ${errors.billingCognome ? 'is-invalid' : ''}`}
+                                                name="cognome"
+                                                value={billingData.cognome}
+                                                onChange={handleBillingChange}
+                                                required
+                                            />
+                                            {errors.billingCognome && (
+                                                <div className="invalid-feedback">
+                                                    {errors.billingCognome}
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div className="col-12">
+                                            <label className="form-label">Indirizzo</label>
                                             <input
                                                 type="text"
                                                 className={`form-control ${errors.billingIndirizzo ? 'is-invalid' : ''}`}
                                                 name="indirizzo"
                                                 value={billingData.indirizzo}
                                                 onChange={handleBillingChange}
+                                                placeholder="via ..."
                                                 required
                                             />
                                             {errors.billingIndirizzo && (
@@ -441,8 +592,8 @@ const CheckOut = () => {
                                             )}
                                         </div>
 
-                                        <div className="col-lg-6 col-md-12 col-sm-12">
-                                            <label className="form-label">Codice fiscale o partita IVA</label>
+                                        <div className="col-md-6">
+                                            <label className="form-label">Città</label>
                                             <input
                                                 type="text"
                                                 className={`form-control ${errors.billingCitta ? 'is-invalid' : ''}`}
@@ -457,19 +608,91 @@ const CheckOut = () => {
                                                 </div>
                                             )}
                                         </div>
+
+                                        <div className="col-md-6">
+                                            <label className="form-label">Regione</label>
+                                            <select
+                                                className={`form-select ${errors.billingRegione ? 'is-invalid' : ''}`}
+                                                name="regione"
+                                                value={billingData.regione}
+                                                onChange={handleBillingChange}
+                                                required
+                                            >
+                                                <option value="">Scegli Regione</option>
+                                                {regioniItaliane?.map((regione, index) => (
+                                                    <option key={`billing-${index}`} value={regione.nome}>
+                                                        {regione.nome}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                            {errors.billingRegione && (
+                                                <div className="invalid-feedback">
+                                                    {errors.billingRegione}
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div className="col-md-6">
+                                            <label className="form-label">CAP</label>
+                                            <input
+                                                type="text"
+                                                className={`form-control ${errors.billingCap ? 'is-invalid' : ''}`}
+                                                name="cap"
+                                                value={billingData.cap}
+                                                onChange={handleBillingChange}
+                                                required
+                                            />
+                                            {errors.billingCap && (
+                                                <div className="invalid-feedback">
+                                                    {errors.billingCap}
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div className="col-12">
+                                            <label className="form-label">Codice Fiscale</label>
+                                            <input
+                                                type="text"
+                                                className={`form-control ${errors.billingCodiceFiscale ? 'is-invalid' : ''}`}
+                                                name="codiceFiscale"
+                                                value={billingData.codiceFiscale}
+                                                onChange={handleBillingChange}
+                                                placeholder="Inserisci il codice fiscale"
+                                                required
+                                                maxLength={16}
+                                            />
+                                            {errors.billingCodiceFiscale && (
+                                                <div className="invalid-feedback">
+                                                    {errors.billingCodiceFiscale}
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             )}
                             <hr className="my-4" />
+
+                           
+
+
+
+
+
+
+
+
+
+                              {errors.submit && (
+                                <div className="alert alert-danger mb-3" role="alert">
+                                    {errors.submit}
+                                </div>
+                            )}
+
                             <button className="w-100 btn btn-primary btn-lg" type="submit">
-                               <i className="bi bi-cart-check fs-3"></i> Procedi con l'ordine
+                             <i className="bi bi-cart-check fs-3"></i> Procedi con l'ordine
+                                
+
                             </button>
-
-
-
-
-
-
 
                         </form>
                     </div>

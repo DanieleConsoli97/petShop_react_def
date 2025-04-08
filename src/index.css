@@ -177,7 +177,7 @@
 /*PRODUCT LIST */
 .promotion{
   position: absolute;
-  top: 10px;
+  top: 20px;
   left: 10px;
   background-color: #ff4d4d; /* Colore di sfondo rosso */
   color: white; /* Testo bianco */
@@ -284,10 +284,79 @@
 /* BREADCRUMB */
 .breadcrumb-chevron {
   background-color: #F9F5EC !important;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
-  width: 80% !important;
+  width: 100% !important;
   margin: 0 auto !important;
+}
+
+/* Banner styles */
+.shipping-banner {
+  background-image: url('./paws.jpg'); 
+  background-position: 0% 50% ; 
+  margin-top : 20px;
+  width: 60%;
+  height: 100px; 
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 8px; 
+  overflow: hidden;
+}
+
+.shipping-text {
+  color: #3f8858;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.shipping-text h3 {
+  margin: 0; 
+}
+
+.shipping-text p {
+  margin: 5px 0 0 0; 
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  color: #3f8858;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 5px;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  color: #1d5f34
+}
+
+.close-btn:focus {
+  outline: none; 
+}
+
+/*lista prodotti visualizzazione in lista */
+.btn-success {
+  background: #D4A017 !important;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border: none !important;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.btn-succes:hover {
+  background: #e0a800 !important;
 }
 
 /* CONTENITORE DETTAGLIO PRODOTTO */
@@ -297,7 +366,7 @@
   margin: 0 auto;
   /* Assicura che il contenitore sia centrato */
   border-radius: 10px;
-  max-width: 1200px;
+  max-width: 1400px;
   /* Limita la larghezza massima per evitare allungamenti */
 }
 
@@ -309,6 +378,7 @@
   justify-content: center;
   gap: 4rem;
   padding: 2rem;
+  position: relative;
 }
 
 .product-image-container {
@@ -400,7 +470,6 @@
 /* Bottoni arancioni */
 .btn-primary {
   background: #D4A017 !important;
-  /* Bottone arancione */
   font-weight: bold;
   padding: 0.75rem 1.5rem;
   border: none !important;
@@ -428,6 +497,27 @@
 
 /* Media queries */
 @media (max-width: 768px) {
+
+  /*sidebar*/
+  .shipping-banner {
+    width: 90%; 
+    height: 80px; 
+    background-position: 20% 50%;
+  }
+
+  .shipping-text{
+    font-size: 12px; 
+  }
+
+  .shipping-text h3 {
+    font-size: 16px; 
+  }
+
+  .close-btn {
+    font-size: 18px; 
+    top: 8px; 
+    right: 8px; 
+  }
 
   .hero-container {
     height: 70vh;
@@ -589,10 +679,32 @@
     /* opzionale */
   }
 
+  .row.g-0 {
+    flex-direction: column;
+  }
+
+  .col-md-4 img {
+    height: 200px !important;
+  }
+
 }
 
 /* Per schermi medio-grandi (tablet, piccoli desktop) */
 @media (min-width: 769px) and (max-width: 1024px) {
+   /*sidebar*/
+   .shipping-banner {
+    
+    background-position: 30% 50%;
+  }
+
+  .shipping-text{
+    font-size: 18px; 
+  }
+
+  .shipping-text h3 {
+    font-size: 20px; 
+  }
+
   .hero-container {
     height: 70vh;
     background-position: 55% 50%;

@@ -6,6 +6,15 @@ import { useGlobalContext } from "../context/GlobalContext";
 import { Navigate, useNavigate } from "react-router-dom";
 import footprint from "/footprint.png";
 import DeleteButton from "../components/DeleteButton";
+
+
+
+const formatPrice = (price) => {
+    return new Intl.NumberFormat('it-IT', {
+        style: 'currency',
+        currency: 'EUR',
+    }).format(price);
+};
 // Componente principale per la gestione del checkout
 const CheckOut = () => {
 
@@ -303,6 +312,8 @@ const CheckOut = () => {
                                     const { name, quantity, slug } = product
                                     return (
                                         <li key={index} className="list-group-item d-flex justify-content-between lh-sm">
+
+                                       
                                             <div className="d-flex align-items-center">
                                                 <DeleteButton 
                                                     onHold={() => rimuoviDalCarrello(slug)}
@@ -316,6 +327,7 @@ const CheckOut = () => {
                                             </div>
                                             <span className="text-body-secondary">{`${(product.discounted_price !== null ? product.discounted_price : product.price) * product.quantity} €`}</span>
                                         </li>
+
                                     )
                                 })
 
@@ -328,18 +340,24 @@ const CheckOut = () => {
                                 <span className={isShippingFree ? "text-success" : "text-body-secondary"}>
                                     {isShippingFree ? "0.00 €" : "5.00 €"}
                                 </span>
+
                             </li>
                             {DiscountIsTrue.valid && (<li className="list-group-item d-flex justify-content-between bg-body-tertiary">  {/*NOTE - banner promo code */}
                                 <div className="text-success">
                                     <h6 className="my-0">Codice Sconto</h6>
                                     <small>{DiscountIsTrue.discount.code}</small>
                                 </div>
+
+                               
+                          
+
                                 <span className="text-success">{` - ${DiscountIsTrue.discount.discount} €`}</span>
                             </li>)}
 
+
                             <li className="list-group-item d-flex justify-content-between">
                                 <span>Totale (EUR)</span>
-                                <strong>{cartTotal.toFixed(2)} €</strong>
+                                <strong>{formatPrice(cartTotal)}</strong>
                             </li>
                         </ul>
 
@@ -660,15 +678,28 @@ const CheckOut = () => {
                             )}
                             <hr className="my-4" />
 
-                            {errors.submit && (
+                           
+
+
+
+
+
+
+
+
+
+                              {errors.submit && (
                                 <div className="alert alert-danger mb-3" role="alert">
                                     {errors.submit}
                                 </div>
                             )}
 
                             <button className="w-100 btn btn-primary btn-lg" type="submit">
-                                Completa l'ordine
+                             <i className="bi bi-cart-check fs-3"></i> Procedi con l'ordine
+                                
+
                             </button>
+
                         </form>
                     </div>
 

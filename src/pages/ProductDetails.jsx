@@ -23,6 +23,15 @@ function ProductDetail() {
 
   const { aggiungiAlCarrello, aggiungiAllaWishList } = useGlobalContext();
 
+  // Funzione per formattare il prezzo
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('it-IT', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 2
+    }).format(price);
+  };
+
   // Scroll in alto quando lo slug cambia
   useEffect(() => {
     window.scrollTo(0, 0); // Scorri verso l'alto
@@ -84,6 +93,7 @@ function ProductDetail() {
   const handleAddToWishlist = () => {
     aggiungiAllaWishList(product); // Aggiungi alla wishlist   
   }
+  
   if (!product) {
     return (
       <div
@@ -94,7 +104,6 @@ function ProductDetail() {
       </div >
     );
   }
-
 
   return (
     <>
@@ -119,7 +128,10 @@ function ProductDetail() {
             <h1>{product.name}</h1>
             <h6>Brand: {product.brand}</h6>
             <p>{product.description}</p>
-            {product.discounted_price !== null ? <p className="card-text">{product.discounted_price}€</p> : <p className="price">{product.price}€</p>}
+
+             
+            {product.discounted_price !== null ? <p className="price">{formatPrice(product.discounted_price)}</p> : <p className="price">{formatPrice(product.price)}</p>}
+
             {/* Selettore quantità */}
             <div className="quantity-container">
               <button className="quantity-btn" onClick={handleDecrease}>-</button>
@@ -133,10 +145,19 @@ function ProductDetail() {
               />
               <button className="quantity-btn" onClick={handleIncrease}>+</button>
             </div>
-            <button onClick={handleAddToCart} className="btn btn-primary mt-3">Aggiungi al Carrello</button>
-            {/* Aggiungi alla wishlist */}
-            <span onClick={handleAddToWishlist} className="btn btn-primary mt-3 mx-2">Aggiungi alla Wishlist</span>
+           
 
+            {/* Sezione dei bottoni con le icone */}
+            <div className="buttons-container">
+              <button onClick={handleAddToCart} className="btn-icon-text green-btn">
+                <i className="fas fa-cart-plus"></i>
+                Aggiungi al Carrello
+              </button>
+              <button onClick={handleAddToWishlist} className="btn-icon-text red-btn">
+                <i className={`fas fa-heart ${product.in_wishlist ? "filled" : ""}`}></i>
+                Aggiungi alla Wishlist
+              </button>
+            </div>
           </div>
         </div>
 
@@ -174,11 +195,10 @@ function ProductDetail() {
                     <img src={relatedProduct.image_url} className="card-img-top" alt={relatedProduct.name} />
                     <div className="card-body">
                       <h5 className="card-title">{relatedProduct.name}</h5>
-                      <p className="card-text">{relatedProduct.price} €</p>
+                      <p className="card-text">{formatPrice(relatedProduct.price)}</p> {/* Prezzo formattato */}
                       <Link to={`/prodotti/${relatedProduct.slug}`} className="btn btn-primary">
                         Vedi Dettagli
                       </Link>
-
                     </div>
                   </div>
                 </SwiperSlide>
@@ -188,7 +208,10 @@ function ProductDetail() {
         </div>
       </div>
     </div>
+
+
   </>
+
   );
 
 }

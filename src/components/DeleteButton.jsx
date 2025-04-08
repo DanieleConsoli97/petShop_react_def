@@ -98,8 +98,13 @@ const DeleteButton = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        border: '2px solid #dc3545',
+        backgroundColor: 'white',
+        transition: 'background-color 0.3s ease',
         ...style
       }}
+      onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#ffeeee'}
+      onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'white'}
       onMouseDown={startHolding}
       onMouseUp={stopHolding}
       onMouseLeave={stopHolding}
@@ -110,7 +115,7 @@ const DeleteButton = ({
     >
       {/* Icona del cestino */}
       <div className="button-content">
-        <RiDeleteBin2Line size={18} />
+        <RiDeleteBin2Line size={18} color="#dc3545" />
       </div>
       
       {/* Indicatore di progresso circolare */}

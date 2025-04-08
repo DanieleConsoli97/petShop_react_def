@@ -18,7 +18,7 @@ const formatPrice = (price) => {
 // Componente principale per la gestione del checkout
 const CheckOut = () => {
 
-    const { carrello, rimuoviDalCarrello } = useGlobalContext()
+    const { carrello, rimuoviDalCarrello, svuotaCarrello } = useGlobalContext()
     // Gestione degli stati del form
     const [isBillingDifferent, setIsBillingDifferent] = useState(false); // Stato per gestire indirizzi di spedizione/fatturazione diversi
     const [errors, setErrors] = useState({}); // Stato per la gestione degli errori di validazione
@@ -211,6 +211,8 @@ const CheckOut = () => {
                         setErrors({});
                     }
                     navigate("/checkoutDone");
+                }).then(() => {
+                    svuotaCarrello(); // Svuota il carrello dopo l'ordine
                 })
                 .catch(error => {
                     console.error('Errore dettagliato:', error);
@@ -312,10 +314,8 @@ const CheckOut = () => {
                                     const { name, quantity, slug } = product
                                     return (
                                         <li key={index} className="list-group-item d-flex justify-content-between lh-sm">
-
-                                       
                                             <div className="d-flex align-items-center">
-                                                <DeleteButton 
+                                                <DeleteButton
                                                     onHold={() => rimuoviDalCarrello(slug)}
                                                     style={{ marginRight: '10px' }}
                                                     aria-label="Rimuovi prodotto"
@@ -327,7 +327,6 @@ const CheckOut = () => {
                                             </div>
                                             <span className="text-body-secondary">{`${(product.discounted_price !== null ? product.discounted_price : product.price) * product.quantity} €`}</span>
                                         </li>
-
                                     )
                                 })
 
@@ -348,8 +347,8 @@ const CheckOut = () => {
                                     <small>{DiscountIsTrue.discount.code}</small>
                                 </div>
 
-                               
-                          
+
+
 
                                 <span className="text-success">{` - ${DiscountIsTrue.discount.discount} €`}</span>
                             </li>)}
@@ -579,7 +578,24 @@ const CheckOut = () => {
                                                 </div>
                                             )}
                                         </div>
-
+                                        <div className="col-12">
+                                            <label className="form-label">Codice Fiscale</label>
+                                            <input
+                                                type="text"
+                                                className={`form-control ${errors.billingCodiceFiscale ? 'is-invalid' : ''}`}
+                                                name="codiceFiscale"
+                                                value={billingData.codiceFiscale}
+                                                onChange={handleBillingChange}
+                                                placeholder="Inserisci il codice fiscale"
+                                                required
+                                                maxLength={16}
+                                            />
+                                            {errors.billingCodiceFiscale && (
+                                                <div className="invalid-feedback">
+                                                    {errors.billingCodiceFiscale}
+                                                </div>
+                                            )}
+                                        </div>
                                         <div className="col-12">
                                             <label className="form-label">Indirizzo</label>
                                             <input
@@ -647,6 +663,7 @@ const CheckOut = () => {
                                                 value={billingData.cap}
                                                 onChange={handleBillingChange}
                                                 required
+                                                maxLength={5}
                                             />
                                             {errors.billingCap && (
                                                 <div className="invalid-feedback">
@@ -654,52 +671,20 @@ const CheckOut = () => {
                                                 </div>
                                             )}
                                         </div>
-
-                                        <div className="col-12">
-                                            <label className="form-label">Codice Fiscale</label>
-                                            <input
-                                                type="text"
-                                                className={`form-control ${errors.billingCodiceFiscale ? 'is-invalid' : ''}`}
-                                                name="codiceFiscale"
-                                                value={billingData.codiceFiscale}
-                                                onChange={handleBillingChange}
-                                                placeholder="Inserisci il codice fiscale"
-                                                required
-                                                maxLength={16}
-                                            />
-                                            {errors.billingCodiceFiscale && (
-                                                <div className="invalid-feedback">
-                                                    {errors.billingCodiceFiscale}
-                                                </div>
-                                            )}
-                                        </div>
                                     </div>
                                 </div>
                             )}
                             <hr className="my-4" />
-
-                           
-
-
-
-
-
-
-
-
-
-                              {errors.submit && (
+                            {errors.submit && (
                                 <div className="alert alert-danger mb-3" role="alert">
                                     {errors.submit}
                                 </div>
                             )}
 
                             <button className="w-100 btn btn-primary btn-lg" type="submit">
-                             <i className="bi bi-cart-check fs-3"></i> Procedi con l'ordine
-                                
+                                <i className="bi bi-cart-check fs-3"></i> Procedi con l'ordine
 
                             </button>
-
                         </form>
                     </div>
 

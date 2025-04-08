@@ -30,15 +30,19 @@ function DogGamesList() {
     }, []);
 
     if (loading) return (
-        
         <div 
-        className = "container d-flex justify-content-center align-items-center" 
-        style = {{ height: '100vh' }}
+        className="container d-flex justify-content-center align-items-center" 
+        style={{ height: '100vh' }}
         >
-    <p>Caricamento...</p>
-    </div >
+            <p>Caricamento...</p>
+        </div>
     );
     if (error) return <p>Errore: {error}</p>;
+
+    // Function to format price
+    const formatPrice = (price) => {
+        return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(price);
+    };
 
     return (
         <>
@@ -58,7 +62,11 @@ function DogGamesList() {
                         <img src={product.image_url} className={`card-img-top ${isGridView ? '' : 'list-image'}`} alt={product.name} />
                         <div className={`card-body ${isGridView ? '' : 'list-body'}`}>
                             <h5 className="card-title">{product.name}</h5>
-                            {product.discounted_price !== null ? <p className="card-text">{product.discounted_price}€</p> : <p className="price">{product.price}€</p>}
+
+                             
+
+                            {product.discounted_price !== null ? <p className="card-text">{formatPrice(product.discounted_price)}></p> :  <p className="card-text">{formatPrice(product.price)}</p>}
+
                             <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                                 Vedi Dettagli
                             </Link>

@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import { GrSort } from "react-icons/gr";
 import Banner from "../components/Banner";
+
+// Helper function to format prices
+const formatPrice = (price) => {
+    return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(price);
+};
 
 function DiscountedProducts() {
     const [discountedProducts, setDiscountedProducts] = useState([]);
@@ -31,12 +35,14 @@ function DiscountedProducts() {
 
     if (loading) return (
 
+
         <div
             className="container d-flex justify-content-center align-items-center"
             style={{ height: '100vh' }}
         >
             <p>Caricamento...</p>
         </div >
+
     );
     if (error) return <p>Errore: {error}</p>;
 
@@ -51,7 +57,6 @@ function DiscountedProducts() {
                 </button>
                 <button className={`btn btn-outline-success ${!isGridView ? 'active' : ''}`} onClick={() => setIsGridView(false)}>
                     <GrSort />
-
                 </button>
             </div>
 
@@ -62,6 +67,8 @@ function DiscountedProducts() {
                         {discountedProducts.map(product => (
                             <div className="col" key={product.id}>
                                 <div className="card h-100">
+
+
                                     <div className='promotion'>
                                         <span>Offerta! </span>
                                         <span>{product.discounted_price}</span>
@@ -75,6 +82,8 @@ function DiscountedProducts() {
                                         <h5 className="card-title">{product.name}</h5>
                                         <p className="card-text" style={{ fontWeight: 'bold' }}>
                                             <span>Prezzo precedente: <del>{product.price} €</del></span>
+                                            {formatPrice(product.discounted_price)}
+
                                         </p>
                                         <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                                             Vedi Dettagli
@@ -97,7 +106,9 @@ function DiscountedProducts() {
                                 key={product.id}
                                 style={{
                                     borderRadius: '8px',
-                                    marginBottom: '30px',  // Distanza tra le card
+
+                                    marginBottom: '30px',
+
                                     padding: '20px',
                                     boxShadow: '0 6px 8px rgba(0,0,0,0.1)',
                                 }}
@@ -116,10 +127,9 @@ function DiscountedProducts() {
                                 />
                                 <div style={{ flex: 1 }}>
                                     <h5 className="mb-2">{product.name}</h5>
-                                    <p className="mb-2"><del>{product.price} €</del></p>
-                                    {/* Prezzo scontato in verde */}
+                                    <p className="mb-2"><del>{formatPrice(product.price)}</del></p>
                                     <p className="mb-0 text-success" style={{ fontWeight: 'bold' }}>
-                                        {product.discounted_price} €
+                                        {formatPrice(product.discounted_price)}
                                     </p>
                                     <Link to={`/prodotti/${product.slug}`} className="btn btn-primary mt-2">
                                         Vedi Dettagli

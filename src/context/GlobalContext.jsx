@@ -66,7 +66,19 @@ const GlobalProvider = ({ children }) => {
     };
 
     const rimuoviDalCarrello = (prodottoSlug) => {
+        // Trova il prodotto prima di rimuoverlo per mostrare il nome nel toast
+        const prodotto = carrello.find(item => item.slug === prodottoSlug);
         setCarrello(carrello.filter((item) => item.slug !== prodottoSlug));
+        
+        // Mostra toast di rimozione dal carrello
+        if (prodotto) {
+            setToastMessage({
+                title: "Prodotto Rimosso",
+                text: `${prodotto.name} è stato rimosso dal tuo carrello!`,
+                type: "info"
+            });
+            handleShowToast();
+        }
     };
 
 

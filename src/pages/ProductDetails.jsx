@@ -9,6 +9,7 @@ import 'swiper/css';
 import 'swiper/css/scrollbar';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import Banner from '../components/Banner';
 
 function ProductDetail() {
   // Ottieni lo slug del prodotto dalla URL tramite useParams
@@ -96,6 +97,8 @@ function ProductDetail() {
 
 
   return (
+    <>
+    <Banner />
     <div className="container">
       {/* Sezione dei dettagli del prodotto */}
       <div className="container-product my-4">
@@ -185,8 +188,9 @@ function ProductDetail() {
         </div>
       </div>
     </div>
-
+  </>
   );
+
 }
 
 export default ProductDetail;

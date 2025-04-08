@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import { GrSort } from "react-icons/gr";
+import Banner from "../components/Banner";
 
 
 function Accessories() {
@@ -42,6 +43,7 @@ function Accessories() {
 
     return (
         <>
+            <Banner />
             <h1 className='text-center my-4'>Accessori</h1>
             <div className="container d-flex justify-content-end mb-3">
                 <button className={`btn btn-outline-success me-2 ${isGridView ? 'active' : ''}`} onClick={() => setIsGridView(true)}>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useGlobalContext } from '../context/GlobalContext';
 import { Link } from 'react-router-dom';
 import HoldButton from '../components/HoldButton';
-import { TbShoppingCartX,TbTrash } from "react-icons/tb";
+import { TbShoppingCartX, TbTrash } from "react-icons/tb";
 
 function Carrello() {
   const { carrello, rimuoviDalCarrello, svuotaCarrello, handleQuantityChange } = useGlobalContext();
@@ -30,16 +30,21 @@ function Carrello() {
                   <div className="quantity-container">
                     <button
                       className="quantity-btn"
-                      onClick={() => handleQuantityChange(product.slug, product.quantity > 1 ? product.quantity - 1 : 1)}>
+                      onClick={() => handleQuantityChange(product.slug, product.quantity > 1 ? product.quantity - 1 : 1)}
+                      disabled={product.quantity <= 1}  // Disabilita il bottone "-" se la quantità è 1 o inferiore
+                    >
                       -
                     </button>
                     <span className="quantity-input">{product.quantity}</span>
                     <button
                       className="quantity-btn"
-                      onClick={() => handleQuantityChange(product.slug, product.quantity + 1)}>
+                      onClick={() => handleQuantityChange(product.slug, product.quantity < 10 ? product.quantity + 1 : 10)}  // Limita la quantità massima a 10
+                      disabled={product.quantity >= 10}  // Disabilita il bottone "+" se la quantità è 10 o superiore
+                    >
                       +
                     </button>
                   </div>
+
 
                   <div className="button-container">
                     <HoldButton

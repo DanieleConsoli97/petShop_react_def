@@ -10,13 +10,14 @@ function Home() {
     <>
     
       <Hero />
-      <div className="container banner-container"><Banner /></div>
+      <Banner />
       
       <div className="container-sm">
         
         <CarouselCustom />
         
       </div>
+    
     </>
   );
 }

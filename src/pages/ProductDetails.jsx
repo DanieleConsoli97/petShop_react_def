@@ -130,7 +130,7 @@ function ProductDetail() {
             <p>{product.description}</p>
 
              
-            {product.discounted_price !== null ?}<p className="price">{formatPrice(product.discounted_price)}></p> : <p className="price">{formatPrice(product.price)}></p>}
+            {product.discounted_price !== null ? <p className="price">{formatPrice(product.discounted_price)}</p> : <p className="price">{formatPrice(product.price)}</p>}
 
             {/* Selettore quantità */}
             <div className="quantity-container">

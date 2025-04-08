@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
-import { FaTimes } from 'react-icons/fa';
 
-export default function Banner() {
+
+const ShippingBanner = () => {
+  // Stato per gestire la visibilità del banner
   const [isVisible, setIsVisible] = useState(true);
 
-  if (!isVisible) return null;
+  const handleClose = () => {
+    setIsVisible(false); // Nasconde il banner quando il bottone viene cliccato
+  };
 
   return (
-    <div className="banner-wrapper">
-      <div className="banner-container">
-        <img 
-          src="/Free_shipping_ok.jpg" 
-          alt="Promotional banner"
-          className="banner-image"
-        />
-        <button 
-          className="position-absolute top-0 end-0 btn btn-link text-dark p-2"
-          onClick={() => setIsVisible(false)}
-          aria-label="Close"
-        >
-          <FaTimes size={20} />
-        </button>
+    // Se il banner è visibile, renderizza il contenuto
+    isVisible && (
+      <div className="shipping-banner">
+        <div className="shipping-text">
+          <h3>Spedizione Gratuita</h3>
+          <p>Su tutti gli ordini superiori a 20€</p>
+        </div>
+        <button className="close-btn" onClick={handleClose}>X</button>
       </div>
-    </div>
+    )
   );
-}
+};
+
+export default ShippingBanner;
+

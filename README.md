@@ -15,6 +15,8 @@ PawPlanet è un e-commerce completo per prodotti e accessori per animali domesti
 - 🌐 Axios per le chiamate API
 - 💫 React Icons per le icone
 - 🎠 Swiper per i carousel
+- 📅 date-fns per la gestione delle date
+- 🌊 Flowbite React per componenti UI aggiuntivi
 - ✨ ESLint per il linting del codice
 - 🗄️ JSON Server (mock backend)
 
@@ -38,6 +40,11 @@ PawPlanet è un e-commerce completo per prodotti e accessori per animali domesti
   - ✅ Processo di checkout con validazione dei campi
   - 📍 Selezione regione di spedizione italiana
   - 🏠 Gestione indirizzi di spedizione e fatturazione
+  - 🎫 Supporto per codici sconto
+
+- 💝 **Wishlist**
+  - ❤️ Salvataggio prodotti preferiti
+  - 🔄 Trasferimento rapido dalla wishlist al carrello
 
 - 🎯 **Interfaccia Utente**
   - 📱 Design responsive per mobile, tablet e desktop
@@ -55,19 +62,23 @@ PawPlanet è un e-commerce completo per prodotti e accessori per animali domesti
 petShop_react_def/
 ├── public/                # Risorse statiche
 │   ├── PawPlanet.logo.png
-│   ├── PetShop-image.png
-│   └── Planet_1.png
+│   ├── Animation.gif      # Animazione per pagina 404
+│   ├── footprint.png      # Icona impronta
+│   └── Planet_1.png       # Logo pianeta
 ├── src/
 │   ├── assets/           # Asset del progetto
-│   │   └── imgs/
-│   │       └── Hero-animals1.jpg
+│   │   └── imgs/         # Immagini
 │   ├── components/       # Componenti riutilizzabili
+│   │   ├── Banner.jsx    # Banner promozionale
 │   │   ├── Carousel.jsx  # Slider prodotti
+│   │   ├── DeleteButton.jsx # Pulsante eliminazione
 │   │   ├── Footer.jsx    # Footer del sito
 │   │   ├── Hero.jsx      # Sezione hero
+│   │   ├── HoldButton.jsx # Pulsante con animazione
 │   │   ├── Navbar.jsx    # Barra di navigazione
 │   │   ├── PathNav.jsx   # Breadcrumb navigation
-│   │   └── SearchForm.jsx # Form di ricerca
+│   │   ├── SearchForm.jsx # Form di ricerca
+│   │   └── Toasts.jsx    # Sistema notifiche
 │   ├── context/          # Context API
 │   │   └── GlobalContext.jsx # Stato globale dell'app
 │   ├── data/             # Dati statici
@@ -80,7 +91,9 @@ petShop_react_def/
 │   │   ├── ProductsList.jsx # Lista prodotti
 │   │   ├── Search.jsx    # Risultati ricerca
 │   │   ├── CheckOut.jsx  # Pagina checkout
+│   │   ├── CheckoutDone.jsx # Conferma ordine
 │   │   ├── Carrello.jsx  # Carrello acquisti
+│   │   ├── WishList.jsx  # Lista desideri
 │   │   ├── DogProducts.jsx # Prodotti per cani
 │   │   ├── CatProducts.jsx # Prodotti per gatti
 │   │   ├── DogFoodList.jsx # Cibo per cani
@@ -94,7 +107,7 @@ petShop_react_def/
 │   ├── main.jsx          # Entry point
 │   └── index.css         # Stili globali
 ├── .envDefault           # Template variabili ambiente
-├── .gitignore
+├── .gitignore           # File ignorati da Git
 ├── eslint.config.js     # Configurazione ESLint
 ├── index.html           # HTML template
 ├── package.json         # Dipendenze e script
@@ -106,25 +119,29 @@ petShop_react_def/
 L'applicazione utilizza React Context API per la gestione dello stato globale:
 
 - 🛒 **Carrello**: Gestione completa del carrello con persistenza in localStorage
+- 💝 **Wishlist**: Gestione dei prodotti preferiti con persistenza
 - 🔔 **Notifiche**: Sistema unificato di Toast per feedback all'utente
 - 🔄 **Funzioni principali**:
   - `aggiungiAlCarrello`: Aggiunge prodotti al carrello o incrementa la quantità
   - `rimuoviDalCarrello`: Rimuove prodotti dal carrello
   - `svuotaCarrello`: Svuota completamente il carrello
+  - `aggiungiAWishlist`: Aggiunge prodotti alla wishlist
+  - `rimuoviDaWishlist`: Rimuove prodotti dalla wishlist
   - `showToastMessage`: Mostra notifiche contestuali (success, warning, info)
 
 ## 🚀 Come Iniziare
 
 ### 📋 Prerequisiti
 
-- 📦 Node.js (versione 14.0.0 o superiore)
+- 📦 Node.js (versione 16.0.0 o superiore)
 - 📦 npm (incluso con Node.js)
 
 ### 💻 Installazione
 
 1. Clona il repository
 ```bash
-git clone [url-del-repository]
+git clone https://github.com/tuousername/pawplanet-pet-shop.git
+cd pawplanet-pet-shop
 ```
 
 2. Installa le dipendenze
@@ -132,12 +149,17 @@ git clone [url-del-repository]
 npm install
 ```
 
-3. Avvia il mock server (JSON Server)
+3. Crea un file `.env` basato su `.envDefault`
 ```bash
-json-server --watch db.json
+cp .envDefault .env
 ```
 
-4. Avvia il server di sviluppo
+4. Avvia il mock server (JSON Server)
+```bash
+npx json-server --watch db.json --port 3000
+```
+
+5. Avvia il server di sviluppo
 ```bash
 npm run dev
 ```
@@ -187,6 +209,43 @@ L'applicazione utilizza JSON Server come mock backend, con i seguenti endpoints:
   - Carousel per prodotti in evidenza
   - Card prodotto con hover effects
   - Form di checkout con validazione
+  - HoldButton con animazione circolare per azioni prolungate
+
+## 🔧 Configurazione
+
+L'applicazione può essere configurata tramite variabili d'ambiente nel file `.env`:
+
+```
+VITE_API_URL=http://localhost:3000
+VITE_ENABLE_MOCK_DATA=true
+VITE_DISCOUNT_CODE=PAWPLANET2024
+```
+
+## 🤝 Contribuire
+
+Siamo felici di accogliere contributi al progetto! Per contribuire:
+
+1. Fai un fork del repository
+2. Crea un branch per la tua feature (`git checkout -b feature/amazing-feature`)
+3. Committa le tue modifiche (`git commit -m 'Aggiunta una nuova feature'`)
+4. Pusha il branch (`git push origin feature/amazing-feature`)
+5. Apri una Pull Request
+
+### 📏 Linee Guida per i Contributi
+
+- Segui le convenzioni di codice esistenti
+- Aggiungi test per le nuove funzionalità
+- Aggiorna la documentazione se necessario
+- Assicurati che il linting passi (`npm run lint`)
+
+## 🐛 Segnalazione Bug
+
+Hai trovato un bug? Apri una issue sul repository GitHub con:
+
+- Una descrizione chiara del problema
+- Passi per riprodurre il bug
+- Screenshot se applicabile
+- Informazioni sul tuo ambiente (browser, sistema operativo)
 
 ## 🔮 Sviluppi Futuri
 
@@ -199,6 +258,8 @@ L'applicazione utilizza JSON Server come mock backend, con i seguenti endpoints:
 - 🧪 Test automatizzati
 - 📱 App mobile con React Native
 - 📊 Dashboard amministrativa
+- 🌍 Supporto multilingua
+- 🔄 Sincronizzazione carrello tra dispositivi
 
 ## 📄 Licenza
 

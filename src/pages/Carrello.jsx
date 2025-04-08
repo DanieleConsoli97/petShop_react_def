@@ -15,14 +15,32 @@ function Carrello() {
     }).format(price);
   };
 
+
   const totale = carrello.reduce((acc, item) => {
     const prezzoUnitario = item.discounted_price ?? item.price;
     return acc + prezzoUnitario * item.quantity;
   }, 0);
 
+  
+
   return (
-    <div className="container py-4">
-      <h1 className="text-center mb-4">Il tuo Carrello</h1>
+    <div>
+      <div className='container'>
+        <h1 className='text-center'>Carrello</h1>
+
+        {/* Messaggio se il carrello è vuoto */}
+        {carrello.length === 0 ? (
+          <p className="text-center">Il tuo carrello è vuoto. Inizia a fare shopping <Link className='link-underline link-underline-opacity-0 text-warning' to="/prodotti">qui</Link>.</p>
+        ) : (
+          <div className='row'>
+            {carrello.map((product) => (
+              <div className="card" key={product.slug}>
+                <img src={product.image_url} className="card-img-top" alt={product.name} />
+                <div className="card-body">
+                  <h5 className="card-title">{product.name}</h5>
+                  {product.discounted_price !== null ? <p className="price">{formatPrice(product.discounted_price)}</p> : <p className="price">{formatPrice(product.price)}</p>}
+                  <p className="card-text">Prezzo Totale: {product.discounted_price !== null ? (product.discounted_price * product.quantity) : (product.price * product.quantity).toFixed(2)} €</p>
+
 
       {carrello.length === 0 ? (
         <p className="text-center">

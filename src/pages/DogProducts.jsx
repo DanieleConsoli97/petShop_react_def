@@ -65,7 +65,9 @@ function DogProducts() {
 
                             
 
-                            {product.discounted_price !== null ?  <p className="card-text">{formatPrice(product.discounted_price)}</p> :  <p className="card-text">{formatPrice(product.price)}</p>}
+
+                            {product.discounted_price !== null ? <p className="price">{formatPrice(product.discounted_price)}</p> : <p className="price">{formatPrice(product.price)}</p>}
+
 
                             <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                                 Vedi Dettagli

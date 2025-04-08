@@ -100,6 +100,12 @@ function ProductDetail() {
       {/* Sezione dei dettagli del prodotto */}
       <div className="container-product my-4">
         <div className="product-detail d-flex">
+          {product.discounted_price && (
+            <div className='promotion'>
+              <span>Offerta! </span>
+              <span><del>{product.price}</del></span>
+            </div>
+          )}
           {/* Colonna sinistra: immagine del prodotto */}
           <div className="product-image-container">
             <img src={product?.image_url} className="product-image" alt={product.name} />

@@ -53,7 +53,7 @@ function Carrello() {
                             <p className="mb-1">Totale: {formatPrice(prezzoTotale)}</p>
                             <div className="d-flex align-items-center mt-2">
                               <button
-                                className="btn btn-outline-secondary btn-sm"
+                                className="btn btn-success btn-sm"
                                 onClick={() => handleQuantityChange(product.slug, Math.max(1, product.quantity - 1))}
                                 disabled={product.quantity <= 1}
                               >
@@ -61,7 +61,7 @@ function Carrello() {
                               </button>
                               <span className="mx-2">{product.quantity}</span>
                               <button
-                                className="btn btn-outline-secondary btn-sm"
+                                className="btn btn-success btn-sm"
                                 onClick={() => handleQuantityChange(product.slug, Math.min(10, product.quantity + 1))}
                                 disabled={product.quantity >= 10}
                               >
@@ -103,7 +103,6 @@ function Carrello() {
                       <span>Totale prodotti: <strong>{formatPrice(totale)}</strong></span>
                     </li>
                     <li className="d-flex justify-content-between">
-                      <span>Spedizione gratis</span>
                     </li>
                     <li className="d-flex justify-content-between mt-2 border-top pt-2">
                       <strong>Totale</strong>

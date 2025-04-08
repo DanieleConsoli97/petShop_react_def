@@ -93,7 +93,7 @@ const CarouselCustom = () => {
                             <img src={product.image_url} className="card-img-top" alt={product.name} />
                             <div className="card-body">
                                 <h5 className="card-title">{product.name}</h5>
-                                <p className="card-text">{formatPrice(product.price)}</p>
+                                {product.discounted_price !== null ? <p className="price">{formatPrice(product.discounted_price)}</p> : <p className="price">{formatPrice(product.price)}</p>}
                                 <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                                     Vedi Dettagli
                                 </Link>
@@ -102,7 +102,7 @@ const CarouselCustom = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
-            
+
             <h2 className="text-center my-4">Prodotti per Gatti</h2>
             <Swiper
                 slidesPerView={3}

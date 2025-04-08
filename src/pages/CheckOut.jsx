@@ -5,10 +5,11 @@ import regioniItaliane from "../data/Regioni";
 import { useGlobalContext } from "../context/GlobalContext";
 import { Navigate, useNavigate } from "react-router-dom";
 import footprint from "/footprint.png";
+import DeleteButton from "../components/DeleteButton";
 // Componente principale per la gestione del checkout
 const CheckOut = () => {
 
-    const { carrello } = useGlobalContext()
+    const { carrello, rimuoviDalCarrello } = useGlobalContext()
     // Gestione degli stati del form
     const [isBillingDifferent, setIsBillingDifferent] = useState(false); // Stato per gestire indirizzi di spedizione/fatturazione diversi
     const [errors, setErrors] = useState({}); // Stato per la gestione degli errori di validazione
@@ -73,7 +74,7 @@ const CheckOut = () => {
     const validateName = (name) => {
         return /^[A-Za-zÀ-ÿ\s]+$/.test(name);
     };
-    
+
     const validateCodiceFiscale = (cf) => {
         // Validazione semplificata del codice fiscale italiano (16 caratteri alfanumerici)
         return /^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$/i.test(cf);
@@ -153,7 +154,7 @@ const CheckOut = () => {
 
             // Preparazione dei dati per l'invio
             const shippingAddressFormatted = formatAddress(shippingData);
-            
+
             // Formattazione dell'indirizzo di fatturazione completo se diverso
             let billingAddressFormatted;
             if (isBillingDifferent) {
@@ -174,9 +175,9 @@ const CheckOut = () => {
                 city: shippingData.citta,
                 zipCode: shippingData.cap,
                 cartItems: cartItems,
-                discountCodeId: null,
-                shippingCost: 5.00, // Costo fisso di spedizione
-            }
+                discountCode: DiscountIsTrue?.valid ? DiscountIsTrue.discount.code : null,
+                shippingCost: 5.00
+            };
 
             // Invio dei dati dell'ordine al server
             fetch('http://localhost:3000/prodotti/orders', {
@@ -196,6 +197,10 @@ const CheckOut = () => {
                 })
                 .then(data => {
                     console.log('Ordine creato con successo:', data);
+                    if (data.shippingFree) {
+                        // Mostra un messaggio di successo per la spedizione gratuita
+                        setErrors({});
+                    }
                     navigate("/checkoutDone");
                 })
                 .catch(error => {
@@ -279,7 +284,7 @@ const CheckOut = () => {
                 <div className="py-5 text-center">
                     <img className="d-block mx-auto mb-4" src="/Planet_1.png" alt="" width="90" height="90" />
                     <span className="lead">Ci sei quasi... Inserisci i dati per la spedizione </span>
-                    <img src={footprint} alt="" width="30" height="30"/>
+                    <img src={footprint} alt="" width="30" height="30" />
                 </div>
                 <div className="row g-5">
                     <div className="col-md-5 col-lg-4 order-md-last">
@@ -293,15 +298,22 @@ const CheckOut = () => {
 
                             {
                                 carrello.map((product, index) => {
-                                    const { name, price, quantity } = product
+                                    const { name, quantity, slug } = product
                                     return (
                                         <li key={index} className="list-group-item d-flex justify-content-between lh-sm">
-                                            <div>
-                                                <h6 className="my-0">{name}</h6>
-                                                <small className="text-body-secondary fw-bold"> {` Quantità : ${quantity}`}</small>
+                                            <div className="d-flex align-items-center">
+                                                <DeleteButton 
+                                                    onHold={() => rimuoviDalCarrello(slug)}
+                                                    style={{ marginRight: '10px' }}
+                                                    aria-label="Rimuovi prodotto"
+                                                />
+                                                <div>
+                                                    <h6 className="my-0">{name}</h6>
+                                                    <small className="text-body-secondary fw-bold"> {` Quantità : ${quantity}`}</small>
+                                                </div>
                                             </div>
                                             <span className="text-body-secondary">{`${(product.discounted_price !== null ? product.discounted_price : product.price) * product.quantity} €`}</span>
-                                            </li>
+                                        </li>
                                     )
                                 })
 
@@ -493,19 +505,19 @@ const CheckOut = () => {
                             </div>
 
                             <hr className="my-4" />
-                              
-                              <div className="form-check mb-3">
-                                  <input 
-                                      type="checkbox" 
-                                      className="form-check-input" 
-                                      id="billing-different" 
-                                      checked={isBillingDifferent}
-                                      onChange={() => setIsBillingDifferent(!isBillingDifferent)}
-                                  />
-                                  <label className="form-check-label" htmlFor="billing-different">
-                                      Indirizzo di fatturazione diverso da quello di spedizione
-                                  </label>
-                              </div>
+
+                            <div className="form-check mb-3">
+                                <input
+                                    type="checkbox"
+                                    className="form-check-input"
+                                    id="billing-different"
+                                    checked={isBillingDifferent}
+                                    onChange={() => setIsBillingDifferent(!isBillingDifferent)}
+                                />
+                                <label className="form-check-label" htmlFor="billing-different">
+                                    Indirizzo di fatturazione diverso da quello di spedizione
+                                </label>
+                            </div>
 
                             {isBillingDifferent && (
                                 <div className="billing-section mt-4">
@@ -527,7 +539,7 @@ const CheckOut = () => {
                                                 </div>
                                             )}
                                         </div>
-                                        
+
                                         <div className="col-sm-6">
                                             <label className="form-label">Cognome</label>
                                             <input
@@ -544,7 +556,7 @@ const CheckOut = () => {
                                                 </div>
                                             )}
                                         </div>
-                                        
+
                                         <div className="col-12">
                                             <label className="form-label">Indirizzo</label>
                                             <input
@@ -562,7 +574,7 @@ const CheckOut = () => {
                                                 </div>
                                             )}
                                         </div>
-                                        
+
                                         <div className="col-md-6">
                                             <label className="form-label">Città</label>
                                             <input
@@ -579,7 +591,7 @@ const CheckOut = () => {
                                                 </div>
                                             )}
                                         </div>
-                                        
+
                                         <div className="col-md-6">
                                             <label className="form-label">Regione</label>
                                             <select
@@ -602,7 +614,7 @@ const CheckOut = () => {
                                                 </div>
                                             )}
                                         </div>
-                                        
+
                                         <div className="col-md-6">
                                             <label className="form-label">CAP</label>
                                             <input
@@ -619,7 +631,7 @@ const CheckOut = () => {
                                                 </div>
                                             )}
                                         </div>
-                                        
+
                                         <div className="col-12">
                                             <label className="form-label">Codice Fiscale</label>
                                             <input
@@ -642,13 +654,13 @@ const CheckOut = () => {
                                 </div>
                             )}
                             <hr className="my-4" />
-                            
+
                             {errors.submit && (
-                              <div className="alert alert-danger mb-3" role="alert">
-                                  {errors.submit}
-                              </div>
+                                <div className="alert alert-danger mb-3" role="alert">
+                                    {errors.submit}
+                                </div>
                             )}
-                            
+
                             <button className="w-100 btn btn-primary btn-lg" type="submit">
                                 Completa l'ordine
                             </button>

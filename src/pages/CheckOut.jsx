@@ -210,7 +210,7 @@ const CheckOut = () => {
     };
     const calculateTotal = () => {
         const subtotal = carrello.reduce((total, product) => {
-            return total + (product.price * product.quantity);
+            return total + (product.discounted_price !== null ? (product.discounted_price * product.quantity) : (product.price * product.quantity));
         }, 0);
 
         const shippingCost = 5.00; // Costo di spedizione fisso
@@ -300,8 +300,8 @@ const CheckOut = () => {
                                                 <h6 className="my-0">{name}</h6>
                                                 <small className="text-body-secondary fw-bold"> {` Quantità : ${quantity}`}</small>
                                             </div>
-                                            <span className="text-body-secondary">{`${price * quantity} €`}</span>
-                                        </li>
+                                            <span className="text-body-secondary">{`${(product.discounted_price !== null ? product.discounted_price : product.price) * product.quantity} €`}</span>
+                                            </li>
                                     )
                                 })
 

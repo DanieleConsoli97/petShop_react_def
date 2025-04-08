@@ -176,7 +176,7 @@ const CheckOut = () => {
                 zipCode: shippingData.cap,
                 cartItems: cartItems,
                 discountCode: DiscountIsTrue?.valid ? DiscountIsTrue.discount.code : null,
-                shippingCost: 5.00
+                shippingCost: shippingCost
             };
 
             // Invio dei dati dell'ordine al server
@@ -218,7 +218,9 @@ const CheckOut = () => {
             return total + (product.discounted_price !== null ? (product.discounted_price * product.quantity) : (product.price * product.quantity));
         }, 0);
 
-        const shippingCost = 5.00; // Costo di spedizione fisso
+        // Determina se la spedizione è gratuita (ordini >= 20€)
+        const isShippingFree = subtotal >= 20;
+        const shippingCost = isShippingFree ? 0 : 5.00;
 
         let total = subtotal + shippingCost;
 
@@ -228,10 +230,10 @@ const CheckOut = () => {
             total -= discountAmount;
         }
 
-        return total; // Restituisce il totale finale
+        return { total, isShippingFree, shippingCost }; // Restituisce il totale finale e lo stato della spedizione
 
     };
-    const cartTotal = calculateTotal();
+    const { total: cartTotal, isShippingFree, shippingCost } = calculateTotal();
 
     //NOTE - logica gestione codice sconto
     const handleDiscountSubmit = (e) => {   //NOTE - gestione validazione sconto se lo sconto è true viene visualizzato nel carrello se false non viene visualizzato 
@@ -321,8 +323,11 @@ const CheckOut = () => {
                             <li className="list-group-item d-flex justify-content-between lh-sm">
                                 <div>
                                     <small className="text-body-secondary fw-bold"> Costi di spedizione</small>
+                                    {isShippingFree && <small className="text-success d-block">Spedizione gratuita!</small>}
                                 </div>
-                                <span className="text-body-secondary">5 € </span>
+                                <span className={isShippingFree ? "text-success" : "text-body-secondary"}>
+                                    {isShippingFree ? "0.00 €" : "5.00 €"}
+                                </span>
                             </li>
                             {DiscountIsTrue.valid && (<li className="list-group-item d-flex justify-content-between bg-body-tertiary">  {/*NOTE - banner promo code */}
                                 <div className="text-success">

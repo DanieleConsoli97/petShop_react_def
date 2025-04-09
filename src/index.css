@@ -597,6 +597,12 @@
 @media (max-width: 768px) {
    /*carrello*/
 
+   .products-container.grid-view {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 card per riga */
+    gap: 10px; /* Spazio tra le card */
+  }
+
   .card .row img {
     max-width: 200px;
     max-height: 200px;
@@ -1144,6 +1150,13 @@
 
 /* Responsive: su schermi più piccoli (smaller devices) */
 @media (max-width: 576px) {
+
+  .products-container.grid-view {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* 4 card per riga */
+    gap: 10px; /* Spazio tra le card */
+  }
+
   .buttons-container {
     flex-direction: column; /* Metti i bottoni uno sotto l'altro */
     align-items: stretch; /* Allinea i bottoni alla larghezza del genitore */

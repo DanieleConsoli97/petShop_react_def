@@ -1,36 +1,125 @@
-/* Stili e animazioni per il componente HoldButton - Solo Progresso Circolare */
+/* Stili e animazioni per il componente HoldButton - Progresso Circolare Più Evidente */
 
-/* Animazioni per il progresso circolare */
+/* Animazioni per il progresso circolare - Più pronunciate */
 @keyframes pulse-circle {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.08); opacity: 0.85; }
-  100% { transform: scale(1); opacity: 1; }
+  0% { 
+    transform: scale(1); 
+    opacity: 1;
+  }
+  50% { 
+    transform: scale(1.15); /* Scala aumentata da 1.08 a 1.15 */
+    opacity: 0.9; /* Opacità più alta */
+  }
+  100% { 
+    transform: scale(1); 
+    opacity: 1;
+  }
 }
 
 @keyframes progress-dot-pulse {
-  0% { opacity: 0.4; r: 1.5; filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.5)); }
-  50% { opacity: 1; r: 3; filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8)); }
-  100% { opacity: 0.4; r: 1.5; filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.5)); }
+  0% { 
+    opacity: 0.6; /* Più visibile */
+    r: 2; /* Dimensione aumentata da 1.5 a 2 */
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8)); /* Ombra più forte */
+  }
+  50% { 
+    opacity: 1; 
+    r: 4; /* Dimensione aumentata da 3 a 4 */
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 1)); /* Ombra più forte */
+  }
+  100% { 
+    opacity: 0.6; 
+    r: 2;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
+  }
 }
 
 @keyframes checkmark-animation {
-  0% { transform: scale(0) rotate(-20deg); opacity: 0; }
-  50% { transform: scale(1.3) rotate(10deg); opacity: 1; }
-  100% { transform: scale(1) rotate(0); opacity: 1; }
+  0% { 
+    transform: scale(0) rotate(-30deg); /* Rotazione aumentata */
+    opacity: 0; 
+  }
+  50% { 
+    transform: scale(1.4) rotate(15deg); /* Scala e rotazione aumentate */
+    opacity: 1; 
+  }
+  100% { 
+    transform: scale(1) rotate(0); 
+    opacity: 1;
+  }
 }
 
 @keyframes success-glow {
-  0% { box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); filter: brightness(1); }
-  50% { box-shadow: 0 0 25px rgba(40, 167, 69, 0.8); filter: brightness(1.3); }
-  100% { box-shadow: 0 0 15px rgba(40, 167, 69, 0.6); filter: brightness(1.15); }
+  0% { 
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.7); /* Più intenso */
+    filter: brightness(1.1); /* Luminosità aumentata */
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(40, 167, 69, 0.9); /* Molto più intenso */
+    filter: brightness(1.4); 
+  }
+  100% { 
+    box-shadow: 0 0 20px rgba(40, 167, 69, 0.8); 
+    filter: brightness(1.2);
+  }
 }
 
 @keyframes percentage-fade {
-  0% { opacity: 0.7; transform: scale(0.9); }
-  100% { opacity: 1; transform: scale(1); }
+  0% { 
+    opacity: 0.8; /* Più visibile */
+    transform: scale(1.1); /* Scala aumentata */
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1.2); /* Testo leggermente più grande a completamento */
+  }
 }
 
-/* Stili base per il pulsante */
+/* Stili per il progresso circolare - Più evidenti ma stesse dimensioni */
+.progress-circle {
+  position: relative;
+  width: 30px; /* Mantenute le dimensioni originali */
+  height: 30px;
+  z-index: 5;
+}
+
+.progress-circle svg.pulse-circle {
+  animation: pulse-circle 1.5s infinite cubic-bezier(0.4, 0, 0.2, 1); /* Animazione più veloce */
+}
+
+.progress-circle .circle-background {
+  opacity: 0.8; /* Più visibile */
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.6)); /* Ombra più forte */
+}
+
+.progress-circle .progress-indicator {
+  stroke-width: 4; /* Spessore aumentato da 3 a 4 */
+  filter: drop-shadow(0 0 8px rgba(0, 123, 255, 0.9)); /* Ombra più forte */
+}
+
+.progress-circle .progress-dot {
+  animation: progress-dot-pulse 1.2s infinite; /* Animazione più veloce */
+  filter: drop-shadow(0 0 5px white); /* Ombra più forte */
+}
+
+.progress-circle .checkmark-animation {
+  stroke-width: 4; /* Spessore aumentato */
+  animation: checkmark-animation 0.6s ease-out forwards; /* Animazione leggermente più lunga */
+}
+
+/* Stile per il contenitore della percentuale - Più evidente */
+.progress-percentage {
+  font-size: 13px; /* Leggermente più grande (da 12px) */
+  font-weight: 700; /* Più in grassetto */
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8); /* Ombra più forte */
+  animation: percentage-fade 0.3s ease-out; /* Animazione leggermente più lunga */
+}
+
+.progress-percentage.completed {
+  text-shadow: 0 0 8px rgba(40, 167, 69, 0.8); /* Ombra più forte */
+}
+
+/* Tutti gli altri stili rimangono ESATTAMENTE uguali all'originale */
 .hold-button {
   position: relative;
   overflow: hidden;
@@ -41,13 +130,11 @@
   gap: 10px;
 }
 
-/* Stile quando il pulsante è in stato di pressione */
 .hold-button.holding {
   transform: scale(0.97);
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Stile quando l'azione è completata */
 .hold-button.completed {
   transform: scale(1.03);
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
@@ -55,19 +142,10 @@
   animation: success-glow 1.2s forwards;
 }
 
-/* Effetto hover sul pulsante */
 .hold-button:hover:not(.holding) {
   transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* Stili per il progresso circolare */
-.progress-circle {
-  position: relative;
-  width: 30px;
-  height: 30px;
-  z-index: 5;
 }
 
 .hold-button .progress-circle {
@@ -84,33 +162,6 @@
   height: 100%;
 }
 
-.progress-circle svg.pulse-circle {
-  animation: pulse-circle 1.8s infinite cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.progress-circle .circle-background {
-  opacity: 0.6;
-  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.4));
-  transition: all 0.3s ease;
-}
-
-.progress-circle .progress-indicator {
-  stroke-linecap: round;
-  filter: drop-shadow(0 0 4px rgba(0, 123, 255, 0.7));
-  transition: stroke-dashoffset 0.05s linear, stroke 0.3s ease, filter 0.3s ease;
-}
-
-.progress-circle .progress-dot {
-  animation: progress-dot-pulse 1.5s infinite;
-  filter: drop-shadow(0 0 3px white);
-}
-
-.progress-circle .checkmark-animation {
-  display: inline-block;
-  animation: checkmark-animation 0.5s ease-out forwards;
-}
-
-/* Stile per il contenitore del testo nel pulsante */
 .button-content {
   position: relative;
   z-index: 1;
@@ -124,26 +175,4 @@
 
 .hold-button.completed .button-content {
   opacity: 1;
-}
-
-/* Stile per il contenitore della percentuale */
-.progress-percentage {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #007bff;
-  font-weight: 600;
-  text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
-  animation: percentage-fade 0.2s ease-out;
-  font-size: 12px;
-  font-weight: bold;
-  text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
-  transition: color 0.3s ease;
-  z-index: 6;
-}
-
-.progress-percentage.completed {
-  color: #28a745;
-  text-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
 }

@@ -24,7 +24,7 @@ function Carrello() {
   return (
     <div>
       <div className='container'>
-        <Banner/>
+        <Banner />
         <h1 className='text-center'>Carrello</h1>
 
         {/* Messaggio se il carrello è vuoto */}
@@ -77,11 +77,11 @@ function Carrello() {
                               holdTime={2000}
                               className="btn btn-danger btn-sm mb-2"
                             >
-                              Elimina <TbTrash />
+                              Elimina
                             </HoldButton>
                             <br />
                             <Link to={`/prodotti/${product.slug}`} className="btn btn-success btn-sm">
-                              Vedi Dettagli
+                              <span>Dettagli</span>
                             </Link>
                           </div>
                         </div>
@@ -120,9 +120,10 @@ function Carrello() {
                     onHold={svuotaCarrello}
                     holdTime={2000}
                     className="btn btn-outline-danger w-50"
-                  >
-                    Tieni premuto per svuotare <TbShoppingCartX />
+                  >Svuota Carrello
                   </HoldButton>
+                  <span class="fs-9 text-center d-block m-2">Tieni premuto per eliminare i prodotti dal carrello</span>
+
                 </div>
               </div>
             </div>

@@ -592,6 +592,13 @@
 }
 
 /*carrello*/
+
+.fs-9.text-center.d-block {
+  font-size: 0.6rem !important; /* Circa 8px */
+  line-height: 1.1;
+  opacity: 0.6;
+}
+
 .card .row img {
   width: 200px;
   height: 200px;

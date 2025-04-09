@@ -207,7 +207,7 @@ const CheckOut = () => {
                     return response.json();
                 })
                 .then(data => {
-                   
+
                     console.log('Ordine creato con successo:', data);
                     if (data.shippingFree) {
                         // Mostra un messaggio di successo per la spedizione gratuita
@@ -293,7 +293,7 @@ const CheckOut = () => {
         console.log(value)
         setDiscount(value);
     };
-   
+
 
     return (
         <main>
@@ -311,54 +311,49 @@ const CheckOut = () => {
                             <span className="badge bg-primary rounded-pill">{carrello.length}</span>
                         </h4>
                         <ul className="list-group mb-3">
-                            {/* ... contenuto del carrello ... */}
-                            {
-
-                                carrello.map((product, index) => {
-                                    const { name, quantity, slug } = product
-                                    return (
-                                        <li key={index} className="list-group-item d-flex justify-content-between lh-sm">
-                                            <div className="d-flex align-items-center">
-                                                <DeleteButton
-                                                    onHold={() => rimuoviDalCarrello(slug)}
-                                                    style={{ marginRight: '10px' }}
-                                                    aria-label="Rimuovi prodotto"
-                                                />
-                                                <div>
-                                                    <h6 className="my-0">{name}</h6>
-                                                    <small className="text-body-secondary fw-bold"> {` Quantità : ${quantity}`}</small>
-                                                </div>
+                            {carrello.map((product, index) => {
+                                const { name, quantity, slug } = product
+                                return (
+                                    <li key={index} className="list-group-item d-flex justify-content-between lh-sm">
+                                        <div className="d-flex align-items-center">
+                                            <DeleteButton
+                                                onHold={() => rimuoviDalCarrello(slug)}
+                                                style={{ marginRight: '10px' }}
+                                                aria-label="Rimuovi prodotto"
+                                            />
+                                            <div>
+                                                <h6 className="my-0">{name}</h6>
+                                                <small className="text-body-secondary fw-bold"> {` Quantità : ${quantity}`}</small>
                                             </div>
-                                            <span className="text-body-secondary">{`${(product.discounted_price !== null ? product.discounted_price : product.price) * product.quantity} €`}</span>
-                                        </li>
-                                    )
-                                })
+                                        </div>
+                                        <span className="text-body-secondary">
+                                            {formatPrice((product.discounted_price !== null ? product.discounted_price : product.price) * product.quantity)}
+                                        </span>
+                                    </li>
+                                )
+                            })}
 
-                            }
                             <li className="list-group-item d-flex justify-content-between lh-sm">
-
                                 <div>
                                     <small className="text-body-secondary fw-bold"> Costi di spedizione</small>
                                     {isShippingFree && <small className="text-success d-block">Spedizione gratuita!</small>}
                                 </div>
                                 <span className={isShippingFree ? "text-success" : "text-body-secondary"}>
-                                    {isShippingFree ? "0.00 €" : "5.00 €"}
+                                    {isShippingFree ? formatPrice(0) : formatPrice(5.00)}
                                 </span>
-
                             </li>
 
-                            {DiscountIsTrue.valid && (<li className="list-group-item d-flex justify-content-between bg-body-tertiary">  {/*NOTE - banner promo code */}
-                                <div className="text-success">
-                                    <h6 className="my-0">Codice Sconto</h6>
-                                    <small>{DiscountIsTrue.discount.code}</small>
-                                </div>
-
-
-
-
-                                <span className="text-success">{` - ${DiscountIsTrue.discount.discount} €`}</span>
-                            </li>)}
-
+                            {DiscountIsTrue.valid && (
+                                <li className="list-group-item d-flex justify-content-between bg-body-tertiary">
+                                    <div className="text-success">
+                                        <h6 className="my-0">Codice Sconto</h6>
+                                        <small>{DiscountIsTrue.discount.code}</small>
+                                    </div>
+                                    <span className="text-success">
+                                        {`- ${formatPrice(DiscountIsTrue.discount.discount)}`}
+                                    </span>
+                                </li>
+                            )}
 
                             <li className="list-group-item d-flex justify-content-between">
                                 <span>Totale (EUR)</span>
@@ -688,7 +683,7 @@ const CheckOut = () => {
                             )}
 
                             <button className={orderLoad ? "w-100 btn btn-primary btn-lg disabled" : "w-100 btn btn-primary btn-lg"} type="submit">
-                                <i className="bi bi-cart-check fs-3"></i>   
+                                <i className="bi bi-cart-check fs-3"></i>
                                 {orderLoad ? "Invio ordine in corso..." : "Procedi con l'ordine"}
                             </button>
 

@@ -122,8 +122,7 @@ function Carrello() {
                     className="btn btn-outline-danger w-50"
                   >Svuota Carrello
                   </HoldButton>
-                  <span class="fs-9 text-center d-block m-2">Tieni premuto per eliminare i prodotti dal carrello</span>
-
+                  <span className="fs-9 text-center d-block m-2">Tieni premuto per eliminare i prodotti dal carrello</span>
                 </div>
               </div>
             </div>

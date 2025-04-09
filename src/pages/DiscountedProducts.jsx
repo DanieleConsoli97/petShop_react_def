@@ -78,12 +78,11 @@ function DiscountedProducts() {
                                         className="card-img-top"
                                         alt={product.name}
                                     />
-                                    <div className="card-body">
+                                    <div className="card-body text-center">
                                         <h5 className="card-title">{product.name}</h5>
-                                        <p className="card-text" style={{ fontWeight: 'bold' }}>
+                                        <div className="card-text" style={{ fontWeight: 'bold' }}>
                                             <p>Prezzo precedente:<del>{formatPrice(product.price)}</del></p>
-
-                                        </p>
+                                        </div>
                                         <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
                                             Vedi Dettagli
                                         </Link>
@@ -97,7 +96,7 @@ function DiscountedProducts() {
 
             {/* Vista a Lista */}
             {!isGridView && (
-                <div className="container mb-5">
+                <div className="container mb-5 ">
                     <div className="list-group">
                         {discountedProducts.map(product => (
                             <div

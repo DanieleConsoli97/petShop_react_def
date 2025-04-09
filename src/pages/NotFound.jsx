@@ -13,8 +13,8 @@ function NotFound() {
                         className="img-fluid mb-4 animation" 
                         
                     />
-                    <h1 className="display-4 text-danger mb-3">Pagina non trovata</h1>
-                    <p className="lead mb-4">La pagina <strong>{location.pathname}</strong> che stai cercando non esiste o è stata spostata.</p>
+                    <h1 className="display-4 text-danger mb-3">Ops!</h1>
+                    <h4 className="lead mb-4">Qualcuno ha fatto cadere questa pagina dal ripiano più alto!</h4>
                     <p className="mb-4">Puoi tornare alla home page.</p>
                     <div className="mt-4">
                         <Link to="/" className="btn btn-primary my-4">Torna alla Home</Link>

@@ -8,6 +8,9 @@ import SearchForm from "./SearchForm";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const [caniDropdownOpen, setCaniDropdownOpen] = useState(false);
+  const [gattiDropdownOpen, setGattiDropdownOpen] = useState(false)
   const { carrello, wishList } = useGlobalContext();
 
   const getCartCount = () => {
@@ -22,6 +25,22 @@ function Navbar() {
       return null;
     }
     return wishList.length;
+  };
+
+  const closeMobileMenu = () => {
+    setMenuOpen(false);
+    setCaniDropdownOpen(false);
+    setGattiDropdownOpen(false);
+  };
+
+  const toggleCaniDropdown = () => {
+    setCaniDropdownOpen(!caniDropdownOpen);
+    setGattiDropdownOpen(false); // Close other dropdowns
+  };
+
+  const toggleGattiDropdown = () => {
+    setGattiDropdownOpen(!gattiDropdownOpen);
+    setCaniDropdownOpen(false); // Close other dropdowns
   };
 
   return (
@@ -159,7 +178,7 @@ function Navbar() {
           <div className="d-flex flex-column align-items-start mb-3">
             <SearchForm />
             <div className="mt-3 d-flex gap-3">
-              <Link to={'/carrello'} className="cart-icon position-relative">
+              <Link to={'/carrello'} className="cart-icon position-relative" onClick={closeMobileMenu}>
                 {getCartCount() !== null && (
                   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
                     {getCartCount()}
@@ -167,7 +186,7 @@ function Navbar() {
                 )}
                 <FaShoppingCart size={30} />
               </Link>
-              <Link to={'/wishlist'} className="cart-icon position-relative">
+              <Link to={'/wishlist'} className="cart-icon position-relative" onClick={closeMobileMenu}>
                 {getWishlistCount() !== null && (
                   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
                     {getWishlistCount()}
@@ -180,31 +199,43 @@ function Navbar() {
 
           <ul className="nav flex-column">
             <li className="nav-item">
-              <Link className="nav-link" to="/prodotti" onClick={() => setMenuOpen(false)}>
+              <Link className="nav-link" to="/prodotti" onClick={closeMobileMenu}>
                 Tutti i Prodotti
               </Link>
             </li>
             <li className="nav-item dropdown">
-              <span className="nav-link dropdown-toggle" role="button">Cani</span>
-              <ul className="dropdown-menu">
-                <li><Link className="dropdown-item" to={'/prodotti/cani/'} onClick={() => setMenuOpen(false)}>Prodotti per cani</Link></li>
-                <li><Link className="dropdown-item" to={'/prodotti/cani/cibo'} onClick={() => setMenuOpen(false)}>Cibo per cani</Link></li>
-                <li><Link className="dropdown-item" to={'/prodotti/cani/giochi'} onClick={() => setMenuOpen(false)}>Giochi per cani</Link></li>
+              <span
+                className="nav-link dropdown-toggle"
+                role="button"
+                onClick={toggleCaniDropdown}
+              >
+                Cani
+              </span>
+              <ul className={`dropdown-menu ${caniDropdownOpen ? 'show' : ''}`}>
+                <li><Link className="dropdown-item" to={'/prodotti/cani/'} onClick={closeMobileMenu}>Prodotti per cani</Link></li>
+                <li><Link className="dropdown-item" to={'/prodotti/cani/cibo'} onClick={closeMobileMenu}>Cibo per cani</Link></li>
+                <li><Link className="dropdown-item" to={'/prodotti/cani/giochi'} onClick={closeMobileMenu}>Giochi per cani</Link></li>
               </ul>
             </li>
             <li className="nav-item">
-              <span className="nav-link dropdown-toggle" role="button">Gatti</span>
-              <ul className="dropdown-menu">
-                <li><Link className="dropdown-item" to={'/prodotti/gatti/'} onClick={() => setMenuOpen(false)}>Prodotti per gatti</Link></li>
-                <li><Link className="dropdown-item" to={'/prodotti/gatti/cibo'} onClick={() => setMenuOpen(false)}>Cibo per gatti</Link></li>
-                <li><Link className="dropdown-item" to={'/prodotti/gatti/giochi'} onClick={() => setMenuOpen(false)}>Giochi per gatti</Link></li>
+              <span
+                className="nav-link dropdown-toggle"
+                role="button"
+                onClick={toggleGattiDropdown}
+              >
+                Gatti
+              </span>
+              <ul className={`dropdown-menu ${gattiDropdownOpen ? 'show' : ''}`}>
+                <li><Link className="dropdown-item" to={'/prodotti/gatti/'} onClick={closeMobileMenu}>Prodotti per gatti</Link></li>
+                <li><Link className="dropdown-item" to={'/prodotti/gatti/cibo'} onClick={closeMobileMenu}>Cibo per gatti</Link></li>
+                <li><Link className="dropdown-item" to={'/prodotti/gatti/giochi'} onClick={closeMobileMenu}>Giochi per gatti</Link></li>
               </ul>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to={'/prodotti/accessori'} onClick={() => setMenuOpen(false)}>Accessori</Link>
+              <Link className="nav-link" to={'/prodotti/accessori'} onClick={closeMobileMenu}>Accessori</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to={'/prodotti/promozioni'} onClick={() => setMenuOpen(false)}>Offerte</Link>
+              <Link className="nav-link" to={'/prodotti/promozioni'} onClick={closeMobileMenu}>Offerte</Link>
             </li>
           </ul>
         </div>

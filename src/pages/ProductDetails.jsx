@@ -163,7 +163,7 @@ function ProductDetail() {
 
         {/* Sezione del carosello per i prodotti correlati */}
         <div className="related-carousel">
-          <h2 className="text-center my-4">Prodotti Correlati</h2>
+          <h2 className="text-center my-4">Potrebbe anche interessarti : </h2>
           <Swiper
             slidesPerView={3}
             spaceBetween={30}

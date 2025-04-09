@@ -44,7 +44,7 @@ function Carrello() {
                     const prezzoTotale = prezzoUnitario * product.quantity;
 
                     return (
-                      <div key={product.slug} className="mb-4">
+                      <div key={product.slug} className="mb-1">
                         <div className="row align-items-center">
                           <div className="col-md-3">
                             <img src={product.image_url} className="img-fluid rounded" alt={product.name} />

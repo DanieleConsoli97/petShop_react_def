@@ -81,7 +81,7 @@ function DiscountedProducts() {
                                     <div className="card-body">
                                         <h5 className="card-title">{product.name}</h5>
                                         <p className="card-text" style={{ fontWeight: 'bold' }}>
-                                           <p>Prezzo precedente:<del>{formatPrice(product.price)}</del></p>
+                                            <p>Prezzo precedente:<del>{formatPrice(product.price)}</del></p>
 
                                         </p>
                                         <Link to={`/prodotti/${product.slug}`} className="btn btn-primary">
@@ -125,11 +125,13 @@ function DiscountedProducts() {
                                     }}
                                 />
                                 <div style={{ flex: 1 }}>
+                                    <div className='promotion'>
+                                        <span>Offerta! </span>
+                                        <span>{product.discounted_price}</span>
+                                    </div>
                                     <h5 className="mb-2">{product.name}</h5>
-                                    <p className="mb-2"><del>{formatPrice(product.price)}</del></p>
-                                    <p className="mb-0 text-success" style={{ fontWeight: 'bold' }}>
-                                        {formatPrice(product.discounted_price)}
-                                    </p>
+                                    <p>Prezzo precedente: <del>{formatPrice(product.price)}</del></p>
+                                    <p className="mb-0" style={{ fontWeight: 'bold' }}></p>
                                     <Link to={`/prodotti/${product.slug}`} className="btn btn-primary mt-2">
                                         Vedi Dettagli
                                     </Link>

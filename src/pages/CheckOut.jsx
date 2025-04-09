@@ -3,7 +3,7 @@
 import { useState } from "react";
 import regioniItaliane from "../data/Regioni";
 import { useGlobalContext } from "../context/GlobalContext";
-import { Navigate, useNavigate,Link } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 import footprint from "/footprint.png";
 import DeleteButton from "../components/DeleteButton";
 
@@ -47,6 +47,7 @@ const CheckOut = () => {
         cap: '',
         codiceFiscale: ''
     });
+    const [orderLoad, setOrderLoad] = useState(false); //NOTE Stato per il caricamento dell'ordine
 
     // Handler per l'aggiornamento dei dati di spedizione
     const handleShippingChange = (e) => {
@@ -156,6 +157,7 @@ const CheckOut = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validateForm()) {
+            setOrderLoad(true); // Imposta lo stato di caricamento dell'ordine
             // Formattazione dell'indirizzo completo
             const formatAddress = (data) => {
                 return `${data.indirizzo}, ${data.cap} ${data.citta}, ${data.regione}, ${data.paese}`;
@@ -205,6 +207,7 @@ const CheckOut = () => {
                     return response.json();
                 })
                 .then(data => {
+                   
                     console.log('Ordine creato con successo:', data);
                     if (data.shippingFree) {
                         // Mostra un messaggio di successo per la spedizione gratuita
@@ -289,10 +292,9 @@ const CheckOut = () => {
         const { value } = e.target;
         console.log(value)
         setDiscount(value);
-
-
-
     };
+   
+
     return (
         <main>
             <div className="container">
@@ -685,10 +687,11 @@ const CheckOut = () => {
                                 </div>
                             )}
 
-                            <button className="w-100 btn btn-primary btn-lg" type="submit">
-                                <i className="bi bi-cart-check fs-3"></i> Procedi con l'ordine
-
+                            <button className={orderLoad ? "w-100 btn btn-primary btn-lg disabled" : "w-100 btn btn-primary btn-lg"} type="submit">
+                                <i className="bi bi-cart-check fs-3"></i>   
+                                {orderLoad ? "Invio ordine in corso..." : "Procedi con l'ordine"}
                             </button>
+
                             <p className="text-center my-3">Confermando il tuo ordine accetti integralmente le nostre <Link>Condizioni generali di uso e vendita</Link>. L'acquisto sarà completato solo con la conferma di spedizione. Prendi visione della nostra <Link>Informativa sulla privacy</Link>, della nostra <Link>Informativa sui Cookie</Link> e della nostra Informativa sulla Pubblicità definita in base agli interessi.</p>
                         </form>
                     </div>

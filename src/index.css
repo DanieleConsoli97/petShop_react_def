@@ -609,9 +609,75 @@
   margin: 10px;
 }
 
+/* Stile di base per la WishList */
+.container {
+  padding: 15px;
+}
+
+.card {
+  margin: 10px 0;
+}
+
+.card-img-top {
+  height: 200px !important; 
+  object-fit: contain !important; 
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-footer {
+  padding: 10px;
+}
+
+
 
 /* MEDIA QUERY*/
 @media (max-width: 768px) {
+
+  /*WHISLIST*/
+   .col {
+    max-width: 70% !important;
+    height: fit-content !important;
+    margin: 0 auto; 
+  }
+
+  .row-cols-md-5 {
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 15px;
+  }
+
+  .card-img-top {
+    height: 150px !important; 
+    object-fit: contain !important; 
+  }
+
+  .card-body {
+    padding: 10px; 
+  }
+
+  .card-footer {
+    padding: 5px; 
+  }
+
+  .price {
+    font-size: 12px; 
+  }
+
+  .card-title {
+    font-size: 14px; 
+  }
+
+  /* Aggiungere uno spazio tra il titolo della lista e la navbar */
+  .container h1 {
+    margin-top: 20px; /* Aggiungere un po' di margine in alto */
+  }
+
+  .btn-sm {
+    font-size: 12px; /* Adattare la dimensione del bottone */
+  }
    
 
    .products-container.grid-view {
@@ -842,6 +908,42 @@
 
 /* Per schermi medio-grandi (tablet, piccoli desktop) */
 @media (min-width: 769px) and (max-width: 1024px) {
+
+  /*WHISHLIST*/
+  .col {
+    max-width: 70% !important;
+    
+    margin: 0 auto; 
+  }
+
+  .row-cols-md-5 {
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 15px;
+  }
+
+
+  .card-img-top {
+    height: 150px !important; 
+    object-fit: contain !important; 
+  }
+
+  .card-body {
+    padding: 10px; 
+  }
+
+  .card-footer {
+    padding: 5px; 
+  }
+
+  .price {
+    font-size: 12px; 
+  }
+
+  .card-title {
+    font-size: 14px; 
+  }
+
   /*carrello*/
   /* Riduci larghezza card complessiva */
   .card,

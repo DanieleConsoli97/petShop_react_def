@@ -1224,4 +1224,20 @@
   margin-right: 8px; 
 }
 
+/* Contenitore del messaggio popup */
+.popup-message-container {
+  text-align: center;  
+  margin-top: 10px;     
+  width: 100%;          
+  display: flex;        
+  justify-content: flex-end; 
+  padding-right: 12%;    
+}
+
+/* Popup con stile */
+.alert {
+  width: auto;
+  max-width: 400px;
+  margin: 0;
+}
 

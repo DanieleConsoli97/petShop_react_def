@@ -3,6 +3,7 @@ import { useGlobalContext } from '../context/GlobalContext';
 import { Link } from 'react-router-dom';
 import HoldButton from '../components/HoldButton';
 import { TbShoppingCartX, TbTrash } from "react-icons/tb";
+import Banner from "../components/Banner"
 
 function Carrello() {
   const { carrello, rimuoviDalCarrello, svuotaCarrello, handleQuantityChange } = useGlobalContext();
@@ -23,6 +24,7 @@ function Carrello() {
   return (
     <div>
       <div className='container'>
+        <Banner/>
         <h1 className='text-center'>Carrello</h1>
 
         {/* Messaggio se il carrello è vuoto */}

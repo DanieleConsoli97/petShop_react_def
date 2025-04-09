@@ -17,7 +17,7 @@ function ProductDetail() {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [popupMessage, setPopupMessage] = useState("");
-  
+
   const { aggiungiAlCarrello, rimuoviDalCarrello, aggiungiAllaWishList, rimuoviDallaWishList, carrello, wishList } = useGlobalContext();
 
   const formatPrice = (price) => {
@@ -75,11 +75,7 @@ function ProductDetail() {
   };
 
   const handleAddToCart = () => {
-    if (carrello.some(item => item.slug === product.slug)) {
-      rimuoviDalCarrello(product.slug);
-    } else {
-      aggiungiAlCarrello(product, quantity);
-    }
+    aggiungiAlCarrello(product, quantity);
   };
 
   const handleAddToWishlist = () => {
@@ -122,8 +118,8 @@ function ProductDetail() {
               <h6>Brand: {product.brand}</h6>
               <p>{product.description}</p>
 
-              {product.discounted_price !== null ? 
-                <p className="price">{formatPrice(product.discounted_price)}</p> : 
+              {product.discounted_price !== null ?
+                <p className="price">{formatPrice(product.discounted_price)}</p> :
                 <p className="price">{formatPrice(product.price)}</p>}
 
               <div className="quantity-container">
@@ -141,8 +137,8 @@ function ProductDetail() {
 
               <div className="buttons-container">
                 <button onClick={handleAddToCart} className="btn-icon-text green-btn">
-                  <i className={`fas fa-cart-plus ${carrello.some(item => item.slug === product.slug) ? 'added' : ''}`}></i>
-                  {carrello.some(item => item.slug === product.slug) ? 'Rimuovi dal Carrello' : 'Aggiungi al Carrello'}
+                  <i className="fas fa-cart-plus"></i>
+                  Aggiungi al Carrello
                 </button>
                 <button onClick={handleAddToWishlist} className="btn-icon-text red-btn">
                   <i className={`fas fa-heart ${wishList.some(item => item.slug === product.slug) ? "filled" : ""}`}></i>
@@ -152,25 +148,43 @@ function ProductDetail() {
             </div>
           </div>
 
-        
-
+          {/* Popup di notifica sotto i bottoni */}
+          {popupMessage && (
+            <div className="popup-message-container">
+              <div className="alert alert-success alert-dismissible fade show" role="alert">
+                {popupMessage}
+                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            </div>
+          )}
+          {/* Sezione del carosello per i prodotti correlati */}
           <div className="related-carousel">
-            <h2 className="text-center my-4">Prodotti Correlati</h2>
+            <h2 className="text-center my-4">Potrebbe anche interessarti : </h2>
             <Swiper
               slidesPerView={3}
               spaceBetween={30}
               grabCursor={true}
               navigation={true}
               breakpoints={{
-                320: { slidesPerView: 1, spaceBetween: 10 },
-                640: { slidesPerView: 2, spaceBetween: 20 },
-                768: { slidesPerView: 3, spaceBetween: 30 }
+                320: {
+                  slidesPerView: 1,
+                  spaceBetween: 10,
+                },
+                640: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 3,
+                  spaceBetween: 30,
+                }
               }}
               modules={[Pagination, Navigation]}
               className="mySwiper"
             >
+              {/* Filtra i prodotti correlati per mostrare solo quelli della stessa categoria */}
               {relatedProducts.filter((relatedProduct) => relatedProduct.animals === product.animals).map((relatedProduct) => {
-                if (relatedProduct.slug === slug) return null;
+                if (relatedProduct.slug === slug) return null; // Skip the current product
                 return (
                   <SwiperSlide key={relatedProduct.id}>
                     <div className="card-related">
@@ -182,55 +196,6 @@ function ProductDetail() {
                           Vedi Dettagli
                         </Link>
                       </div>
-
-           {/* Popup di notifica sotto i bottoni */}
-          {popupMessage && (
-            <div className="popup-message-container">
-              <div className="alert alert-success alert-dismissible fade show" role="alert">
-                {popupMessage}
-                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-            </div>
-          )}
-        {/* Sezione del carosello per i prodotti correlati */}
-        <div className="related-carousel">
-          <h2 className="text-center my-4">Potrebbe anche interessarti : </h2>
-          <Swiper
-            slidesPerView={3}
-            spaceBetween={30}
-            grabCursor={true}
-            navigation={true}
-            breakpoints={{
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 10,
-              },
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 3,
-                spaceBetween: 30,
-              }
-            }}
-            modules={[Pagination, Navigation]}
-            className="mySwiper"
-          >
-            {/* Filtra i prodotti correlati per mostrare solo quelli della stessa categoria */}
-            {relatedProducts.filter((relatedProduct) => relatedProduct.animals === product.animals).map((relatedProduct) => {
-              if (relatedProduct.slug === slug) return null; // Skip the current product
-              return (
-                <SwiperSlide key={relatedProduct.id}>
-                  <div className="card-related">
-                    <img src={relatedProduct.image_url} className="card-img-top" alt={relatedProduct.name} />
-                    <div className="card-body">
-                      <h5 className="card-title">{relatedProduct.name}</h5>
-                      {product.discounted_price !== null ? <p className="price">{formatPrice(product.discounted_price)}</p> : <p className="price">{formatPrice(product.price)}</p>}
-                      <Link to={`/prodotti/${relatedProduct.slug}`} className="btn btn-primary">
-                        Vedi Dettagli
-                      </Link>
-
                     </div>
                   </SwiperSlide>
                 );

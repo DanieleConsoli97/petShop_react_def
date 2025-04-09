@@ -591,11 +591,21 @@
   margin: 0 auto 10px;
 }
 
+/*carrello*/
+.card .row img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px;
+}
 
 
 /* MEDIA QUERY*/
 @media (max-width: 768px) {
-   /*carrello*/
+   
 
    .products-container.grid-view {
     display: grid;
@@ -718,15 +728,11 @@
     font-size: 0.8rem !important;
   }
 
-    /*Wishlist*/
-
-
-
-
-
-
-
-
+  .card .row img {
+    width: 150px;
+    height: 150px;
+  }
+  
   /*navbar hamburger menu*/
   .hamburger {
     display: block;

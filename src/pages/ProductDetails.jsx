@@ -191,7 +191,7 @@ function ProductDetail() {
                       <img src={relatedProduct.image_url} className="card-img-top" alt={relatedProduct.name} />
                       <div className="card-body">
                         <h5 className="card-title">{relatedProduct.name}</h5>
-                        {product.discounted_price !== null ? <p className="price">{formatPrice(product.discounted_price)}</p> : <p className="price">{formatPrice(product.price)}</p>}
+                        {relatedProduct.discounted_price !== null ? <p className="price">{formatPrice(relatedProduct.discounted_price)}</p> : <p className="price">{formatPrice(relatedProduct.price)}</p>}
                         <Link to={`/prodotti/${relatedProduct.slug}`} className="btn btn-primary">
                           Vedi Dettagli
                         </Link>

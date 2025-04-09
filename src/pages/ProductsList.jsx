@@ -70,7 +70,7 @@ function ProductList() {
                     <div className={`products-card ${isGridView ? '' : 'list-item'}`} key={product.id}>
                         <img src={product.image_url} className={`card-img-top ${isGridView ? '' : 'list-image'}`} alt={product.name} />
                         <div className={`card-body ${isGridView ? '' : 'list-body'}`}>
-                            <h5 className="card-title">{product.name}</h5>
+                            <h1 className="card-title">{product.name}</h1>
 
                             {product.discounted_price !== null ? <p className="price">{formatPrice(product.discounted_price)}</p> : <p className="price">{formatPrice(product.price)}</p>}
 

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import regioniItaliane from "../data/Regioni";
 import { useGlobalContext } from "../context/GlobalContext";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate,Link } from "react-router-dom";
 import footprint from "/footprint.png";
 import DeleteButton from "../components/DeleteButton";
 
@@ -290,7 +290,7 @@ const CheckOut = () => {
         console.log(value)
         setDiscount(value);
 
-        
+
 
     };
     return (
@@ -310,8 +310,8 @@ const CheckOut = () => {
                         </h4>
                         <ul className="list-group mb-3">
                             {/* ... contenuto del carrello ... */}
-
                             {
+
                                 carrello.map((product, index) => {
                                     const { name, quantity, slug } = product
                                     return (
@@ -689,6 +689,7 @@ const CheckOut = () => {
                                 <i className="bi bi-cart-check fs-3"></i> Procedi con l'ordine
 
                             </button>
+                            <p className="text-center my-3">Confermando il tuo ordine accetti integralmente le nostre <Link>Condizioni generali di uso e vendita</Link>. L'acquisto sarà completato solo con la conferma di spedizione. Prendi visione della nostra <Link>Informativa sulla privacy</Link>, della nostra <Link>Informativa sui Cookie</Link> e della nostra Informativa sulla Pubblicità definita in base agli interessi.</p>
                         </form>
                     </div>
 

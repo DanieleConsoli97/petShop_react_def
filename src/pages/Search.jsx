@@ -14,6 +14,7 @@ const Search = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isGridView, setIsGridView] = useState(true); // Stato per la visualizzazione
+    const [noResults, setNoResults] = useState(false); // Nuovo stato per indicare nessun risultato
 
     // Funzione per alternare la visibilità dei prodotti scontati
     const handleClickDiscountedProducts = () => {
@@ -21,20 +22,33 @@ const Search = () => {
     };
 
     useEffect(() => {
+        setLoading(true); // Imposta il caricamento all'inizio di ogni fetch
+        setError(null);   // Resetta l'errore
+        setNoResults(false); // Resetta lo stato di "nessun risultato"
+
         fetch(`http://localhost:3000/prodotti/search/${term}`)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Errore durante il recupero dei prodotti');
+                    // Se la risposta non è OK, proviamo a leggere il JSON per un eventuale messaggio di errore
+                    return response.json().then(errData => {
+                        throw new Error(errData.message || 'Errore durante il recupero dei prodotti');
+                    });
                 }
                 return response.json();
             })
             .then(data => {
-                setProducts(data);
-
-                // Filtra i prodotti scontati
-                const discounted = data.filter(product => product.discounted_price > 0);
-                setDiscountedProducts(discounted); // Imposta i prodotti scontati
-
+                if (Array.isArray(data)) {
+                    setProducts(data);
+                    const discounted = data.filter(product => product.discounted_price > 0);
+                    setDiscountedProducts(discounted);
+                    setNoResults(data.length === 0); // Imposta noResults se l'array è vuoto
+                } else {
+                    // Se data non è un array, potrebbe essere un messaggio di "nessun risultato" dal server
+                    console.warn("Risposta inattesa dal server:", data);
+                    setProducts([]);
+                    setDiscountedProducts([]);
+                    setNoResults(true);
+                }
                 setLoading(false);
             })
             .catch(err => {
@@ -44,7 +58,6 @@ const Search = () => {
     }, [term]);
 
     if (loading) return (
-
         <div
             className="container d-flex justify-content-center align-items-center"
             style={{ height: '100vh' }}
@@ -53,20 +66,11 @@ const Search = () => {
         </div >
     );
     if (error) return <p>Errore: {error}</p>;
+    if (noResults) return <h2 className='text-center my-4'>Nessun prodotto trovato per il termine "{term}"</h2>;
 
     const formatPrice = (price) => {
         return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(price);
     };
-
-    // Se nessun prodotto corrisponde alla ricerca, mostriamo un messaggio
-    let prodottoTrovato = products.some(product =>
-        product.name.toLowerCase().includes(term.toLowerCase()) ||
-        product.description.toLowerCase().includes(term.toLowerCase())
-    );
-
-    if (!prodottoTrovato) {
-        return <p>Prodotto non trovato</p>;
-    }
 
     // Se vogliamo visualizzare solo i prodotti scontati
     const displayedProducts = showDiscountedProducts ? discountedProducts : products;
